@@ -1,0 +1,280 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+}
+
+.container{
+    /* border: 1px solid red; */
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.bloque-menu{
+    width: 250px;
+    height: 100vh;
+    float: left;
+    outline: 1px solid #ecf0f1;
+    background-color: #fff;
+    transition: all 400ms;
+}
+
+.mostrar{
+    /* display: block !important; */
+    transform: translateX(0) !important;
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10; */
+}
+
+.menu-oculto{
+    position: absolute;
+    font-size: 2rem;
+    display: none;
+    right: 10px;
+    top: 15px;
+}
+
+.menu-oculto:hover{
+    cursor: pointer;
+}
+
+.box-user {
+    padding: 10px 30px 20px 30px;
+    background-color:  #ecf0f1   ;
+    color: #111;
+    font-weight: bold;
+}
+
+/* .box-user .img-user{
+    width: 100%;
+} */
+
+.img-user{
+    display: block;
+    width: 100%;
+}
+
+.datos-usuario{
+    font-size: .8rem;
+}
+
+/* bloque funciones */
+
+.menu-funciones{
+    text-align: left;
+}
+
+.menu-funciones ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    /* background-color: #77b9b7; */
+}
+
+.menu-funciones ul li{
+    height: 50px;
+    position: relative;
+
+    /* background-color: #ccc; */
+    /* outline: 1px solid gray; */
+}
+.menu-funciones ul li a img{
+    position: absolute;
+    bottom: 10px;
+}
+
+.menu-funciones ul li a label{
+    padding-left: 30px;
+}
+
+.menu-funciones ul li a{
+    padding-left: 20px;
+
+    color:  #5f6a6a ;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px ;
+    box-sizing: border-box;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.menu-funciones ul li a:hover{
+    background-color:  #ecf0f1 ;
+}
+
+
+/* izquierda full*/
+
+
+.bloque-main{
+    width: calc(100% - 250px);
+    height: 100vh;
+    float: left;
+    padding-left: 5%;
+    padding-right: 5%;
+    box-sizing: border-box;
+    /* outline: 1px solid yellow; */
+}
+
+/* estilo file upload*/
+label{
+    display: inline-block;
+}
+
+.input-label{
+    font-size: .8rem;
+    background: #5D6D7E;
+    color: #fff;
+    padding: 20px;
+    transition: 0.5s;
+}
+
+.input-label:hover{
+    background: #283747;
+    cursor: pointer;
+}
+
+.fas{
+    margin-right: 10px;
+}
+
+#file{
+    display: none;
+}
+
+/* fin file upload*/
+
+/*MUSTRA DE ARCHIVO SYLLABUS*/
+
+.labelRegistered{
+    background-color: #2471a3 ;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: #fff;
+    margin-top: 5px;
+}
+
+.labelRegistered a{
+    margin-left: 10px;
+    color: red;
+    padding: 0 5px;
+    font-weight: bold;
+    text-decoration: none;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.labelRegistered a:hover{
+    background: red;
+    color: #fff;
+}
+
+.labelRegistered a:hover  .labelRegistered {
+    background: #ccc;
+}
+.labelRegistered:hover{
+    background-color: #1a5276 ;
+    cursor: pointer;
+    color: #fff;
+}
+
+.file-upload{
+    margin-top: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+/* toggle class*/
+
+
+
+@media (max-width: 680px){
+    .bloque-menu{
+       /* display: none ; */
+       position: absolute;
+       transform: translateX(-250px);
+    }
+
+    .menu-oculto{
+        display: block;
+    }
+
+    .bloque-main{
+        width: 100%;
+    }
+}
+
+/* @media (min-width: 681px){
+    .bloque-menu{
+        position: static;
+    }
+} */
+
+
+/* PAGINA LISTA CURSOS */
+.cursos{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.item-curso{
+    width: 300px;
+    margin: 5px;
+    outline: 1px solid #ccc;
+    float: left;
+}
+
+.item-curso .name-curso{
+    width: 100%;
+    padding: 10px 15px;;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+    background: #1a5276;
+    color: white;;
+}
+
+.item-curso .name-curso h4{
+    font-weight: 100;
+}
+
+.item-curso .descripcion-curso{
+    padding: 0 20px 10px 20px;
+    overflow: hidden;
+}
+
+.item-curso .descripcion-curso a{
+    float: right;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background:  #1abc9c ;
+    color: #fff;
+    text-decoration: none;
+}
+
+
+/* PAGINA REGISTRO CURSOS*/ 
+
+.combo-box-cursos{
+    width: 300px;
+    height: 28px;
+    padding-left:10px;
+    font-size: 1rem;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+/* PAGINA LISTA ALUMNOS*/
+
+.cursos table{
+    width: 100%;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
