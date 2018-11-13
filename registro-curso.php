@@ -13,40 +13,25 @@
 
 </head>
 <body>
+    <?php
+        session_start();
+        $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
+    ?>
     <div class="container">
-        <aside class="bloque-menu">
-                <img src="img/user-defecto.jpg" alt="imagen-user" class="img-user">
-
-                <!-- <h4 style="text-align: center">Bienvenido</h4> -->
-                <div class="box-user">
-                    <p class="datos-usuario">
-                        Oswaldo Daniel Cazasola Salas
-                    </p>
-                    <p class="datos-usuario">
-                        oswaldo.cazasola@gmail.com
-                    </p>
-                    <p class="datos-usuario">
-                        929814249
-                    </p>
-                </div>
-                <!-- fin bloque usuario -->
-                <div class="menu-funciones">
-                    <ul>
-                        <li><a href="plataforma.html"><img src="img/icons/icon1.png"><label>Plataforma</label></a></li>
-                        <li><a href="cursos.html"><img src="img/icons/icon1.png"><label>Cursos</label></a></li>
-                        <li><a href="lista-alumnos.html"><img src="img/icons/icon1.png"><label>Lista Alumnos</label></a></li>
-                        <li><a href="registro-curso.html"><img src="img/icons/icon1.png"><label>Registro Curso</label></a></li>
-                        <li><a href="plataforma.html"><img src="img/icons/icon1.png"><label>Cerrar Sesiòn</label></a></li>
-                    </ul>
-                </div>
-        </aside>
         <div class="menu-oculto"><i class="fas fa-bars"></i></div>
-
+        <?php
+            include 'aside-usuario-info.php'
+        ?>
         <section class="bloque-main">
-           <h1>LISTA DE CURSOS ASIGNADOS</h1>
-           <p>Prof: Oswaldo Daniel Cazasola Salas</p>
-
-            <div class="cursos">
+            <h1>REGISTRO DE CURSOS ASIGNADO SEGÙN MATRÌCULA</h1>
+            <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>            
+           <p>Seleccione el curso a habilitar en plataforma:</p>
+           <select class="combo-box-cursos">
+              <option value="volvo">SISTEMAS DE INFORMACIÒN</option>
+              <option value="saab">TEORIA GENERAL DE SISTEMAS</option>
+              <option value="mercedes">LENGUAJE ENSAMBLADOR</option>
+            </select>
+           <div class="cursos">
                 <div class="item-curso">
                     <div class="name-curso">
                         <h4>SISTEMAS DE INFORMACIÒN</h4>
@@ -56,7 +41,7 @@
                         Lunes : 8:30 - 15:20<br>
                         Lunes : 8:30 - 15:20
                     </p>
-                    <a href="plataforma.html">Ir a Plataforma</a>
+                    <a href="plataforma.php">Habilitar en plataforma</a>
                     </div>
                 </div>
 
@@ -69,7 +54,7 @@
                         Lunes : 8:30 - 15:20<br>
                         Lunes : 8:30 - 15:20
                     </p>
-                    <a href="plataforma.html">Ir a Plataforma</a>
+                    <a href="plataforma.php">Habilitar en plataforma</a>
                     </div>
                 </div>
 
@@ -82,10 +67,10 @@
                         Lunes : 8:30 - 15:20<br>
                         Lunes : 8:30 - 15:20
                     </p>
-                    <a href="plataforma.html">Ir a Plataforma</a>
+                    <a href="plataforma.php">Habilitar en plataforma</a>
                     </div>
                 </div>
-            </div>
+           </div>
         </section>
     </div>
 </body>

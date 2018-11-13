@@ -12,39 +12,20 @@
 
 </head>
 <body>
+    <?php
+        session_start();
+        $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
+    ?>
     <div class="container">
-        <aside class="bloque-menu">
-                <img src="img/user-defecto.jpg" alt="imagen-user" class="img-user">
 
-                <!-- <h4 style="text-align: center">Bienvenido</h4> -->
-                <div class="box-user">
-                    <p class="datos-usuario">
-                        Oswaldo Daniel Cazasola Salas
-                    </p>
-                    <p class="datos-usuario">
-                        oswaldo.cazasola@gmail.com
-                    </p>
-                    <p class="datos-usuario">
-                        929814249
-                    </p>
-                </div>
-                <!-- fin bloque usuario -->
-                <div class="menu-funciones">
-                    <ul>
-                        <li><a href="plataforma.html"><img src="img/icons/icon1.png"><label>Plataforma</label></a></li>
-                        <li><a href="cursos.html"><img src="img/icons/icon1.png"><label>Cursos</label></a></li>
-                        <li><a href="lista-alumnos.html"><img src="img/icons/icon1.png"><label>Lista Alumnos</label></a></li>
-                        <li><a href="registro-curso.html"><img src="img/icons/icon1.png"><label>Registro Curso</label></a></li>
-                        <li><a href="plataforma.html"><img src="img/icons/icon1.png"><label>Cerrar Sesiòn</label></a></li>
-                    </ul>
-                </div>
-        </aside>
+        <?php
+            include 'aside-usuario-info.php';
+        ?>
         <div class="menu-oculto"><i class="fas fa-bars"></i></div>
 
         <section class="bloque-main">
            <h1>LISTA DE ALUMNOS CON PARTICIPACIÒN ACTIVA</h1>
-           <p>Prof: Oswaldo Daniel Cazasola Salas</p>
-           <p>Seleccione la fuente de archivo para mostrar la lista correspondiente:</p>
+           <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>                   <p>Seleccione la fuente de archivo para mostrar la lista correspondiente:</p>
            <select class="combo-box-cursos">
               <option value="volvo">SYLLABUS</option>
               <option value="saab">ARCHIVO NRO 1</option>
