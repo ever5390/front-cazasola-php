@@ -13,7 +13,7 @@
             while($result = $statement->fetch()){
                 $rows[] = $result;
             }
-
+            // $con->close_conexion();
             return $rows;
         }
     }

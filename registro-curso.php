@@ -15,6 +15,10 @@
 <body>
     <?php
         session_start();
+        require_once ('modelo/class.conexion.php');
+        require_once ('modelo/class.consultas_cursos.php');
+        require_once ('controlador/controller.cursos.php');
+        $id_user = $_SESSION["usuario_registrado"]['codigo'];
         $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
     ?>
     <div class="container">
@@ -25,14 +29,23 @@
         <section class="bloque-main">
             <h1>REGISTRO DE CURSOS ASIGNADO SEGÙN MATRÌCULA</h1>
             <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>            
-           <p>Seleccione el curso a habilitar en plataforma:</p>
-           <select class="combo-box-cursos">
-              <option value="volvo">SISTEMAS DE INFORMACIÒN</option>
-              <option value="saab">TEORIA GENERAL DE SISTEMAS</option>
-              <option value="mercedes">LENGUAJE ENSAMBLADOR</option>
+           
+           <p>Seleccione el curso a habilitar en plataforma:</p>            
+           <select class="combo-box-cursos" onchange="this.value">
+              <option value="0">--seleccione--</option>
+            <?php
+                $consulta_curso = new Cursos();
+                $cursos = $consulta_curso->getCursos($id_user);
+                if($cursos){
+                    foreach($cursos as $curso){
+                        echo "<option value='".$curso['id_curso']."'>".$curso['nombre']."</option>";
+                    }
+                }
+            ?>             
             </select>
+
            <div class="cursos">
-                <div class="item-curso">
+                <!-- <div class="item-curso">
                     <div class="name-curso">
                         <h4>SISTEMAS DE INFORMACIÒN</h4>
                     </div>
@@ -43,9 +56,9 @@
                     </p>
                     <a href="plataforma.php">Habilitar en plataforma</a>
                     </div>
-                </div>
+                </div> -->
 
-                 <div class="item-curso">
+                 <!-- <div class="item-curso">
                     <div class="name-curso">
                         <h4>TEORIA GENERAL DE SISTEMAS</h4>
                     </div>
@@ -68,8 +81,8 @@
                         Lunes : 8:30 - 15:20
                     </p>
                     <a href="plataforma.php">Habilitar en plataforma</a>
-                    </div>
-                </div>
+                    </div> 
+                </div>-->
            </div>
         </section>
     </div>

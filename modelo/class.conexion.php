@@ -1,6 +1,8 @@
 <?php
 
     class Conexion{
+        public $conexion = null;
+        
         public function get_conexion(){
             $user = "root";
             $pass = "";

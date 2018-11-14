@@ -1,0 +1,71 @@
+insert into curso values (null, 'QUIMICA');
+insert into curso values (null, 'FISICA');
+insert into curso values (null, 'ARQUITECTURA DEL COMPUTADOR');
+insert into curso values (null, 'ANALISIS DE SISTEMAS');
+insert into curso values (null, 'BASE DE DATOS');
+
+create table if not exists horario(
+	id_horario int auto_increment primary key,
+	id_curso int not null,
+	dia_asignado varchar(20) null,
+	horainicio varchar(10) null,
+	horafin varchar(10) null
+);
+
+insert into horario values (null,2,'Lunes','10:00','13:30'),
+									(null,2,'Jueves','08:00','12:30'),
+									(null,3,'Lunes','10:00','13:30'),
+									(null,3,'Jueves','08:00','12:30'),
+									(null,4,'Lunes','10:00','13:30'),
+									(null,5,'Jueves','08:00','12:30'),
+									(null,5,'Lunes','10:00','13:30'),
+									(null,5,'Jueves','08:00','12:30'),
+									(null,6,'Lunes','10:00','13:30'),
+									(null,6,'Jueves','08:00','12:30'),
+									(null,7,'Lunes','10:00','13:30'),
+									(null,8,'Jueves','08:00','12:30'),
+									(null,10,'Lunes','10:00','13:30'),
+									(null,9,'Jueves','08:00','12:30'),
+									(null,7,'Lunes','10:00','13:30'),
+									(null,8,'Jueves','08:00','12:30'),
+									(null,10,'Lunes','10:00','13:30'),
+									(null,9,'Jueves','08:00','12:30');
+
+
+create table if not exists detalle_curso_prof(
+	id_detallecp int auto_increment primary key,
+	id_curso int not null,
+	id_user int not null,
+	CONSTRAINT fk_curso_prof FOREIGN KEY (id_curso) REFERENCES curso(id_curso),
+	CONSTRAINT fk_user_prof FOREIGN KEY (id_user) REFERENCES usuario(codigo)
+	
+);
+
+insert into detalle_curso_prof values (null, 1, 1),
+												  (null, 2, 1),
+												  (null, 3, 1),
+												  (null, 4, 2),
+												  (null, 5, 2),
+												  (null, 6, 4),
+												  (null, 7, 4);
+
+select * from detalle_curso_prof;
+create view view_horario_curso
+as
+select h.id_curso, h.dia_asignado, h.horainicio, h.horafin, c.nombre
+from horario as h
+inner join curso as c
+on h.id_curso = c.id_curso;
+
+select * from view_horario_curso;
+select * from view_horario_curso where id_user = 1;
+select * from view_horario_curso where id_curso = 1;
+
+create view view_curso_detalle
+as
+select c.nombre, c.id_curso, dt.id_user
+from curso as c
+inner join detalle_curso_prof as dt
+on c.id_curso = dt.id_curso;
+
+select * from view_curso_detalle;
