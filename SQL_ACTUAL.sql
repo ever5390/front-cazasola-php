@@ -1,6 +1,6 @@
 use drive_unac;
 
-create table curso(
+create table if not exists curso(
 	id_curso int auto_increment primary key,
 	nombre_curso varchar(50) not null
 );
@@ -58,7 +58,7 @@ create table if not exists detalle_curso_prof(
 	
 );
 
-insert into detalle_curso_prof values (null, 1, 3),
+insert into detalle_curso_prof values 			  (null, 1, 3),
 												  (null, 2, 3),
 												  (null, 3, 3),
 												  (null, 4, 2),

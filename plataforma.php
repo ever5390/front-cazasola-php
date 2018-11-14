@@ -1,3 +1,8 @@
+<?php   
+        require 'modelo/class.consultas_archivos.php';
+        require 'controlador/controller.cursos.php';
+        require 'controlador/controller.archivos_subidos.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +19,20 @@
 </head>
 <body>
     <?php
-        require_once ('modelo/class.consultas_archivos.php');
-        require_once ('controlador/controller.archivos_subidos.php');
         session_start();
         $id_user = $_SESSION["usuario_registrado"]['codigo'];
         $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
+
+        $result = null;
+
+        if(isset($_GET['id_curso'])){
+            $curso_id = $_GET['id_curso'];
+
+            $registro_curso = new Cursos();
+            $result = $registro_curso->c_getCursosById($curso_id);
+        }else{
+            $curso_id = 0;
+        }       
     ?>
     <div class="container">
         <?php
@@ -28,10 +42,29 @@
         <div class="menu-oculto"><i class="fas fa-bars"></i></div>
 
         <section class="bloque-main">
-           <h1>SISTEMAS DE INFORMACION</h1>
-           <p>Lunes : 8:00 - 13:20 <br>
-           Viernes : 17:30 - 20:30</p>
+            <?php
+                if(!$result){
+                    echo '<h1>PLATAFORMA DE GESTION DE ACTIVIDADES</h1>';
+                    echo '<p>Horario del curso a gestionar</p>';
+                }else{
+                    foreach($result as $detalle_reg){
+                        
+                        echo "<h1>".$detalle_reg['nombre_curso']."</h1>";
+                        
+                      
+                        $horario = $registro_curso->c_horarioByIdCurso($detalle_reg['id_curso']);
+                        foreach($horario as $reg_horario){
+                            echo    "<p>".$reg_horario['dia_asignado'].": ";
+                            echo          $reg_horario['horainicio']." - ";
+                            echo          $reg_horario['horafin'];
+                            echo    "</p>";
+                        }
+                        
+                    }
+                }
 
+            ?>
+           
            <div class="select-file">    
 
             <!--  INICIO SECCION SUBIRS ARCHIVOS -->
@@ -66,9 +99,8 @@
                         <?php
 
                         if( $nivel_usu == 1){
-
                             $consultas_archivos = new Archivos();
-                            $registro_arch = $consultas_archivos->getArchivos($id_user, 6);
+                            $registro_arch = $consultas_archivos->getArchivos($id_user, $curso_id);
                             if(!$registro_arch){
 
                                 echo "<strong>Seleccione un curso de su Lista ..</strong>";
@@ -143,9 +175,6 @@
                         }
                         //fin del If :::: tipo usuario
                         ?>
-                        <!-- <label class="labelRegistered" for="nameFileRegistered">INFORME N° 0XX - REPORTE DE INTERMEDIADOS E INSERTADOS DEL MES DE JULIO 2018 <a href="#">x</a><a href="#">€</a><a href="#">5</a></label>
-                        <label class="labelRegistered" for="nameFileRegistered">INFORME N° 0XX - REPORTE DE INTERMEDIADOS E INSERTADOS DEL MES DE JULIO 2018 <a href="#">x</a><a href="#">€</a><a href="#">5</a></label>
-                        <label class="labelRegistered" for="nameFileRegistered">INFORME N° 0XX - REPORTE DE INTERMEDIADOS E INSERTADOS DEL MES DE JULIO 2018 <a href="#">x</a><a href="#">€</a><a href="#">5</a></label> -->
                     </div>
                 </div>
            </div>

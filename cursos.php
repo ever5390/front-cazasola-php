@@ -25,47 +25,15 @@
 
         <section class="bloque-main">
            <h1>LISTA DE CURSOS ASIGNADOS</h1>
+          
            <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>        
-            <div class="cursos">
-                <div class="item-curso">
-                    <div class="name-curso">
-                        <h4>SISTEMAS DE INFORMACIÒN</h4>
-                    </div>
-                    <div class="descripcion-curso">
-                    <p> Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20
-                    </p>
-                    <a href="plataforma.php">Ir a Plataforma</a>
-                    </div>
-                </div>
-
-                 <div class="item-curso">
-                    <div class="name-curso">
-                        <h4>TEORIA GENERAL DE SISTEMAS</h4>
-                    </div>
-                    <div class="descripcion-curso">
-                    <p> Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20
-                    </p>
-                    <a href="plataforma.php">Ir a Plataforma</a>
-                    </div>
-                </div>
-
-                 <div class="item-curso">
-                    <div class="name-curso">
-                        <h4>LENGUAJE ENSAMBLADOR</h4>
-                    </div>
-                    <div class="descripcion-curso">
-                    <p> Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20
-                    </p>
-                    <a href="plataforma.php">Ir a Plataforma</a>
-                    </div>
-                </div>
+            
+           <div id="divData" class="cursos">
+                <?php
+                    require_once 'controlador/helper3.php';
+                ?>
             </div>
+
         </section>
     </div>
 </body>
