@@ -20,6 +20,7 @@
         require_once ('controlador/controller.cursos.php');
         $id_user = $_SESSION["usuario_registrado"]['codigo'];
         $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
+        $ruta = "plataforma.php";
     ?>
     <div class="container">
         <div class="menu-oculto"><i class="fas fa-bars"></i></div>
@@ -27,63 +28,9 @@
             include 'aside-usuario-info.php'
         ?>
         <section class="bloque-main">
-            <h1>REGISTRO DE CURSOS ASIGNADO SEGÙN MATRÌCULA</h1>
-            <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>            
-           
-           <p>Seleccione el curso a habilitar en plataforma:</p>            
-           <select class="combo-box-cursos" onchange="this.value">
-              <option value="0">--seleccione--</option>
-            <?php
-                $consulta_curso = new Cursos();
-                $cursos = $consulta_curso->getCursos($id_user);
-                if($cursos){
-                    foreach($cursos as $curso){
-                        echo "<option value='".$curso['id_curso']."'>".$curso['nombre']."</option>";
-                    }
-                }
-            ?>             
-            </select>
-
-           <div class="cursos">
-                <!-- <div class="item-curso">
-                    <div class="name-curso">
-                        <h4>SISTEMAS DE INFORMACIÒN</h4>
-                    </div>
-                    <div class="descripcion-curso">
-                    <p> Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20
-                    </p>
-                    <a href="plataforma.php">Habilitar en plataforma</a>
-                    </div>
-                </div> -->
-
-                 <!-- <div class="item-curso">
-                    <div class="name-curso">
-                        <h4>TEORIA GENERAL DE SISTEMAS</h4>
-                    </div>
-                    <div class="descripcion-curso">
-                    <p> Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20
-                    </p>
-                    <a href="plataforma.php">Habilitar en plataforma</a>
-                    </div>
-                </div>
-
-                 <div class="item-curso">
-                    <div class="name-curso">
-                        <h4>LENGUAJE ENSAMBLADOR</h4>
-                    </div>
-                    <div class="descripcion-curso">
-                    <p> Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20<br>
-                        Lunes : 8:30 - 15:20
-                    </p>
-                    <a href="plataforma.php">Habilitar en plataforma</a>
-                    </div> 
-                </div>-->
-           </div>
+        <?php
+            include 'registra_curso_include.php'
+        ?>  
         </section>
     </div>
 </body>

@@ -17,3 +17,9 @@ $(document).ready(function(){
         $('.bloque-menu').toggleClass('mostrar');     
     });
 });
+
+function valor() {
+    var valorSelect= $("#miSelect").val();
+    // window.locationf="controlador/helper.php?val="+valorSelect;
+    $("#divData").load("controlador/helper.php?val="+valorSelect) ;
+}

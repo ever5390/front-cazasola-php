@@ -68,7 +68,7 @@
                         if( $nivel_usu == 1){
 
                             $consultas_archivos = new Archivos();
-                            $registro_arch = $consultas_archivos->getArchivos($id_user);
+                            $registro_arch = $consultas_archivos->getArchivos($id_user, 6);
                             if(!$registro_arch){
 
                                 echo "<strong>Seleccione un curso de su Lista ..</strong>";
@@ -80,7 +80,7 @@
                             ?>
                                 <label class="labelRegistered" for="nameFileRegistered">
                                         <?php
-                                        echo $user['nombre'];                         
+                                        echo $user['titulo'];                         
                                         if($nivel_usu == 1) {
                                             echo "<a href='#'>x</a>";
                                         }
@@ -119,8 +119,10 @@
                                     if($user['tipo_archivo'] == 2){
                         ?>
                                 <label class="labelRegistered" for="nameFileRegistered">
-                                    INFORME N° 0XX - REPORTE DE INTERMEDIADOS E INSERTADOS DEL MES DE JULIO 2018 
+                                    <!-- INFORME N° 0XX - REPORTE DE INTERMEDIADOS E INSERTADOS DEL MES DE JULIO 2018  -->
                                     <?php
+                                     
+                                        echo $user['titulo'];
                                         if($nivel_usu == 1) {
                                             echo "<a href='#'>x</a>";
                                         }
@@ -131,7 +133,7 @@
                                             echo "<a href='#'>5</a>";
                                         }
                                     ?>
-                                </label>
+                                </label><br>
                             <?php
                                     }//fin del If :::: tipo ARCHIVO
                                 }//fin del FOR EACH :::: tipo usuario

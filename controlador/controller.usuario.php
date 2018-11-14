@@ -13,7 +13,6 @@ $consultas = new ConsultasUsuarios();
 $registro_usuario = $consultas->cargarUsuarios($usuario,$password);
 
 if($registro_usuario){
-    // $_SESSION["usuario_registrado"] = $registro_usuario;
     foreach($registro_usuario as $user){
 
         if($user){
