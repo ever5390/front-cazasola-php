@@ -17,6 +17,24 @@
             // $con->close_conexion();
             return $rows;
         }
+
+        public function InsertarArchivo($titulo, $descripcion, $tipo_archivo, $id_curso, $id_user){
+            $modelo2 = new Conexion();
+            $conexion = $modelo2->get_conexion();
+            $sql="insert into archivo values ( null, :titulo, :descripcion, :tipo_archivo, :id_curso, :id_user )";
+            $statement = $conexion->prepare($sql);
+            $statement->bindParam(":titulo", $titulo);
+            $statement->bindParam(":descripcion", $descripcion);
+            $statement->bindParam(":tipo_archivo", $tipo_archivo);
+            $statement->bindParam(":id_curso", $id_curso);
+            $statement->bindParam(":id_user", $id_user);
+            if(!$statement){
+                return false;
+            }else{
+                $statement->execute();
+            }
+            return true;
+        }
     }
 
 ?>

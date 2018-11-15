@@ -53,33 +53,39 @@
                         echo "<h1>".$detalle_reg['nombre_curso']."</h1>";
                         
                         $horario = $registro_curso->c_horarioByIdCurso($detalle_reg['id_curso']);
+                        echo    "<p>";
                         foreach($horario as $reg_horario){
-                            echo    "<p>".$reg_horario['dia_asignado'].": ";
+                            echo          $reg_horario['dia_asignado'].": ";
                             echo          $reg_horario['horainicio']." - ";
-                            echo          $reg_horario['horafin'];
-                            echo    "</p>";
+                            echo          $reg_horario['horafin'] ."<br>";
                         }
-                        
+                        echo    "</p>";
                     }
                 }
 
             ?>
-           
+
            <div class="select-file">    
 
-            <!--  INICIO SECCION SUBIRS ARCHIVOS -->
+            <!--selectbox-file  INICIO SECCION SUBIRS ARCHIVOS -->
 
             <?php
                 if($nivel_usu == 1) {
             ?>
-               <div class="selectbox-file">
-                    <label for="file" class="input-label">
-                        <i class="fas fa-upload"></i>
-                        Seleccione el archivo a subir
-                    </label>
-                    <form name="formulario" method="post" >
-                        <input type="file" id="file" >
-                        <input type="hidden" name="inputHidden" value="">
+               <div class="">
+                            
+
+                    <form name="formulario" action="controlador/helper.archivos_uploads.php?id_curso=<?php echo $curso_id ?>" method="post" >
+                        <label for="file" class="input-label">
+                            <i class="fas fa-upload"></i>
+                            Seleccione el archivo a subir
+                        </label>
+                        <input type="submit" name="btn_submit" value="">
+                        <textarea rows="3" name="txtDescripcion" placeholder=" Descripcion del Archivo"></textarea>
+                        <input type="file" id="file" onchange = "cargarArchivo(this)">
+                        <input type="text" name="inputHidden" value="">
+                        
+                        
                     </form>
                </div>
 

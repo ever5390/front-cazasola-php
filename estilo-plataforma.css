@@ -132,6 +132,7 @@ label{
     color: #fff;
     padding: 20px;
     transition: 0.5s;
+    
 }
 
 .input-label:hover{
@@ -147,6 +148,10 @@ label{
     display: none;
 }
 
+
+.input_inline_file{
+    display: inline-block !important;
+}
 /* fin file upload*/
 
 /*MUSTRA DE ARCHIVO SYLLABUS*/
@@ -157,6 +162,7 @@ label{
     padding: 10px 20px;
     color: #fff;
     margin-top: 5px;
+   
 }
 
 .labelRegistered a{

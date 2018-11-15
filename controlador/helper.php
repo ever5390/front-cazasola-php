@@ -45,13 +45,3 @@
     }
     
 ?>
-
-            <!-- echo        "<a href='".$ruta.$detalle_reg['id_curso']."&activado=".$detalle_reg['activado']."'>";
-                if(!$detalle_reg['activado']){
-            echo    "Habilitar en plataforma";
-                }   else {
-            echo     "Deshabilitar";
-                }             
-            echo        "</a>";
-            echo     "</div>";
-            echo "</div>"; -->
