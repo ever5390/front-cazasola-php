@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `archivo` (
   PRIMARY KEY (`id`),
   KEY `fk_id_curso_archivo` (`id_curso`),
   KEY `fk_id_user_archivo` (`id_usser`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla drive_unac.archivo: 17 rows
 /*!40000 ALTER TABLE `archivo` DISABLE KEYS */;
@@ -38,8 +38,6 @@ INSERT INTO `archivo` (`id`, `titulo`, `descripcion`, `tipo_archivo`, `id_curso`
 	(4, 'sistemas blandos', 'loremipsum dolor detsmani logiigion ..', 2, 7, 1),
 	(5, 'sistemas blandos', 'loremipsum dolor detsmani logiigion ..', 2, 7, 1),
 	(6, 'sistemas blandos', 'loremipsum dolor detsmani logiigion ..', 1, 8, 1),
-	(7, 'sylabus de quimica', 'quimica archivo archivo de quimioca', 1, 1, 1),
-	(8, 'archivo de quimica 1', 'quimica quimica quimca', 2, 1, 1),
 	(9, 'fisica_sylabus', 'fisica fisica fisica', 1, 2, 1),
 	(10, 'fisica_sylabus', 'fisica fisica fisica', 2, 2, 1),
 	(11, 'arquitectura de sylabus', 'fisica fisica fisica', 1, 3, 1),
@@ -47,8 +45,10 @@ INSERT INTO `archivo` (`id`, `titulo`, `descripcion`, `tipo_archivo`, `id_curso`
 	(13, 'arquitectura de sistemas', 'quimica quimica quimca', 2, 3, 1),
 	(14, 'fisica_sylabus', 'fisica fisica fisica', 2, 2, 1),
 	(15, 'fisica_sylabus', 'fisica fisica fisica', 2, 2, 1),
+	(19, 'titulo archivo subido', 'descripcion del archivo subido', 2, 3, 1),
 	(17, 'arquitectura de sistemas', 'quimica quimica qimicaa', 2, 3, 1),
-	(18, 'arquitectura de sistemas', 'quimica quimica quimca', 2, 3, 1);
+	(18, 'arquitectura de sistemas', 'quimica quimica quimca', 2, 3, 1),
+	(21, 'titulo archivo subido', 'descripcion del archivo subido', 2, 3, 1);
 /*!40000 ALTER TABLE `archivo` ENABLE KEYS */;
 
 -- Volcando estructura para tabla drive_unac.curso
@@ -63,12 +63,12 @@ CREATE TABLE IF NOT EXISTS `curso` (
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
 INSERT INTO `curso` (`id_curso`, `nombre_curso`, `activado`) VALUES
 	(1, 'QUIMICA', 1),
-	(2, 'FISICA', 1),
+	(2, 'FISICA', 0),
 	(3, 'ARQUITECTURA DEL COMPUTADOR', 1),
-	(4, 'ANALISIS DE SISTEMAS', 0),
-	(5, 'BASE DE DATOS', 0),
-	(6, 'TALLER DE BASE DE DATOS', 0),
-	(7, 'PROGRAMACION AVANZADA', 0);
+	(4, 'ANALISIS DE SISTEMAS', 1),
+	(5, 'BASE DE DATOS', 1),
+	(6, 'TALLER DE BASE DE DATOS', 1),
+	(7, 'PROGRAMACION AVANZADA', 1);
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 
 -- Volcando estructura para tabla drive_unac.detalle_curso_prof
