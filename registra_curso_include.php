@@ -1,7 +1,5 @@
 <?php
-    require_once ('../modelo/class.conexion.php');
-    // require ('./modelo/class.consultas_cursos.php');
-    require ('controlador/controller.cursos.php');
+
 
     $consulta_curso = new Cursos();
 ?>

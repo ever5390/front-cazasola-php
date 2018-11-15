@@ -1,5 +1,6 @@
 <?php   
         require 'modelo/class.consultas_archivos.php';
+        require 'modelo/class.consultas_cursos.php';
         require 'controlador/controller.cursos.php';
         require 'controlador/controller.archivos_subidos.php';
 ?>
@@ -32,7 +33,7 @@
             $result = $registro_curso->c_getCursosById($curso_id);
         }else{
             $curso_id = 0;
-        }       
+        }
     ?>
     <div class="container">
         <?php
@@ -51,7 +52,6 @@
                         
                         echo "<h1>".$detalle_reg['nombre_curso']."</h1>";
                         
-                      
                         $horario = $registro_curso->c_horarioByIdCurso($detalle_reg['id_curso']);
                         foreach($horario as $reg_horario){
                             echo    "<p>".$reg_horario['dia_asignado'].": ";

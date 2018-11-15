@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    require 'modelo/class.conexion.php';
+            require_once 'modelo/class.consultas_cursos.php';
+            require 'controlador/controller.cursos.php';
+// require 'controlador/controller.cursos.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,20 +21,7 @@
 </head>
 <body>
     <?php
-        require_once ('./modelo/class.conexion.php');
-        require ('modelo/class.consultas_cursos.php');
-        require ('controlador/controller.cursos.php');
-
-
-        session_start();
-        $id_user = $_SESSION["usuario_registrado"]['codigo'];
-        $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
-        $ruta = "plataforma.php";
-        if(isset($_GET['valor'])){
-            $param = $_GET['valor'];
-            echo $param;
-        }
-        
+        $nivel_usu = $_SESSION["usuario_registrado"]['nivel']; //para el aside 
     ?>
     <div class="container">
         <div class="menu-oculto"><i class="fas fa-bars"></i></div>
@@ -36,37 +30,27 @@
         ?>
         <section class="bloque-main">
         <?php
-            // include 'registra_curso_include.php'
             
-         
+            $consulta = new Cursos();
+            $id_user = $_SESSION["usuario_registrado"]['codigo'];
+            $cursos = array();
+            $cursos = $consulta->getCursos($id_user);
+        ?>
 
-                $consulta_curso = new Cursos();
-            ?>
-
-            <h1>REGISTRO DE CURSOS ASIGNADO SEGÙN MATRÌCULA</h1>
-            <p><strong>Usuario: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>            
-           
-           <p>Seleccione el curso a habilitar en plataforma:</p>            
-           <select class="combo-box-cursos" onchange='valor()' id='miSelect'>
-              <option value="0">--seleccione--</option>
-            <?php
-                $cursos = $consulta_curso->getCursos($id_user);
-                if($cursos){
-                    foreach($cursos as $curso){
-                        echo "<option value='".$curso['id_curso']."'>".$curso['nombre_curso']."</option>";
-                    }
+           <h1>REGISTRO DE CURSOS ASIGNADO SEGÙN MATRÌCULA</h1>
+           <p><strong>Usuario: </strong><?php $_SESSION["usuario_registrado"]['nombres']?></p>        
+           <p>Seleccione el curso a habilitar en plataforma:</p>
+           <select class="combo-box-cursos" onchange="valor(this)" id="miSelect">
+                <option value="0">--seleccione--</option>
+        <?php
+                foreach($cursos as $curso){
+                    echo $curso['id_curso']."<br>";
+                    echo $curso['nombre_curso']."<br>";
+                    echo "<option value='".$curso['id_curso']."'>".$curso['nombre_curso']."</option>";
                 }
-            ?>             
-            </select>
-            <div id="divData" class="cursos">
-              
-           </div>
-
-
-
-
-
-
+        ?>
+           </select>
+           <div id='divData' class='cursos'>
 
         </section>
     </div>

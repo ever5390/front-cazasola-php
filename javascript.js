@@ -20,6 +20,7 @@ $(document).ready(function(){
 
 function valor() {
     var valorSelect= $("#miSelect").val();
+    alert(valorSelect);
     // window.locationf="controlador/helper.php?val="+valorSelect;
-    $("#divData").load("controlador/helper.php?val="+valorSelect) ;
+    // $("#divData").load("controlador/helper4.php?val="+valorSelect) ;
 }

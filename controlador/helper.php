@@ -1,5 +1,5 @@
 <?php
-    require '../modelo/class.conexion.php';
+    // require '../modelo/class.conexion.php';
     require 'controller.cursos.php';
 
     session_start();
