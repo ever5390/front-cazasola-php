@@ -35,6 +35,20 @@
             }
             return true;
         }
+
+        public function deleteArchivo($id_archivo){
+            $modelo2 = new Conexion();
+            $conexion = $modelo2->get_conexion();
+            $sql="delete from archivo where id = :id_archivo";
+            $statement = $conexion->prepare($sql);
+            $statement->bindParam(":id_archivo", $id_archivo);
+            if(!$statement){
+                return false;
+            }else{
+                $statement->execute();
+            }
+            return true;
+        }
     }
 
 ?>

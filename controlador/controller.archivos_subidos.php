@@ -15,6 +15,12 @@ class Archivos{
         return $exito;
     }
 
+    function c_deleteArchivo($id_archivo){
+        $consultas = new ConsultasArchivos();
+        $exito = $consultas->deleteArchivo($id_archivo);
+        return $exito;
+    }
+
 }
 
 ?>
