@@ -1,24 +1,19 @@
-
 <aside class="bloque-menu">
         <img src="img/user-defecto.jpg" alt="imagen-user" class="img-user">
         <!-- <h4 style="text-align: center">Bienvenido</h4> -->
         <div class="box-user">
             <p class="datos-usuario">
                 <?php
-                    
                     echo $_SESSION["usuario_registrado"]['nombres'];
                 ?>
-            
             </p>
             <p class="datos-usuario">
-               <?php
-                    
+               <?php 
                     echo $_SESSION["usuario_registrado"]['correo'];
                 ?>
             </p>
             <p class="datos-usuario">
                 <?php
-                    
                     echo $_SESSION["usuario_registrado"]['telefono'];
                 ?>
             </p>

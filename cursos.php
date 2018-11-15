@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway|Work+Sans" rel="stylesheet">     <title>plataforma-administrativa</title>
     <script src="jquery.min.js"></script>
     <script src="javascript.js"></script>
-
 </head>
 <body>
     <?php
@@ -25,15 +24,14 @@
 
         <section class="bloque-main">
            <h1>LISTA DE CURSOS ASIGNADOS</h1>
-          
            <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>        
-            
-           <div id="divData" class="cursos">
+        
+           <section class="bloque-main">
                 <?php
                     require_once 'controlador/helper3.php';
                 ?>
-            </div>
-
+            </section>
+           <div id="divData" class="cursos"></div>
         </section>
     </div>
 </body>

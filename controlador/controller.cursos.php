@@ -1,5 +1,6 @@
 <?php
-// require './modelo/class.consultas_cursos.php';
+    require_once 'modelo/class.conexion.php';
+    require_once 'modelo/class.consultas_cursos.php';
 class Cursos{
     
     function getCursos($idUser){
