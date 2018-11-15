@@ -4,7 +4,7 @@
     $consulta_curso = new Cursos();
 ?>
 
-<h1>REGISTRO DE CURSOS ASIGNADO SEGÙN MATRÌCULA</h1>
+            <h1>REGISTRO DE CURSOS ASIGNADO SEGÙN MATRÌCULA</h1>
             <p><strong>Usuario: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>            
            
            <p>Seleccione el curso a habilitar en plataforma:</p>            

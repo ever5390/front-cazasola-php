@@ -6,7 +6,7 @@
 
     $ruta = "plataforma.php?id_curso=";
     $curso = new Cursos();
-    $result = $curso->c_verDetalleCursoProf($nivel_usu, 1);
+    $result = $curso->c_verDetalleCursoProf($id_user, 1);
 
     if($result){
         foreach($result as $detalle_reg){
@@ -22,11 +22,10 @@
                 echo          $reg_horario['horafin'];
                 echo    "</p>";
             }
-            echo        "<a href='".$ruta.$reg_horario['id_curso']."'>Administrar Plataforma</a>";
+            echo        "<a class ='btn-activado' href='".$ruta.$reg_horario['id_curso']."'>Administrar Plataforma</a>";
             echo     "</div>";
             echo "</div>";
         }
     }
-    // header(
-    // header("Location: ../registro-curso.php?valor=44");    
+  
 ?>

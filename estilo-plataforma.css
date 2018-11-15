@@ -249,7 +249,16 @@ label{
     overflow: hidden;
 }
 
-.item-curso .descripcion-curso a{
+.btn-desactivado{
+    float: right;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background:  #C0392B ;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-activado{
     float: right;
     padding: 10px 20px;
     box-sizing: border-box;

@@ -15,6 +15,7 @@
     <?php
         session_start();
         $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
+        $id_user = $_SESSION["usuario_registrado"]['codigo'];
     ?>
     <div class="container">
          <?php
@@ -26,12 +27,11 @@
            <h1>LISTA DE CURSOS ASIGNADOS</h1>
            <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>        
         
-           <section class="bloque-main">
+                <div id="divData" class="cursos">
                 <?php
                     require_once 'controlador/helper3.php';
                 ?>
-            </section>
-           <div id="divData" class="cursos"></div>
+                </div>
         </section>
     </div>
 </body>
