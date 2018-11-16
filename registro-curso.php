@@ -50,13 +50,10 @@
                     }
                 ?>
             </select>
-            <button id="btn_cursos">Ver Todos</button>
+            <button value="hola" onclick ="valor(this)" id="btn_cursos">Ver Todos</button>
 
             <div id="divData" class="cursos"></div>
 
-            <?php
-                //require 'controlador/helper4.php';
-            ?>
         </section>
 
     </div>

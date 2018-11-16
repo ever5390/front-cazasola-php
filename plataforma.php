@@ -75,7 +75,7 @@
                <div class="">
                             
 
-                    <form name="formulario" action="controlador/helper.archivos_uploads.php?id_curso=<?php echo $curso_id ?>" method="post" >
+                    <form name="formulario" action="controlador/helper.archivos_uploads.php?orden=1&id_curso=<?php echo $curso_id ?>" method="post" >
                         <label for="file" class="input-label">
                             <i class="fas fa-upload"></i>
                             Seleccione el archivo a subir
@@ -107,21 +107,20 @@
 
                         if( $nivel_usu == 1){
                             $consultas_archivos = new Archivos();
-                            $registro_arch = $consultas_archivos->getArchivos($id_user, $curso_id);
-                            if(!$registro_arch){
+                            $syllabus = $consultas_archivos->getFileSyllabus($id_user, $curso_id, 1);
+                            if(!$syllabus){
 
                                 echo "<strong>Seleccione un curso de su Lista ..</strong>";
                                 }
                             else{
                                     
-                                foreach($registro_arch as $user){
-                                    if($user['tipo_archivo'] == 1){
+                                foreach($syllabus as $file){
                             ?>
                                 <label class="labelRegistered" for="nameFileRegistered">
                                         <?php
-                                        echo $user['titulo'];                         
+                                        echo $file['titulo'];                         
                                         if($nivel_usu == 1) {
-                                            echo "<a href='#'>x</a>";
+                                            echo "<a href='controlador/helper.archivos_uploads.php?orden=2&id_curso=".$curso_id."&id_archivo=".$file['id']."'>x</a>";
                                         }
                                     ?>
                                         <a href="#">€</a>
@@ -132,7 +131,6 @@
                                     ?>
                                 </label>
                             <?php 
-                                    }//fin del If :::: tipo ARCHIVO
                                 }//fin del FOR EACH :::: tipo usuario
                             }
                         } else {
@@ -145,25 +143,27 @@
 
                 <div class="file-upload">
                     <h3>ACTIVITIES</h3>
+                    <?php
+                        $actividades = $consultas_archivos->getFileSyllabus($id_user, $curso_id, 2);
+                    ?>
                     <div class="box-syllabus">
                         <?php
                          if( $nivel_usu == 1){
-                            if(!$registro_arch){
+                            if(!$actividades){
 
                                 echo "<strong>Seleccione un curso de su Lista ..</strong>";
                             }
                             else
                             {
-                                foreach($registro_arch as $user){
-                                    if($user['tipo_archivo'] == 2){
+                                foreach($actividades as $file2){
                         ?>
                                 <label class="labelRegistered" for="nameFileRegistered">
                                     <!-- INFORME N° 0XX - REPORTE DE INTERMEDIADOS E INSERTADOS DEL MES DE JULIO 2018  -->
                                     <?php
                                      
-                                        echo $user['titulo'];
+                                        echo $file2['titulo'];
                                         if($nivel_usu == 1) {
-                                            echo "<a href='#'>x</a>";
+                                            echo "<a href='controlador/helper.archivos_uploads.php?orden=2&id_curso=".$curso_id."&id_archivo=".$file2['id']."'>x</a>";
                                         }
                                     ?>
                                     <a href="#">€</a>
@@ -174,7 +174,6 @@
                                     ?>
                                 </label><br>
                             <?php
-                                    }//fin del If :::: tipo ARCHIVO
                                 }//fin del FOR EACH :::: tipo usuario
                             }
                         } else {

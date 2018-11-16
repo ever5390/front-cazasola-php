@@ -3,9 +3,15 @@
 
 class Archivos{
     
-    function getArchivos($id_user, $id_curso){
+    function getFileSyllabus($id_user, $id_curso, $tipo){
         $consultas = new ConsultasArchivos();
-        $registro_archivos = $consultas->cargarArchivos($id_user , $id_curso);
+        $registro_archivos = $consultas->cargarArchivos($id_user , $id_curso, $tipo);
+        return $registro_archivos;
+    }
+
+    function getFileActividad($id_user, $id_curso, $tipo){
+        $consultas = new ConsultasArchivos();
+        $registro_archivos = $consultas->cargarArchivos($id_user , $id_curso, $tipo);
         return $registro_archivos;
     }
 

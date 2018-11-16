@@ -2,14 +2,15 @@
     require_once ('class.conexion.php');
     class ConsultasArchivos{
 
-        public function cargarArchivos($id_user, $id_curso){
+        public function cargarArchivos($id_user, $id_curso, $tipo_archivo){
             $rows = null;
             $con = new Conexion();
             $conexion = $con->get_conexion();
-            $sql="select * from archivo where id_usser = :id_user and id_curso = :id_curso";
+            $sql="select * from archivo where id_usser = :id_user and id_curso = :id_curso and tipo_archivo= :tipo_archivo";
             $statement = $conexion->prepare($sql);
             $statement->bindParam(":id_user", $id_user);
             $statement->bindParam(":id_curso", $id_curso);
+            $statement->bindParam(":tipo_archivo", $tipo_archivo);
             $statement->execute();
             while($result = $statement->fetch()){
                 $rows[] = $result;
