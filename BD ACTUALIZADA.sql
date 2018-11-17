@@ -1,6 +1,6 @@
 
-CREATE DATABASE IF NOT EXISTS `drive_unac2` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `drive_unac2`;
+CREATE DATABASE IF NOT EXISTS `drive_unac` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `drive_unac`;
 
 -- Volcando estructura para tabla drive_unac.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (

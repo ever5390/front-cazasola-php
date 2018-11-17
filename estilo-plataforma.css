@@ -156,6 +156,7 @@ label{
 
 /*MUSTRA DE ARCHIVO SYLLABUS*/
 
+
 .labelRegistered{
     background-color: #2471a3 ;
     border-radius: 10px;
@@ -175,18 +176,23 @@ label{
     border-radius: 50%;
 }
 
+/* para los botones de accion eliminar, ver y cantidad de alumnos que descargaron*/
 .labelRegistered a:hover{
     background: red;
     color: #fff;
 }
 
-.labelRegistered a:hover  .labelRegistered {
+/* .labelRegistered a:hover  .labelRegistered {
     background: #ccc;
-}
+} */
 .labelRegistered:hover{
-    background-color: #1a5276 ;
+    background-color: #051c2b ;
     cursor: pointer;
     color: #fff;
+}
+
+.file-upload .labelRegistered:hover> .enlace_ocultar{
+    opacity: 1;
 }
 
 .file-upload{
@@ -195,6 +201,11 @@ label{
     border: 1px solid #ccc;
     padding: 10px 20px;
     border-radius: 10px;
+}
+
+.file-upload .labelRegistered .enlace_ocultar{
+    opacity :0.0;
+    transition: all 0.3s;
 }
 
 /* toggle class*/

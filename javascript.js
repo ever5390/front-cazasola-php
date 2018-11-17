@@ -14,18 +14,18 @@ $(document).ready(function(){
 function valor() {
     
     var valorSelect= $("#miSelect").val();
-    window.locationf="controlador/helper.php?val="+valorSelect;
-    $("#divData").load("controlador/helper.php?val="+valorSelect) ;
+    if(valorSelect != 0){
+        window.locationf="controlador/helper.php?val="+valorSelect;
+        $("#divData").load("controlador/helper.php?val="+valorSelect) ;    
+    }
 }
 
 function cargarArchivo(elemento){
 
 	// var preview = document.querySelector("img");                                                    
     var file = document.querySelector("input[type=file]").files[0];
-    var valor = document.formulario.inputHidden;
+    var valor = document.formulario.nameArchivoOculto;
     valor.value = file.name;
-    alert(file.name);
-
 
 	// var valor = document.formularioModificacion.txtFoto;
 	// valor.value = file.name;

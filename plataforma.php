@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="estilo-plataforma.css">
-    <link rel="stylesheet" href="estilo-cursos.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway|Work+Sans" rel="stylesheet">
     <script src="jquery.min.js"></script>
@@ -71,32 +70,23 @@
 
             <?php
                 if($nivel_usu == 1) {
-            ?>
-               <div class="">
-                            
-
-                    <form name="formulario" action="controlador/helper.archivos_uploads.php?orden=1&id_curso=<?php echo $curso_id ?>" method="post" >
+            ?>                        
+                    <form name="formulario" enctype="multipart/form-data" action="controlador/helper.archivos_uploads.php?orden=1&id_curso=<?php echo $curso_id ?>" method="post" >
                         <label for="file" class="input-label">
                             <i class="fas fa-upload"></i>
                             Seleccione el archivo a subir
                         </label>
                         <input type="submit" name="btn_submit" value="">
                         <textarea rows="3" name="txtDescripcion" placeholder=" Descripcion del Archivo"></textarea>
-                        <input type="file" id="file" onchange = "cargarArchivo(this)">
-                        <input type="text" name="inputHidden" value="">
-                        
-                        
-                    </form>
-               </div>
-
-               <div class="check-box">
-                   <br>
-                    <input type="radio" name="rb"> Syllabus
-                    <input type="radio" name="rb"> Activities
-               </div>
-                <?php  
-                    }  
-                ?>
+                        <input type="file" name="fichero_usuario" id="file" onchange = "cargarArchivo(this)" required>
+                        <input type="hidden" name="nameArchivoOculto" value="">
+                        <br><br>
+                        <input type="radio" name="radio" value="1" required> Syllabus
+                        <input type="radio" name="radio" value="2" required> Activities
+               </form>
+            <?php  
+                }  
+            ?>
 
             <!--  INICIO SECCION LISTA DE ARCHIVOS -->
 
@@ -120,13 +110,13 @@
                                         <?php
                                         echo $file['titulo'];                         
                                         if($nivel_usu == 1) {
-                                            echo "<a href='controlador/helper.archivos_uploads.php?orden=2&id_curso=".$curso_id."&id_archivo=".$file['id']."'>x</a>";
+                                            echo "<a class='enlace_ocultar' href='controlador/helper.archivos_uploads.php?orden=2&id_curso=".$curso_id."&id_archivo=".$file['id']."'>x</a>";
                                         }
                                     ?>
-                                        <a href="#">€</a>
+                                        <a class='enlace_ocultar' href="#">€</a>
                                     <?php
                                         if($nivel_usu == 1){
-                                            echo "<a href='#'>5</a>";
+                                            echo "<a class='enlace_ocultar' href='#'>5</a>";
                                         }
                                     ?>
                                 </label>
@@ -163,16 +153,17 @@
                                      
                                         echo $file2['titulo'];
                                         if($nivel_usu == 1) {
-                                            echo "<a href='controlador/helper.archivos_uploads.php?orden=2&id_curso=".$curso_id."&id_archivo=".$file2['id']."'>x</a>";
+                                            echo "<a class='enlace_ocultar' href='controlador/helper.archivos_uploads.php?orden=2&id_curso=".$curso_id."&id_archivo=".$file2['id']."'>x</a>";
                                         }
                                     ?>
-                                    <a href="#">€</a>
                                     <?php
+                                    echo "<a href='#' class='enlace_ocultar' >€</a>";
+                                    
                                         if($nivel_usu == 1){
-                                            echo "<a href='#'>5</a>";
+                                            echo "<a href='#' class='enlace_ocultar' >5</a>";
                                         }
                                     ?>
-                                </label><br>
+                                </label>
                             <?php
                                 }//fin del FOR EACH :::: tipo usuario
                             }

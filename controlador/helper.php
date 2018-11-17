@@ -15,7 +15,7 @@
 
     if($parametro == "todos"){
         $result = $cursoById->c_verDetalleCursoByIdProfe($id_usu);
-    }else{
+    }elseif($parametro != 0){
         $result = $cursoById->c_getCursosById($parametro);
     }
     
