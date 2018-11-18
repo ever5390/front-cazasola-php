@@ -1,8 +1,8 @@
 <?php   
-        require 'modelo/class.consultas_archivos.php';
-        require 'modelo/class.consultas_cursos.php';
-        require 'controlador/controller.cursos.php';
-        require 'controlador/controller.archivos_subidos.php';
+        require_once '../model/DAO_courses.php';
+        require_once '../model/DAO_files.php';
+        require_once '../controller/controller_courses.php';
+        require_once '../controller/controller_files.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,28 +10,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="estilo-plataforma.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway|Work+Sans" rel="stylesheet">
-    <script src="jquery.min.js"></script>
-    <script src="javascript.js"></script>
+    <link rel="stylesheet" href="../library/css/estilos_generales.css">
+    <script src="../library/js/jquery.min.js"></script>
+    <script src="../library/js/javascript.js"></script>
     <title>plataforma-administrativa</title>
 </head>
 <body>
     <?php
         session_start();
-        $id_user = $_SESSION["usuario_registrado"]['codigo'];
+        $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
         $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
 
         $result = null;
 
-        if(isset($_GET['id_curso'])){
-            $curso_id = $_GET['id_curso'];
+        if(isset($_GET['idDetalleProf'])){
+            $id_detalle = $_GET['idDetalleProf'];
 
             $registro_curso = new Cursos();
-            $result = $registro_curso->c_getCursosById($curso_id);
+            $result = $registro_curso->getDetalleViewBDetalleId($id_detalle);
+            // echo var_dump($result);
+            // $result = $registro_curso->c_getCursosById($id_detalle);
         }else{
-            $curso_id = 0;
+            $id_detalle = 0;
         }
     ?>
     <div class="container">
@@ -51,7 +53,7 @@
                         
                         echo "<h1>".$detalle_reg['nombre_curso']."</h1>";
                         
-                        $horario = $registro_curso->c_horarioByIdCurso($detalle_reg['id_curso']);
+                        $horario = $registro_curso->c_horarioByIdCurso($detalle_reg['id_detallecp']);
                         echo    "<p>";
                         foreach($horario as $reg_horario){
                             echo          $reg_horario['dia_asignado'].": ";
@@ -71,7 +73,7 @@
             <?php
                 if($nivel_usu == 1) {
             ?>                        
-                    <form name="formulario" enctype="multipart/form-data" action="controlador/helper.archivos_uploads.php?orden=1&id_curso=<?php echo $curso_id ?>" method="post" >
+                    <form name="formulario" enctype="multipart/form-data" action="../services/helper.archivos_uploads.php?orden=1&idDetalleProf=<?php echo $id_detalle ?>" method="post" >
                         <label for="file" class="input-label">
                             <i class="fas fa-upload"></i>
                             Seleccione el archivo a subir
@@ -97,7 +99,7 @@
 
                         if( $nivel_usu == 1){
                             $consultas_archivos = new Archivos();
-                            $syllabus = $consultas_archivos->getFileSyllabus($id_user, $curso_id, 1);
+                            $syllabus = $consultas_archivos->getFileSyllabus($id_detalle, 1);
                             if(!$syllabus){
 
                                 echo "<strong>Seleccione un curso de su Lista ..</strong>";
@@ -110,7 +112,7 @@
                                         <?php
                                         echo $file['titulo'];                         
                                         if($nivel_usu == 1) {
-                                            echo "<a class='enlace_ocultar' href='controlador/helper.archivos_uploads.php?orden=2&id_curso=".$curso_id."&id_archivo=".$file['id']."'>x</a>";
+                                            echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file['id']."'>x</a>";
                                         }
                                     ?>
                                         <a class='enlace_ocultar' href="#">€</a>
@@ -134,7 +136,7 @@
                 <div class="file-upload">
                     <h3>ACTIVITIES</h3>
                     <?php
-                        $actividades = $consultas_archivos->getFileSyllabus($id_user, $curso_id, 2);
+                        $actividades = $consultas_archivos->getFileSyllabus($id_detalle, 2);
                     ?>
                     <div class="box-syllabus">
                         <?php
@@ -153,7 +155,7 @@
                                      
                                         echo $file2['titulo'];
                                         if($nivel_usu == 1) {
-                                            echo "<a class='enlace_ocultar' href='controlador/helper.archivos_uploads.php?orden=2&id_curso=".$curso_id."&id_archivo=".$file2['id']."'>x</a>";
+                                            echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file2['id']."'>x</a>";
                                         }
                                     ?>
                                     <?php

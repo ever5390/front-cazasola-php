@@ -1,14 +1,13 @@
 <?php
 
-require_once ('../modelo/class.conexion.php');
-require_once ('../modelo/class.consultas_usuarios.php');
-
-$mensaje = null;
+require_once ('../model/DAO_connection.php');
+require_once ('../model/DAO_users.php');
 
 session_start();
 
 $usuario = $_POST['txtUser'];
 $password = $_POST['txtPass'];
+
 $consultas = new ConsultasUsuarios();
 $registro_usuario = $consultas->cargarUsuarios($usuario,$password);
 
@@ -20,6 +19,6 @@ if($registro_usuario){
         }
     }
 }
-header('Location: ../plataforma.php');
+header('Location: ../view/cursos.php');
 
 ?>

@@ -3,21 +3,21 @@
 
 class Archivos{
     
-    function getFileSyllabus($id_user, $id_curso, $tipo){
+    function getFileSyllabus($id_detalle, $tipo){
         $consultas = new ConsultasArchivos();
-        $registro_archivos = $consultas->cargarArchivos($id_user , $id_curso, $tipo);
+        $registro_archivos = $consultas->cargarArchivosByParamas($id_detalle, $tipo);
         return $registro_archivos;
     }
 
-    function getFileActividad($id_user, $id_curso, $tipo){
+    function getFileActividad($id_detalle, $tipo){
         $consultas = new ConsultasArchivos();
-        $registro_archivos = $consultas->cargarArchivos($id_user , $id_curso, $tipo);
+        $registro_archivos = $consultas->cargarArchivosByParamas($id_detalle, $tipo);
         return $registro_archivos;
     }
 
-    function c_insertarArchivo($titulo, $descripcion, $tipo_archivo, $id_curso, $id_user){
+    function c_insertarArchivo($titulo, $descripcion, $tipo_archivo, $id_detalle){
         $consultas = new ConsultasArchivos();
-        $exito = $consultas->InsertarArchivo($titulo, $descripcion, $tipo_archivo, $id_curso, $id_user);
+        $exito = $consultas->InsertarArchivo($titulo, $descripcion, $tipo_archivo, $id_detalle);
         return $exito;
     }
 

@@ -1,7 +1,7 @@
 window.onload = function() {
     document.getElementById("btn_cursos").onclick = function(){
-        window.locationf="controlador/helper.php?val=todos";
-        $("#divData").load("controlador/helper.php?val=todos") ;
+        window.locationf="../services/helper.php?val=todos";
+        $("#divData").load("../services/helper.php?val=todos") ;
     }
 }
 
@@ -14,9 +14,11 @@ $(document).ready(function(){
 function valor() {
     
     var valorSelect= $("#miSelect").val();
+    alert(valorSelect);
     if(valorSelect != 0){
-        window.locationf="controlador/helper.php?val="+valorSelect;
-        $("#divData").load("controlador/helper.php?val="+valorSelect) ;    
+        //La ruta es como si estuviera en la pàgina de cursos_registro por eso SOLO los ../
+        window.locationf="../services/helper.php?val="+valorSelect;
+        $("#divData").load("../services/helper.php?val="+valorSelect) ;    
     }
 }
 

@@ -14,7 +14,6 @@
             while($result = $statement->fetch()){
                 $rows[] = $result;
             }
-            // $modelo->close_conexion();
             return $rows;
         }
     }
