@@ -157,53 +157,89 @@ label{
 /*MUSTRA DE ARCHIVO SYLLABUS*/
 
 
-.labelRegistered{
+.box-content-file{
     background-color: #2471a3 ;
     border-radius: 10px;
     padding: 10px 20px;
     color: #fff;
     margin-top: 5px;
-   
+    box-sizing: border-box;
+    font-size: .8rem;
+    width: 100%;
+    position: relative;
 }
 
-.labelRegistered a{
-    margin-left: 10px;
+.box-content-file .block-file{
+    display: block;
+}
+
+.box-content-file .titulo{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.box-content-file .fecha {
+    font-size: .8rem;
+    margin-bottom: 10px;
+}
+
+.box-content-file .view_details{
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 2px 8px;
+}
+
+.box-content-file .numberPerson_download{
+    margin-left: 3px;
+}
+
+.box-content-file .descripcion{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.box-content-file a{
+    position: absolute;
+    right: 10px;
+    top: 10px;
     color: red;
     padding: 0 5px;
-    font-weight: bold;
     text-decoration: none;
     background: #fff;
     border-radius: 50%;
+    font-weight: bold;
 }
 
 /* para los botones de accion eliminar, ver y cantidad de alumnos que descargaron*/
-.labelRegistered a:hover{
+.box-content-file a:hover{
     background: red;
     color: #fff;
 }
 
-/* .labelRegistered a:hover  .labelRegistered {
-    background: #ccc;
-} */
-.labelRegistered:hover{
+.box-content-file:hover{
     background-color: #051c2b ;
     cursor: pointer;
     color: #fff;
 }
 
-.file-upload .labelRegistered:hover> .enlace_ocultar{
+.file-upload .box-content-file:hover> .enlace_ocultar{
     opacity: 1;
 }
 
 .file-upload{
-    margin-top: 20px;
+    margin-top: 15px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     padding: 10px 20px;
     border-radius: 10px;
 }
 
-.file-upload .labelRegistered .enlace_ocultar{
+h4{
+    padding: 0;
+    margin: 2px;
+}
+
+.file-upload .box-content-file .enlace_ocultar{
     opacity :0.0;
     transition: all 0.3s;
 }

@@ -30,8 +30,6 @@
 
             $registro_curso = new Cursos();
             $result = $registro_curso->getDetalleViewBDetalleId($id_detalle);
-            // echo var_dump($result);
-            // $result = $registro_curso->c_getCursosById($id_detalle);
         }else{
             $id_detalle = 0;
         }
@@ -40,7 +38,6 @@
         <?php
             include 'aside-usuario-info.php';
         ?>
-
         <div class="menu-oculto"><i class="fas fa-bars"></i></div>
 
         <section class="bloque-main">
@@ -68,7 +65,7 @@
 
            <div class="select-file">    
 
-            <!--selectbox-file  INICIO SECCION SUBIRS ARCHIVOS -->
+            <!--Section: Upload Files -->
 
             <?php
                 if($nivel_usu == 1) {
@@ -93,7 +90,7 @@
             <!--  INICIO SECCION LISTA DE ARCHIVOS -->
 
                 <div class="file-upload">
-                    <h3>SYLLABUS</h3>
+                    <h4>SYLLABUS</h4>
                     <div class="box-syllabus">
                         <?php
 
@@ -108,17 +105,16 @@
                                     
                                 foreach($syllabus as $file){
                             ?>
-                                <label class="labelRegistered" for="nameFileRegistered">
+                                <label class="box-content-file" for="nameFileRegistered">
                                         <?php
-                                        echo $file['titulo'];                         
+                                         echo "<span class='block-file titulo'>".$file['titulo']."</span>";
+                                         echo "<span class='block-file fecha'>10 NOV 2018</span>";
+                                         echo "<span class='view_details download'>download</span>";
+                                         if($nivel_usu == 1){
+                                             echo "<span class='view_details numberPerson_download'>15 alumnos</span>";
+                                         }                                         
                                         if($nivel_usu == 1) {
                                             echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file['id']."'>x</a>";
-                                        }
-                                    ?>
-                                        <a class='enlace_ocultar' href="#">€</a>
-                                    <?php
-                                        if($nivel_usu == 1){
-                                            echo "<a class='enlace_ocultar' href='#'>5</a>";
                                         }
                                     ?>
                                 </label>
@@ -134,7 +130,7 @@
                 </div>
 
                 <div class="file-upload">
-                    <h3>ACTIVITIES</h3>
+                    <h4>ACTIVITIES</h4>
                     <?php
                         $actividades = $consultas_archivos->getFileSyllabus($id_detalle, 2);
                     ?>
@@ -149,21 +145,27 @@
                             {
                                 foreach($actividades as $file2){
                         ?>
-                                <label class="labelRegistered" for="nameFileRegistered">
-                                    <!-- INFORME N° 0XX - REPORTE DE INTERMEDIADOS E INSERTADOS DEL MES DE JULIO 2018  -->
+                                <label class="box-content-file" for="nameFileRegistered">
                                     <?php
-                                     
-                                        echo $file2['titulo'];
+                                        echo "<span class='block-file titulo'>".$file2['titulo']."</span>";
+                                        echo "<span class='block-file fecha'>10 NOV 2018</span>";
+                                        if($nivel_usu == 1){
+                                            echo "<span class='view_details download'>download</span>";
+                                            echo "<span class='view_details numberPerson_download'>15 alumnos</span>";
+                                        }
+                                        echo "<span class='block-file descripcion'>";
+                                        echo " La diferencia entre las unidades em y rem es como el navegador determina el valor px al que se ";
+                                        echo " están traduciendo. Entender ésta diferencia es la clave para determinar cuando usar cada unidad.";
+                                        echo " Vamos a comenzar sobre como trabajan las unidades rem y em desde cero para asegurarnos que";
+                                        echo " conozcas cada detalle.";
+                                        echo "</span>";
+                                        echo "<span class='block-file fecha'><strong>Fecha Entrega:</strong> 20 DIC 2018</span>";
+
                                         if($nivel_usu == 1) {
                                             echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file2['id']."'>x</a>";
                                         }
-                                    ?>
-                                    <?php
-                                    echo "<a href='#' class='enlace_ocultar' >€</a>";
                                     
-                                        if($nivel_usu == 1){
-                                            echo "<a href='#' class='enlace_ocultar' >5</a>";
-                                        }
+
                                     ?>
                                 </label>
                             <?php
