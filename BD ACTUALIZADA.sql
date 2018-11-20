@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         5.6.17 - MySQL Community Server (GPL)
+-- Versión del servidor:         5.7.23 - MySQL Community Server (GPL)
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             9.5.0.5196
 -- --------------------------------------------------------
@@ -20,31 +20,37 @@ USE `drive_unac`;
 CREATE TABLE IF NOT EXISTS `archivo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(80) DEFAULT NULL,
-  `descripcion` varchar(50) DEFAULT NULL,
+  `name_archivo` varchar(200) DEFAULT NULL,
+  `descripcion` varchar(400) DEFAULT NULL,
   `tipo_archivo` int(11) NOT NULL,
   `id_detallecp` int(11) NOT NULL,
+  `fecha_subida` datetime DEFAULT NULL,
+  `fecha_entrega` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_detallecp_archivo` (`id_detallecp`)
-) ENGINE=MyISAM AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla drive_unac.archivo: 15 rows
+-- Volcando datos para la tabla drive_unac.archivo: 18 rows
 /*!40000 ALTER TABLE `archivo` DISABLE KEYS */;
-INSERT INTO `archivo` (`id`, `titulo`, `descripcion`, `tipo_archivo`, `id_detallecp`) VALUES
-	(65, 'soldimix.jpg', 'descripcion del archivo subido', 1, 4),
-	(64, 'pelota.jpg', 'descripcion del archivo subido', 1, 2),
-	(58, 'anillo.png', 'descripcion del archivo subido', 1, 3),
-	(78, 'Scrum Certiffication Pre +Scrum Master+ Agile Scrum Training.png', 'descripcion del archivo subido', 2, 1),
-	(79, 'Scrum Certiffication Pre +Scrum Master+ Agile Scrum Training.png', 'descripcion del archivo subido', 2, 3),
-	(74, 'maquinaria.jpg', 'descripcion del archivo subido', 2, 1),
-	(66, 'anillo.png', 'descripcion del archivo subido', 2, 4),
-	(67, 'zapatilla.jpg', 'descripcion del archivo subido', 1, 5),
-	(68, 'moto.jpg', 'descripcion del archivo subido', 1, 8),
-	(69, 'reloj.png', 'descripcion del archivo subido', 2, 8),
-	(76, 'Scrum Certiffication Pre +Scrum Master+ ', 'descripcion del archivo subido', 2, 1),
-	(72, 'soldimix.jpg', 'descripcion del archivo subido', 2, 8),
-	(73, 'Scrum Certiffication Pre +Scrum Master+ ', 'descripcion del archivo subido', 1, 1),
-	(80, 'Scrum Certiffication Pre +Scrum Master+ Agile Scrum Training.png', 'descripcion del archivo subido', 2, 3),
-	(81, 'KrugerCV_Update_forBCP.docx', 'descripcion del archivo subido', 2, 3);
+INSERT INTO `archivo` (`id`, `titulo`, `name_archivo`, `descripcion`, `tipo_archivo`, `id_detallecp`, `fecha_subida`, `fecha_entrega`) VALUES
+	(65, 'soldimix.jpg', 'soldimix.jpg', 'descripcion del archivo subido', 1, 4, '2018-11-19 18:12:09', '2018-10-12 00:00:00'),
+	(64, 'pelota.jpg', 'pelota.jpg', 'descripcion del archivo subido', 1, 2, '2018-11-19 18:12:11', '2018-10-12 00:00:00'),
+	(79, 'Scrum Certiffication Pre +Scrum Master+ Agile Scrum Training.png', 'Scrum Certiffication Pre +Scrum Master+ Agile Scrum Training.png', 'You learned from our CSS Colors Chapter, that you ', 2, 3, '2018-11-19 18:12:17', '2018-10-12 00:00:00'),
+	(66, 'anillo.png', 'anillo.png', 'You learned from our CSS Colors Chapter, that you ', 2, 4, '2018-11-19 18:12:17', '2018-10-12 00:00:00'),
+	(67, 'zapatilla.jpg', 'zapatilla.jpg', 'descripcion del archivo subido', 1, 5, '2018-11-19 18:12:12', '2018-10-12 00:00:00'),
+	(68, 'moto.jpg', 'moto.jpg', 'descripcion del archivo subido', 1, 8, '2018-11-19 18:12:13', '2018-10-12 00:00:00'),
+	(69, 'reloj.png', 'reloj.png', 'You learned from our CSS Colors Chapter, that you ', 2, 8, '2018-11-19 18:12:18', '2018-10-12 00:00:00'),
+	(76, 'Scrum Certiffication Pre +Scrum Master+ ', 'Scrum Certiffication Pre +Scrum Master+ ', 'You learned from our CSS Colors Chapter, that you ', 2, 1, '2018-11-19 18:12:19', '2018-10-12 00:00:00'),
+	(72, 'soldimix.jpg', 'soldimix.jpg', 'You learned from our CSS Colors Chapter, that you ', 2, 8, '2018-11-19 18:12:19', '2018-10-12 00:00:00'),
+	(103, 'photo-1516727052521-08079c40df80.jpg', 'photo-1516727052521-08079c40df80.jpg', 'ffgfgfgfgfgfgfg', 1, 1, '2018-11-19 23:46:16', '2018-11-17 00:00:00'),
+	(80, 'Scrum Certiffication Pre +Scrum Master+ Agile Scrum Training.png', 'Scrum Certiffication Pre +Scrum Master+ Agile Scrum Training.png', 'You learned from our CSS Colors Chapter, that you ', 2, 3, '2018-11-19 18:12:20', '2018-10-12 00:00:00'),
+	(81, 'KrugerCV_Update_forBCP.docx', 'KrugerCV_Update_forBCP.docx', 'You learned from our CSS Colors Chapter, that you ', 2, 3, '2018-11-19 18:12:21', '2018-10-12 00:00:00'),
+	(88, 'photo-1516727052521-08079c40df80.jpg', 'photo-1516727052521-08079c40df80.jpg', 'You learned from our CSS Colors Chapter, that you ', 2, 3, '2018-11-19 18:12:22', '2018-10-12 00:00:00'),
+	(83, 'photo-1454165804606-c3d57bc86b40.jpg', 'photo-1454165804606-c3d57bc86b40.jpg', 'You learned from our CSS Colors Chapter, that you ', 2, 3, '2018-11-19 18:12:23', '2018-10-12 00:00:00'),
+	(94, 'photo-1516727052521-08079c40df80.jpg', 'photo-1516727052521-08079c40df80.jpg', 'You learned from our CSS Colors Chapter, that you ', 1, 3, '2018-11-19 18:12:14', '2018-10-12 00:00:00'),
+	(106, 'Confirmar reenvÃ­o del formulario', 'Confirmar reenvÃ­o del formulario', 'Esta pÃ¡gina web necesita los datos ingresados anteriormente para mostrarse correctamente. Puedes volver a enviar los datos, pero ten en cuenta que se repetirÃ¡n las acciones que la pÃ¡gina haya realizado anteriormente.', 2, 1, '2018-11-20 01:55:50', '2018-11-17 00:00:00'),
+	(104, 'Type your audience targeting rule here.', 'Type your audience targeting rule here.', 'Why doesn\'t this work? The label is inside the .item parent. I don\'t wanna put it outside of block elements as it wouldn\'t be valid.\r\nSo I\'m trying to simulate a label click:', 2, 2, '2018-11-20 00:13:09', '2018-11-28 00:00:00'),
+	(105, 'DO_SIS_Requisitos_Hardware_Big_Data_V9 (1).pdf', 'DO_SIS_Requisitos_Hardware_Big_Data_V9 (1).pdf', 'DO_SIS_Requisitos_Hardware_Big_Data_V9 (1).pdf', 2, 2, '2018-11-20 00:19:28', '2018-11-30 00:00:00');
 /*!40000 ALTER TABLE `archivo` ENABLE KEYS */;
 
 -- Volcando estructura para tabla drive_unac.curso
@@ -80,11 +86,11 @@ CREATE TABLE IF NOT EXISTS `detalle_curso_prof` (
 -- Volcando datos para la tabla drive_unac.detalle_curso_prof: 9 rows
 /*!40000 ALTER TABLE `detalle_curso_prof` DISABLE KEYS */;
 INSERT INTO `detalle_curso_prof` (`id_detallecp`, `id_curso`, `id_user`, `habilitado`) VALUES
-	(1, 1, 1, 0),
+	(1, 1, 1, 1),
 	(2, 2, 1, 0),
 	(3, 3, 1, 1),
 	(4, 4, 2, 1),
-	(5, 5, 2, 1),
+	(5, 5, 2, 0),
 	(6, 6, 4, 0),
 	(7, 7, 4, 0),
 	(8, 1, 4, 1),
@@ -133,9 +139,9 @@ CREATE TABLE IF NOT EXISTS `matricula_alumno` (
   PRIMARY KEY (`id_matricula`),
   KEY `fk_id_detalle` (`id_detallecp`),
   KEY `fk_id_user` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla drive_unac.matricula_alumno: ~7 rows (aproximadamente)
+-- Volcando datos para la tabla drive_unac.matricula_alumno: ~8 rows (aproximadamente)
 /*!40000 ALTER TABLE `matricula_alumno` DISABLE KEYS */;
 INSERT INTO `matricula_alumno` (`id_matricula`, `id_usuario`, `id_detallecp`) VALUES
 	(1, 3, 1),
@@ -144,7 +150,8 @@ INSERT INTO `matricula_alumno` (`id_matricula`, `id_usuario`, `id_detallecp`) VA
 	(4, 3, 4),
 	(5, 5, 5),
 	(6, 5, 6),
-	(7, 5, 2);
+	(7, 5, 2),
+	(8, 5, 8);
 /*!40000 ALTER TABLE `matricula_alumno` ENABLE KEYS */;
 
 -- Volcando estructura para tabla drive_unac.nivel
@@ -193,13 +200,26 @@ CREATE TABLE `view_curso_detalle` (
 	`id_user` INT(11) NOT NULL
 ) ENGINE=MyISAM;
 
+-- Volcando estructura para vista drive_unac.view_detalle_matricula
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `view_detalle_matricula` (
+	`id_matricula` INT(11) NOT NULL,
+	`id_usuario` INT(11) NOT NULL,
+	`id_curso` INT(11) NOT NULL,
+	`id_detallecp` INT(11) NOT NULL,
+	`id_user` INT(11) NOT NULL,
+	`habilitado` INT(1) NOT NULL
+) ENGINE=MyISAM;
+
 -- Volcando estructura para vista drive_unac.view_curso_detalle
 -- Eliminando tabla temporal y crear estructura final de VIEW
 DROP TABLE IF EXISTS `view_curso_detalle`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_curso_detalle` AS select c.nombre_curso, dt.id_detallecp, dt.id_user
-	from curso as c
-	inner join detalle_curso_prof as dt
-	on c.id_curso = dt.id_curso ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_curso_detalle` AS select `c`.`nombre_curso` AS `nombre_curso`,`dt`.`id_detallecp` AS `id_detallecp`,`dt`.`id_user` AS `id_user` from (`curso` `c` join `detalle_curso_prof` `dt` on((`c`.`id_curso` = `dt`.`id_curso`)));
+
+-- Volcando estructura para vista drive_unaac.view_detalle_matricula
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `view_detalle_matricula`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_detalle_matricula` AS select `m`.`id_matricula` AS `id_matricula`,`m`.`id_usuario` AS `id_usuario`,`dt`.`id_curso` AS `id_curso`,`dt`.`id_detallecp` AS `id_detallecp`,`dt`.`id_user` AS `id_user`,`dt`.`habilitado` AS `habilitado` from (`matricula_alumno` `m` join `detalle_curso_prof` `dt` on((`m`.`id_detallecp` = `dt`.`id_detallecp`)));
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
