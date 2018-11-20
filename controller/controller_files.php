@@ -15,15 +15,29 @@ class Archivos{
         return $registro_archivos;
     }
 
-    function c_insertarArchivo($titulo, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega){
+    function c_insertarArchivo($titulo, $nameFile, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega){
         $consultas = new ConsultasArchivos();
-        $exito = $consultas->InsertarArchivo($titulo, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega);
+        $exito = $consultas->InsertarArchivo($titulo, $nameFile,  $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega);
         return $exito;
     }
 
     function c_deleteArchivo($id_archivo){
         $consultas = new ConsultasArchivos();
         $exito = $consultas->deleteArchivo($id_archivo);
+        return $exito;
+    }
+
+    /* DESCARGARS DE ARCHIVOS GESTIÒN  */
+
+    function c_insertarArchivoDescarga($id_archivo, $id_usuario){
+        $consultas = new ConsultasArchivos();
+        $exito = $consultas->insertarArchivoDescarga($id_archivo, $id_usuario);
+        return $exito;
+    }
+
+    function c_conteoDescarga($id_archivo){
+        $consultas = new ConsultasArchivos();
+        $exito = $consultas->conteoDescarga($id_archivo);
         return $exito;
     }
 

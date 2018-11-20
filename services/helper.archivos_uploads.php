@@ -4,7 +4,7 @@
     require_once '../controller/controller_files.php';
 
     $archivo = new Archivos();
-    $dir_subida = 'c:/wamp64/www/front-cazasola-php/uploads/files';
+    $dir_subida = 'c:/wamp/www/front-cazasola-php/uploads/files';
     $fichero_subido = $dir_subida.basename($_FILES['fichero_usuario']['name']);
     $titulo = null;
     $nameFile = null;
@@ -18,16 +18,24 @@
     if(isset($_GET['idDetalleProf'])) $id_detalle = $_GET['idDetalleProf'];
     if(isset($_GET['id_archivo'])) $id_archivo = $_GET['id_archivo'];
     if(isset($_GET['orden']))  $orden = $_GET['orden'];
-
-    if($titulo === ''){
+    if($titulo == ''){
         $titulo = $nameFile;
     }
     $mensaje = null; //mensaje de respuesta [RESPONSE]
 
+    
+    // echo var_dump($titulo);
+    // echo var_dump($tipo_archivo);
+    // echo var_dump($nameFile);
+    // echo var_dump($fecha_entrega);
+    // echo var_dump($fecha_subida);
+    // echo var_dump($descripcion);
+    // echo var_dump($id_detalle);
+    // echo var_dump($orden);
     switch($orden){
         case 1:
             if (move_uploaded_file($_FILES['fichero_usuario']['tmp_name'], $fichero_subido))
-                $archivo->c_insertarArchivo( $titulo, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega);
+                $archivo->c_insertarArchivo($titulo, $nameFile, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega);
             if($archivo)
                 $mensaje = "Archivo insertado con exito";
             break;

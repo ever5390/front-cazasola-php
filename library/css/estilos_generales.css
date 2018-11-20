@@ -248,11 +248,13 @@ textarea{
 
 .box-content-file .block-file{
     display: block;
+    padding-left: 5px;
 }
 
 .box-content-file .titulo{
     font-size: 1rem;
     font-weight: bold;
+    margin-bottom: 8px;
 }
 
 .box-content-file .fecha {
@@ -270,12 +272,27 @@ textarea{
     margin-left: 3px;
 }
 
+.box-content-file .download{
+    margin-left: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+.box-content-file .download a{
+    color: white;
+    text-decoration: none;
+}
+
+.box-content-file .download a:hover{
+    text-decoration: underline;
+}
+
 .box-content-file .descripcion{
     margin-top: 10px;
     margin-bottom: 5px;
 }
 
-.box-content-file a{
+.box-content-file .enlace_ocultar{
     position: absolute;
     right: 10px;
     top: 10px;
@@ -288,7 +305,7 @@ textarea{
 }
 
 /* para los botones de accion eliminar, ver y cantidad de alumnos que descargaron*/
-.box-content-file a:hover{
+.box-content-file .enlace_ocultar:hover{
     background: red;
     color: #fff;
 }

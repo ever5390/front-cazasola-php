@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         5.7.23 - MySQL Community Server (GPL)
+-- Versión del servidor:         5.6.17 - MySQL Community Server (GPL)
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             9.5.0.5196
 -- --------------------------------------------------------
@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS `archivo` (
   `fecha_entrega` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_detallecp_archivo` (`id_detallecp`)
-) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=110 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla drive_unac.archivo: 18 rows
+-- Volcando datos para la tabla drive_unac.archivo: 19 rows
 /*!40000 ALTER TABLE `archivo` DISABLE KEYS */;
 INSERT INTO `archivo` (`id`, `titulo`, `name_archivo`, `descripcion`, `tipo_archivo`, `id_detallecp`, `fecha_subida`, `fecha_entrega`) VALUES
 	(65, 'soldimix.jpg', 'soldimix.jpg', 'descripcion del archivo subido', 1, 4, '2018-11-19 18:12:09', '2018-10-12 00:00:00'),
@@ -50,7 +50,8 @@ INSERT INTO `archivo` (`id`, `titulo`, `name_archivo`, `descripcion`, `tipo_arch
 	(94, 'photo-1516727052521-08079c40df80.jpg', 'photo-1516727052521-08079c40df80.jpg', 'You learned from our CSS Colors Chapter, that you ', 1, 3, '2018-11-19 18:12:14', '2018-10-12 00:00:00'),
 	(106, 'Confirmar reenvÃ­o del formulario', 'Confirmar reenvÃ­o del formulario', 'Esta pÃ¡gina web necesita los datos ingresados anteriormente para mostrarse correctamente. Puedes volver a enviar los datos, pero ten en cuenta que se repetirÃ¡n las acciones que la pÃ¡gina haya realizado anteriormente.', 2, 1, '2018-11-20 01:55:50', '2018-11-17 00:00:00'),
 	(104, 'Type your audience targeting rule here.', 'Type your audience targeting rule here.', 'Why doesn\'t this work? The label is inside the .item parent. I don\'t wanna put it outside of block elements as it wouldn\'t be valid.\r\nSo I\'m trying to simulate a label click:', 2, 2, '2018-11-20 00:13:09', '2018-11-28 00:00:00'),
-	(105, 'DO_SIS_Requisitos_Hardware_Big_Data_V9 (1).pdf', 'DO_SIS_Requisitos_Hardware_Big_Data_V9 (1).pdf', 'DO_SIS_Requisitos_Hardware_Big_Data_V9 (1).pdf', 2, 2, '2018-11-20 00:19:28', '2018-11-30 00:00:00');
+	(105, 'DO_SIS_Requisitos_Hardware_Big_Data_V9 (1).pdf', 'DO_SIS_Requisitos_Hardware_Big_Data_V9 (1).pdf', 'DO_SIS_Requisitos_Hardware_Big_Data_V9 (1).pdf', 2, 2, '2018-11-20 00:19:28', '2018-11-30 00:00:00'),
+	(109, 'Proyecto de Sistemas Formulacion de Casos', 'KrugerCV_Update_forBCP.docx', 'Controla cÃ³mo tus datos permiten que Google funcione mejor para ti\r\n\r\n', 2, 4, '2018-11-20 05:36:38', '2018-11-25 00:00:00');
 /*!40000 ALTER TABLE `archivo` ENABLE KEYS */;
 
 -- Volcando estructura para tabla drive_unac.curso
@@ -71,6 +72,20 @@ INSERT INTO `curso` (`id_curso`, `nombre_curso`) VALUES
 	(6, 'TALLER DE BASE DE DATOS'),
 	(7, 'PROGRAMACION AVANZADA');
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
+
+-- Volcando estructura para tabla drive_unac.descargas_archivos_alumnos
+CREATE TABLE IF NOT EXISTS `descargas_archivos_alumnos` (
+  `id_descarga` int(11) NOT NULL AUTO_INCREMENT,
+  `id_archivo` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  PRIMARY KEY (`id_descarga`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_archivo` (`id_archivo`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla drive_unac.descargas_archivos_alumnos: 0 rows
+/*!40000 ALTER TABLE `descargas_archivos_alumnos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `descargas_archivos_alumnos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla drive_unac.detalle_curso_prof
 CREATE TABLE IF NOT EXISTS `detalle_curso_prof` (
@@ -214,12 +229,12 @@ CREATE TABLE `view_detalle_matricula` (
 -- Volcando estructura para vista drive_unac.view_curso_detalle
 -- Eliminando tabla temporal y crear estructura final de VIEW
 DROP TABLE IF EXISTS `view_curso_detalle`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_curso_detalle` AS select `c`.`nombre_curso` AS `nombre_curso`,`dt`.`id_detallecp` AS `id_detallecp`,`dt`.`id_user` AS `id_user` from (`curso` `c` join `detalle_curso_prof` `dt` on((`c`.`id_curso` = `dt`.`id_curso`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_curso_detalle` AS select `c`.`nombre_curso` AS `nombre_curso`,`dt`.`id_detallecp` AS `id_detallecp`,`dt`.`id_user` AS `id_user` from (`curso` `c` join `detalle_curso_prof` `dt` on((`c`.`id_curso` = `dt`.`id_curso`))) ;
 
--- Volcando estructura para vista drive_unaac.view_detalle_matricula
+-- Volcando estructura para vista drive_unac.view_detalle_matricula
 -- Eliminando tabla temporal y crear estructura final de VIEW
 DROP TABLE IF EXISTS `view_detalle_matricula`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_detalle_matricula` AS select `m`.`id_matricula` AS `id_matricula`,`m`.`id_usuario` AS `id_usuario`,`dt`.`id_curso` AS `id_curso`,`dt`.`id_detallecp` AS `id_detallecp`,`dt`.`id_user` AS `id_user`,`dt`.`habilitado` AS `habilitado` from (`matricula_alumno` `m` join `detalle_curso_prof` `dt` on((`m`.`id_detallecp` = `dt`.`id_detallecp`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_detalle_matricula` AS select `m`.`id_matricula` AS `id_matricula`,`m`.`id_usuario` AS `id_usuario`,`dt`.`id_curso` AS `id_curso`,`dt`.`id_detallecp` AS `id_detallecp`,`dt`.`id_user` AS `id_user`,`dt`.`habilitado` AS `habilitado` from (`matricula_alumno` `m` join `detalle_curso_prof` `dt` on((`m`.`id_detallecp` = `dt`.`id_detallecp`))) ;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

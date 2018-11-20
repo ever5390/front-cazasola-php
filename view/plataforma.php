@@ -1,7 +1,9 @@
 <?php   
         require_once '../model/DAO_courses.php';
         require_once '../model/DAO_files.php';
+        require_once '../model/DAO_users.php';
         require_once '../controller/controller_courses.php';
+        require_once '../controller/controller_users.php';
         require_once '../controller/controller_files.php';
 
         session_start();
@@ -10,7 +12,9 @@
         $result = null;
         if(isset($_GET['idDetalleProf'])){
             $id_detalle = $_GET['idDetalleProf'];
+            $consultas_archivos = new Archivos();
             $registro_curso = new Cursos();
+            $usuarios =  new Usuarios();
             $result = $registro_curso->getDetalleViewBDetalleId($id_detalle);
         }else{
             $id_detalle = 0;
@@ -44,10 +48,10 @@
                     echo '<p>Horario del curso a gestionar</p>';
                 }else{
                     foreach($result as $detalle_reg){
-                        
                         echo "<h1> SOP812 ".$detalle_reg['nombre_curso']."</h1>";
                         if($nivel_usu == 2){
-                            echo "<span> <strong>Prof: TYH56 </strong>Nombre del Profesor que será cargado</span><br><br>";
+                            $profesor = $usuarios->c_cargarUsuariosByUserId($detalle_reg['id_user']);
+                            echo "<span> <strong>Prof: TYH56 </strong>".$profesor[0]['nombres']."</span><br><br>";
                         }
                         $horario = $registro_curso->c_horarioByIdCurso($detalle_reg['id_detallecp']);
                         echo    "<p class='horario'>";
@@ -74,7 +78,7 @@
                         <form id="form-archivo-details" name="formulario" enctype="multipart/form-data" action="../services/helper.archivos_uploads.php?orden=1&idDetalleProf=<?php echo $id_detalle ?>" method="post" >
                             <div><a class="close-modal" href="javascript:closeModal()">x</a></div><br>
                             <p><input type="radio" name="radio" value="1" required> Syllabus
-                            <input type="radio" name="radio" value="2" required> Activities <p>    
+                            <input type="radio" name="radio" value="2" required> Actividades <p>    
                             <p><input    class="input-form" type="file" name="fichero_usuario" id="file" onchange = "cargarArchivo(this)"></p>
                             <p><input    class="input-form" type="text" name="txtTitulo" placeholder="titulo de actividad"></p>
                             <p><input    class="input-form" type="text" id="nameFile" name="nameFile" placeholder="archivo subido" ></p>
@@ -93,8 +97,6 @@
                     <h4>SYLLABUS</h4>
                     <div class="box-syllabus">
                         <?php
-                        
-                            $consultas_archivos = new Archivos();
                             $syllabus = $consultas_archivos->getFileSyllabus($id_detalle, 1);
                             if(!$syllabus){
 
@@ -106,19 +108,19 @@
                             ?>
                                 <label class="box-content-file" for="nameFileRegistered">
                                     <?php
-                                        echo "<span class='block-file titulo'>".$file['titulo']."</span>";
-                                        echo "<span class='block-file fecha'>".$file['fecha_subida']."</span>";
-                                        if($nivel_usu == 1){
-                                            echo "<span class='view_details download'>download</span>";
-                                            echo "<span class='view_details numberPerson_download'>15 alumnos</span>";
-                                        }
-                                        echo "<span class='block-file descripcion'>".$file['descripcion']."</span>";
-                                        echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file['fecha_entrega']."</span>";
-
-                                        if($nivel_usu == 1) {
-                                            echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file['id']."'>x</a>";
-                                        }
-                                    ?>
+                                         echo "<span class='block-file titulo'>".$file['titulo']."</span>";
+                                         if($nivel_usu == 2){
+                                             echo "<span class='view_details fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
+                                             echo "<span class='view_details download'><a href='#' >download</a></span>";
+                                         } else{
+                                             echo "<span class='block-file fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
+                                             echo "<span class='view_details download'><a href='#' >download</a></span>";
+                                             echo "<span class='view_details numberPerson_download'>15 alumnos</span>";
+                                             echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file['id']."'>x</a>";
+                                         }
+                                         echo "<span class='block-file descripcion'>".$file['descripcion']."</span>";
+                                         echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file['fecha_entrega']."</span>";     
+                                     ?>
                                 </label>
                             <?php 
                                 }//fin del FOR EACH :::: tipo usuario
@@ -129,7 +131,7 @@
                 </div>
 
                 <div class="file-upload">
-                    <h4>ACTIVITIES</h4>
+                    <h4>ACTIVIDADES</h4>
                     <?php
                         $actividades = $consultas_archivos->getFileSyllabus($id_detalle, 2);
                     ?>
@@ -146,17 +148,17 @@
                                 <label class="box-content-file" for="nameFileRegistered">
                                     <?php
                                         echo "<span class='block-file titulo'>".$file2['titulo']."</span>";
-                                        echo "<span class='block-file fecha'>".$file2['fecha_subida']."</span>";
-                                        if($nivel_usu == 1){
-                                            echo "<span class='view_details download'>download</span>";
+                                        if($nivel_usu == 2){
+                                            echo "<span class='view_details fecha'>Fecha subida: ".$file2['fecha_subida']."</span>";
+                                            echo "<span class='view_details download'><a href='../services/service_descarga_file.php?idFile=".$file2['id']."' >download</a></span>";
+                                        } else{
+                                            echo "<span class='block-file fecha'>Fecha subida: ".$file2['fecha_subida']."</span>";
+                                            echo "<span class='view_details download'><a href='service_descarga_file.php' >download</a></span>";
                                             echo "<span class='view_details numberPerson_download'>15 alumnos</span>";
-                                        }
-                                        echo "<span class='block-file descripcion'>".$file2['descripcion']."</span>";
-                                        echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file2['fecha_entrega']."</span>";
-
-                                        if($nivel_usu == 1) {
                                             echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file2['id']."'>x</a>";
                                         }
+                                        echo "<span class='block-file descripcion'>".$file2['descripcion']."</span>";
+                                        echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file2['fecha_entrega']."</span>";     
                                     ?>
                                 </label>
                             <?php

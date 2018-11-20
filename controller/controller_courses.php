@@ -1,7 +1,4 @@
 <?php
-    // require_once 'C:/wamp64/www/front-cazasola-php/modelo/class.conexion.php';
-    // require_once 'C:/wamp64/www/front-cazasola-php/modelo/class.consultas_cursos.php'; 
-
     require_once '../model/DAO_connection.php';
     require_once '../model/DAO_courses.php'; 
 

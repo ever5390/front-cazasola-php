@@ -21,7 +21,7 @@
             $rows = null;
             $modelo = new Conexion();
             $conexion = $modelo->get_conexion();
-            $sql="select * from usuario where usuario = :user";
+            $sql="select * from usuario where id_usuario = :user";
             $statement = $conexion->prepare($sql);
             $statement->bindParam(":user", $user);
             $statement->execute();
