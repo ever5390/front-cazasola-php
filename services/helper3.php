@@ -6,7 +6,11 @@
 
     $ruta = "../view/plataforma.php?idDetalleProf=";
     $cursos = new Cursos();
-    $result = $cursos->getCursosByIdProf($id_user);
+    if($nivel_usu == 1){ // USUARIO PROFESOR
+        $result = $cursos->getCursosByIdProf($id_user);
+    } else { // USUARIO ALUMNO
+        $result = $cursos->c_getViewMatriculaAlumno($id_user);
+    }
 
     if($result){
         foreach($result as $cursoReg){
@@ -14,9 +18,7 @@
                 echo "<div class='item-curso'>";
                 echo    "<div class='name-curso'>";
                 $cursoName = $cursos->c_getCursosById($cursoReg['id_curso']);
-                foreach($cursoName as $reg){
-                echo        "<h4>".$reg['nombre_curso']."</h4>";
-                }
+                echo        "<h4>".$cursoName[0]['nombre_curso']."</h4>";
                 echo    "</div>";
                 echo    "<div class='descripcion-curso'>";
                 $horario = $cursos->c_horarioByIdCurso($cursoReg['id_detallecp']);
@@ -32,5 +34,5 @@
             }
         }
     }
-  
+
 ?>

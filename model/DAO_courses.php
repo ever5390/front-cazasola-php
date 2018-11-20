@@ -101,6 +101,37 @@
             }
             return true;
         }
+
+
+        /* Matricula solo Alumno */
+        public function getMatriculaAlumno($idUser_alumno){
+            $rows = null;
+            $modelo = new Conexion();
+            $conexion = $modelo->get_conexion();
+            $sql="select * from matricula_alumno where id_usuario = :idUser_alumno";
+            $statement = $conexion->prepare($sql);
+            $statement->bindParam(":idUser_alumno", $idUser_alumno);
+            $statement->execute();
+            while($result = $statement->fetch()){
+                $rows[] = $result;
+            }
+            return $rows;
+        }
+
+        public function getViewMatriculaAlumno($idUser_alumno){
+            $rows = null;
+            $modelo = new Conexion();
+            $conexion = $modelo->get_conexion();
+            $sql="select * from view_detalle_matricula where id_usuario = :idUser_alumno";
+            $statement = $conexion->prepare($sql);
+            $statement->bindParam(":idUser_alumno", $idUser_alumno);
+            $statement->execute();
+            while($result = $statement->fetch()){
+                $rows[] = $result;
+            }
+            return $rows;
+        }
+        
     }
 
 ?>

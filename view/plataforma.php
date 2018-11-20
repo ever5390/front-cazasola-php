@@ -3,7 +3,20 @@
         require_once '../model/DAO_files.php';
         require_once '../controller/controller_courses.php';
         require_once '../controller/controller_files.php';
+
+        session_start();
+        $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
+        $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
+        $result = null;
+        if(isset($_GET['idDetalleProf'])){
+            $id_detalle = $_GET['idDetalleProf'];
+            $registro_curso = new Cursos();
+            $result = $registro_curso->getDetalleViewBDetalleId($id_detalle);
+        }else{
+            $id_detalle = 0;
+        }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,22 +31,6 @@
     <title>plataforma-administrativa</title>
 </head>
 <body>
-    <?php
-        session_start();
-        $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
-        $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
-
-        $result = null;
-
-        if(isset($_GET['idDetalleProf'])){
-            $id_detalle = $_GET['idDetalleProf'];
-
-            $registro_curso = new Cursos();
-            $result = $registro_curso->getDetalleViewBDetalleId($id_detalle);
-        }else{
-            $id_detalle = 0;
-        }
-    ?>
     <div class="container">
         <?php
             include 'aside-usuario-info.php';
@@ -48,10 +45,12 @@
                 }else{
                     foreach($result as $detalle_reg){
                         
-                        echo "<h1>".$detalle_reg['nombre_curso']."</h1>";
-                        
+                        echo "<h1> SOP812 ".$detalle_reg['nombre_curso']."</h1>";
+                        if($nivel_usu == 2){
+                            echo "<span> <strong>Prof: TYH56 </strong>Nombre del Profesor que será cargado</span><br><br>";
+                        }
                         $horario = $registro_curso->c_horarioByIdCurso($detalle_reg['id_detallecp']);
-                        echo    "<p>";
+                        echo    "<p class='horario'>";
                         foreach($horario as $reg_horario){
                             echo          $reg_horario['dia_asignado'].": ";
                             echo          $reg_horario['horainicio']." - ";
@@ -60,29 +59,30 @@
                         echo    "</p>";
                     }
                 }
-
             ?>
-
-           <div class="select-file">    
-
-            <!--Section: Upload Files -->
-
+           <div class="select-file">
             <?php
                 if($nivel_usu == 1) {
-            ?>                        
-                    <form name="formulario" enctype="multipart/form-data" action="../services/helper.archivos_uploads.php?orden=1&idDetalleProf=<?php echo $id_detalle ?>" method="post" >
-                        <label for="file" class="input-label">
-                            <i class="fas fa-upload"></i>
-                            Seleccione el archivo a subir
-                        </label>
-                        <input type="submit" name="btn_submit" value="">
-                        <textarea rows="3" name="txtDescripcion" placeholder=" Descripcion del Archivo"></textarea>
-                        <input type="file" name="fichero_usuario" id="file" onchange = "cargarArchivo(this)" required>
-                        <input type="hidden" name="nameArchivoOculto" value="">
-                        <br><br>
-                        <input type="radio" name="radio" value="1" required> Syllabus
-                        <input type="radio" name="radio" value="2" required> Activities
-               </form>
+            ?>
+                    <label for="file" class="input-label" id="file_button" >
+                        <i class="fas fa-upload"></i> Seleccione el archivo a subir
+                    </label>
+                    <a class="input-label enlace_desactivado" href="javascript:openModal()" >Subir</a>
+
+                    <div id="modal">
+                        
+                        <form id="form-archivo-details" name="formulario" enctype="multipart/form-data" action="../services/helper.archivos_uploads.php?orden=1&idDetalleProf=<?php echo $id_detalle ?>" method="post" >
+                            <div><a class="close-modal" href="javascript:closeModal()">x</a></div><br>
+                            <p><input type="radio" name="radio" value="1" required> Syllabus
+                            <input type="radio" name="radio" value="2" required> Activities <p>    
+                            <p><input    class="input-form" type="file" name="fichero_usuario" id="file" onchange = "cargarArchivo(this)"></p>
+                            <p><input    class="input-form" type="text" name="txtTitulo" placeholder="titulo de actividad"></p>
+                            <p><input    class="input-form" type="text" id="nameFile" name="nameFile" placeholder="archivo subido" ></p>
+                            <p><input    class="input-form" type="date" name="txtFecha" required></p>
+                            <p><textarea class="input-form" cols="2" rows="3" name="txtDescripcion" placeholder=" descripcion de la actividad" value=""></textarea></p>
+                            <p><input    class="input-form btn-submit" type="submit" name="btn_submit" value="Upload File"></p>
+                        </form>
+                    </div>
             <?php  
                 }  
             ?>
@@ -93,8 +93,7 @@
                     <h4>SYLLABUS</h4>
                     <div class="box-syllabus">
                         <?php
-
-                        if( $nivel_usu == 1){
+                        
                             $consultas_archivos = new Archivos();
                             $syllabus = $consultas_archivos->getFileSyllabus($id_detalle, 1);
                             if(!$syllabus){
@@ -106,13 +105,16 @@
                                 foreach($syllabus as $file){
                             ?>
                                 <label class="box-content-file" for="nameFileRegistered">
-                                        <?php
-                                         echo "<span class='block-file titulo'>".$file['titulo']."</span>";
-                                         echo "<span class='block-file fecha'>10 NOV 2018</span>";
-                                         echo "<span class='view_details download'>download</span>";
-                                         if($nivel_usu == 1){
-                                             echo "<span class='view_details numberPerson_download'>15 alumnos</span>";
-                                         }                                         
+                                    <?php
+                                        echo "<span class='block-file titulo'>".$file['titulo']."</span>";
+                                        echo "<span class='block-file fecha'>".$file['fecha_subida']."</span>";
+                                        if($nivel_usu == 1){
+                                            echo "<span class='view_details download'>download</span>";
+                                            echo "<span class='view_details numberPerson_download'>15 alumnos</span>";
+                                        }
+                                        echo "<span class='block-file descripcion'>".$file['descripcion']."</span>";
+                                        echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file['fecha_entrega']."</span>";
+
                                         if($nivel_usu == 1) {
                                             echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file['id']."'>x</a>";
                                         }
@@ -121,9 +123,6 @@
                             <?php 
                                 }//fin del FOR EACH :::: tipo usuario
                             }
-                        } else {
-                            echo "<a href='cursos.php'>Seleccione un curso de su Lista ..</a>";
-                        }
                         //fin del If :::: tipo usuario
                         ?>
                     </div>
@@ -136,7 +135,6 @@
                     ?>
                     <div class="box-syllabus">
                         <?php
-                         if( $nivel_usu == 1){
                             if(!$actividades){
 
                                 echo "<strong>Seleccione un curso de su Lista ..</strong>";
@@ -148,33 +146,23 @@
                                 <label class="box-content-file" for="nameFileRegistered">
                                     <?php
                                         echo "<span class='block-file titulo'>".$file2['titulo']."</span>";
-                                        echo "<span class='block-file fecha'>10 NOV 2018</span>";
+                                        echo "<span class='block-file fecha'>".$file2['fecha_subida']."</span>";
                                         if($nivel_usu == 1){
                                             echo "<span class='view_details download'>download</span>";
                                             echo "<span class='view_details numberPerson_download'>15 alumnos</span>";
                                         }
-                                        echo "<span class='block-file descripcion'>";
-                                        echo " La diferencia entre las unidades em y rem es como el navegador determina el valor px al que se ";
-                                        echo " están traduciendo. Entender ésta diferencia es la clave para determinar cuando usar cada unidad.";
-                                        echo " Vamos a comenzar sobre como trabajan las unidades rem y em desde cero para asegurarnos que";
-                                        echo " conozcas cada detalle.";
-                                        echo "</span>";
-                                        echo "<span class='block-file fecha'><strong>Fecha Entrega:</strong> 20 DIC 2018</span>";
+                                        echo "<span class='block-file descripcion'>".$file2['descripcion']."</span>";
+                                        echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file2['fecha_entrega']."</span>";
 
                                         if($nivel_usu == 1) {
                                             echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file2['id']."'>x</a>";
                                         }
-                                    
-
                                     ?>
                                 </label>
                             <?php
                                 }//fin del FOR EACH :::: tipo usuario
                             }
-                        } else {
-                            echo "<a href='cursos.php'>Seleccione un curso de su Lista ..</a>";
-                        }
-                        //fin del If :::: tipo usuario
+                        
                         ?>
                     </div>
                 </div>

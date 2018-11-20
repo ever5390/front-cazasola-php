@@ -15,9 +15,9 @@ class Archivos{
         return $registro_archivos;
     }
 
-    function c_insertarArchivo($titulo, $descripcion, $tipo_archivo, $id_detalle){
+    function c_insertarArchivo($titulo, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega){
         $consultas = new ConsultasArchivos();
-        $exito = $consultas->InsertarArchivo($titulo, $descripcion, $tipo_archivo, $id_detalle);
+        $exito = $consultas->InsertarArchivo($titulo, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega);
         return $exito;
     }
 

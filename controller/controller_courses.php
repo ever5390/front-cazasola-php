@@ -49,8 +49,6 @@ Class Cursos{
         return $registro_cursos;
     }
 
-
-
     /*actualizar */ 
     function c_updateCurso($idDetalle, $valor_activate){
         $consultas = new ConsultasCursos();
@@ -58,6 +56,19 @@ Class Cursos{
         return $exito;
     }
 
+    /* Matricula */
+
+    function c_getMatriculaAlumno($idUser_alumno){
+        $consultas = new ConsultasCursos();
+        $registro_cursos = $consultas->getMatriculaAlumno($idUser_alumno);
+        return $registro_cursos;
+    }
+    /*  */
+    function c_getViewMatriculaAlumno($idUser_alumno){
+        $consultas = new ConsultasCursos();
+        $registro_cursos = $consultas->getViewMatriculaAlumno($idUser_alumno);
+        return $registro_cursos;
+    }
 }
 
 ?>

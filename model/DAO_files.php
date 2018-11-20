@@ -18,15 +18,17 @@
             return $rows;
         }
 
-        public function InsertarArchivo($titulo, $descripcion, $tipo_archivo, $id_detalle){
+        public function InsertarArchivo($titulo, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega){
             $con = new Conexion();
             $conexion = $con->get_conexion();
-            $sql="insert into archivo values ( null, :titulo, :descripcion, :tipo_archivo, :id_detalle )";
+            $sql="insert into archivo values ( null, :titulo, :descripcion, :tipo_archivo, :id_detalle, :fecha_subida, :fecha_entrega )";
             $statement = $conexion->prepare($sql);
             $statement->bindParam(":titulo", $titulo);
             $statement->bindParam(":descripcion", $descripcion);
             $statement->bindParam(":tipo_archivo", $tipo_archivo);
             $statement->bindParam(":id_detalle", $id_detalle);
+            $statement->bindParam(":fecha_subida", $fecha_subida);
+            $statement->bindParam(":fecha_entrega", $fecha_entrega);
             if(!$statement){
                 return false;
             }else{

@@ -12,7 +12,6 @@
 </head>
 <body>
     <?php
-
         require_once '../model/DAO_connection.php';
         require_once '../model/DAO_courses.php';
         require_once '../controller/controller_courses.php';
@@ -23,8 +22,6 @@
 
         $nivel_usu = $_SESSION["usuario_registrado"]['nivel']; //para el aside
         $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
-
-        $cursos = $consulta->c_getDetalleViewByUser($id_user);
     ?>
     <div class="container">
         <?php
@@ -37,16 +34,41 @@
            <p><strong>Usuario: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>
 
            <p>Seleccione el curso a habilitar en plataforma:</p>
-           <select class="combo-box-cursos" onchange="valor(this)" id="miSelect">
-              <option value='0'>--seleccione--</option>
-                <?php
-                    if($cursos){
-                        foreach($cursos as $curso){
-                            echo "<option value='".$curso['id_detallecp']."'>".$curso['nombre_curso']."</option>";
+           <?php
+            if($nivel_usu == 1){  // PARA CASO  PROFESOR 
+                $cursos = $consulta->c_getDetalleViewByUser($id_user);
+           ?>
+                <select class="combo-box-cursos" onchange="valor(this)" id="miSelect">
+                    <option value='0'>--seleccione--</option>
+                    <?php
+                        if($cursos){
+                            foreach($cursos as $curso){
+                                echo "<option value='".$curso['id_detallecp']."'>".$curso['nombre_curso']."</option>";
+                            }
+                        }
+                    ?>
+                </select>
+            <?php
+            } else { // PARA CASO ALUMNO
+                $cursos = $consulta->c_getMatriculaAlumno($id_user);
+           ?>
+                <select class="combo-box-cursos" onchange="valor(this)" id="miSelect">
+                    <option value='0'>--seleccione--</option>
+                    <?php
+                    foreach($cursos as $curso){
+                        $matricula = $consulta->getDetalleViewBDetalleId($curso['id_detallecp']);
+                   
+                        if($matricula){
+                            foreach($matricula as $reg_matricula){
+                                echo "<option value='".$reg_matricula['id_detallecp']."'>".$reg_matricula['nombre_curso']."</option>";
+                            }
                         }
                     }
-                ?>
-            </select>
+                    ?>
+                </select>
+            <?php
+            } 
+           ?>
             <button value="" onclick ="valor(this)" id="btn_cursos">Ver Todos</button>
 
             <div id="divData" class="cursos"></div>
@@ -54,5 +76,7 @@
         </section>
 
     </div>
+
+
 </body>
 </html>

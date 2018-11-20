@@ -4,6 +4,8 @@
     $cursoById = new Cursos();
     session_start();
     $id_usu = $_SESSION["usuario_registrado"]['id_usuario'];
+    $nivel_usu = $_SESSION["usuario_registrado"]['nivel']; //para el aside
+
     $cont = 0;
     if(isset($_GET['val'])){
         $parametro = $_GET['val'];
@@ -13,10 +15,13 @@
     //por eso los ../services/helper2.. y no solo helper2.. de frente. 
     $ruta = "../services/helper2.php?idcurso=";
 
-    if($parametro == "todos"){
-            $result = $cursoById->c_verDetalleCursoByIdProfe($id_usu);
-    }elseif($parametro != 0){
-            $result = $cursoById->c_getDetalleByDetalleId($parametro);
+    if($parametro == "todos" &&  $nivel_usu == 1){  // USUARIO PROFESOR
+        $result = $cursoById->c_verDetalleCursoByIdProfe($id_usu);
+    }elseif($parametro == "todos" &&  $nivel_usu == 2){  // USUARIO ALUMNO
+        $result = $cursoById->c_getViewMatriculaAlumno($id_usu);
+    }
+    elseif($parametro != 0){
+        $result = $cursoById->c_getDetalleByDetalleId($parametro);
     }
 
     if($result){
@@ -27,9 +32,7 @@
                 echo        "<div class='name-curso'>";
                     $cursoName = $cursoById->c_getCursosById($cursoReg['id_curso']);
                     
-                    foreach($cursoName as $reg){
-                    echo        "<h4>".$reg['nombre_curso']."</h4>";
-                    }
+                    echo        "<h4>".$cursoName[0]['nombre_curso']."</h4>";
                     echo    "</div>";
                     echo    "<div class='descripcion-curso'>";
                     $horario = $cursoById->c_horarioByIdCurso($cursoReg['id_detallecp']);
