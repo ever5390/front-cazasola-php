@@ -1,0 +1,102 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	/* background: url(bg.jpg);
+	background-size: cover;*/
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+}
+.containerFormulario
+{
+    width: 700px;
+    outline: 1px solid  #ccc;
+	padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+	/* background: rgba(0,0,0,.5); */
+}
+
+.user{
+    width: 100%;
+}
+.container{
+    width: calc(50% - 10px);
+    padding-left: 15px;
+    box-sizing: border-box;
+    float: left;
+    overflow: hidden;
+}
+
+.contain-imgName{
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+
+.containerFormulario p
+{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+
+.containerFormulario input
+{
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+
+.containerFormulario input[type="text"],
+textarea,
+.containerFormulario input[type="password"]
+{
+	border: none;
+	border-bottom: 1px solid #ccc;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	/* color: #fff; */
+	font-size: 14px;
+}
+
+textarea{
+    width: 100%;
+    margin-top: 10px;
+    height: 40px;
+    resize: vertical;
+}
+::placeholder
+{
+	color: rgba(255,255,255,.5);
+}
+.containerFormulario input[type="submit"]
+{
+    width: 50%;
+    float : left;
+	border: none;
+	outline: none;
+	height: 40px;
+	color: #fff;
+	margin-top: 25px;
+	background: #FF5733;
+    cursor: pointer;
+    font-size: 15px;
+}
+.containerFormulario input[type="submit"]:hover, .containerFormulario a:hover
+{
+	background: #efed40;
+	color: #262626;
+}
+.containerFormulario a
+{   
+    color: white;
+    float : left;
+    margin-left: 3px;
+    width: calc(50% - 3px);
+    text-decoration: none;
+    padding: 12px 0;
+    text-align : center;
+    background: #FF5733;
+    margin-top: 25px;
+}

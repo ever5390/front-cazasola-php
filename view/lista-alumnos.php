@@ -1,3 +1,23 @@
+<?php
+    session_start();
+    require_once '../model/DAO_connection.php';
+    require_once '../model/DAO_users.php';
+    require_once '../model/DAO_files.php';
+    require_once '../controller/controller_files.php';
+    require_once '../controller/controller_users.php';
+
+    $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
+    $archivo = new Archivos();
+    $consultas = new Usuarios();
+    $alumnos = array();
+
+    //Obtener Lista de Alumnos que descargaron dichos archivos. Buscando por IdArchivo en tabla Descargas.
+    if(isset($_GET['idFile'])) {
+        $id_archivo = $_GET['idFile'];
+        $alumnos = $archivo->c_getDescargasByIdArchivo($id_archivo);
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +32,7 @@
 
 </head>
 <body>
-    <?php
-        session_start();
-        $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
-    ?>
+
     <div class="container">
 
         <?php
@@ -25,7 +42,8 @@
 
         <section class="bloque-main">
            <h1>LISTA DE ALUMNOS CON PARTICIPACIÒN ACTIVA</h1>
-           <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>                   <p>Seleccione la fuente de archivo para mostrar la lista correspondiente:</p>
+           <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>                   
+           <p>Seleccione la fuente de archivo para mostrar la lista correspondiente:</p>
            <select class="combo-box-cursos">
               <option value="volvo">SYLLABUS</option>
               <option value="saab">ARCHIVO NRO 1</option>
@@ -34,26 +52,27 @@
            <div class="cursos">
                 <table>
                     <thead>
-                        <th>CODIGO</th>
-                        <th>NOMBRES COMPLETOS</th>
-                        <th>FECHA DESCARGA</th>
+                        <th>Código</th>
+                        <th>Nombres y Apellidos</th>
+                        <th>Correo</th>
+                        <th>Fecha Descarga</th>
                     </thead>
                     <tbody>
+                    <?php
+                    if($alumnos != null){
+                        foreach($alumnos as $alumno){
+                            $registroAlumno = $consultas->c_cargarUsuariosByUserId($alumno['id_usuario']);
+                    ?>
                         <tr>
-                            <td>1415210276</td>
-                            <td class="td-nombres">Ever Rosales Peña</td>
-                            <td>10-12-2018</td>
+                            <td>COD_ALU_<?php echo $registroAlumno[0]['id_usuario'] ?></td>
+                            <td class="td-nombres"><?php echo $registroAlumno[0]['nombres'] ?></td>
+                            <td><?php echo $registroAlumno[0]['correo'] ?></td>
+                            <td><?php echo $alumno['fecha_descarga']?></td>
                         </tr>
-                         <tr>
-                            <td>1415210276</td>
-                            <td>Ever Rosales Peña</td>
-                            <td>10-12-2018</td>
-                        </tr>
-                        <tr>
-                            <td>1415210276</td>
-                            <td>Ever Rosales Peña</td>
-                            <td>10-12-2018</td>
-                        </tr>                       
+                    <?php
+                        }
+                    }
+                    ?>
                     </tbody>
                 </table>
            </div>

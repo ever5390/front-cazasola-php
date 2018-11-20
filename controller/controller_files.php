@@ -1,5 +1,4 @@
 <?php
-// // $nameFile = $_POST['txtFile'];
 
 class Archivos{
     
@@ -29,15 +28,27 @@ class Archivos{
 
     /* DESCARGARS DE ARCHIVOS GESTIÒN  */
 
-    function c_insertarArchivoDescarga($id_archivo, $id_usuario){
+    function c_insertarArchivoDescarga($id_archivo, $id_usuario, $id_detalle, $fecha_descarga){
         $consultas = new ConsultasArchivos();
-        $exito = $consultas->insertarArchivoDescarga($id_archivo, $id_usuario);
+        $exito = $consultas->insertarArchivoDescarga($id_archivo, $id_usuario, $id_detalle, $fecha_descarga);
+        return $exito;
+    }
+
+    function c_BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_usuario, $id_detalle){
+        $consultas = new ConsultasArchivos();
+        $exito = $consultas->BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_usuario, $id_detalle);
         return $exito;
     }
 
     function c_conteoDescarga($id_archivo){
         $consultas = new ConsultasArchivos();
-        $exito = $consultas->conteoDescarga($id_archivo);
+        $cantidadCoincidencias = $consultas->conteoDescarga($id_archivo);
+        return $cantidadCoincidencias;
+    }
+
+    function c_getDescargasByIdArchivo($id_archivo){
+        $consultas = new ConsultasArchivos();
+        $exito = $consultas->getDescargasByIdArchivo($id_archivo);
         return $exito;
     }
 

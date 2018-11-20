@@ -10,6 +10,7 @@
         $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
         $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
         $result = null;
+
         if(isset($_GET['idDetalleProf'])){
             $id_detalle = $_GET['idDetalleProf'];
             $consultas_archivos = new Archivos();
@@ -108,19 +109,20 @@
                             ?>
                                 <label class="box-content-file" for="nameFileRegistered">
                                     <?php
-                                         echo "<span class='block-file titulo'>".$file['titulo']."</span>";
-                                         if($nivel_usu == 2){
-                                             echo "<span class='view_details fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
-                                             echo "<span class='view_details download'><a href='#' >download</a></span>";
-                                         } else{
-                                             echo "<span class='block-file fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
-                                             echo "<span class='view_details download'><a href='#' >download</a></span>";
-                                             echo "<span class='view_details numberPerson_download'>15 alumnos</span>";
-                                             echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file['id']."'>x</a>";
-                                         }
-                                         echo "<span class='block-file descripcion'>".$file['descripcion']."</span>";
-                                         echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file['fecha_entrega']."</span>";     
-                                     ?>
+                                        echo "<span class='block-file titulo'>".$file['titulo']."</span>";
+                                        if($nivel_usu == 2){
+                                            echo "<span class='view_details fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
+                                            echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."' >download</a></span>";
+                                        } else{
+                                            echo "<span class='block-file fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
+                                            echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."' >download</a></span>";
+                                            $archivosDescargados = $consultas_archivos->c_conteoDescarga($file['id']);
+                                            echo "<span class='view_details download'><a href='lista-alumnos.php?idDetalleProf=".$id_detalle."&idFile=".$file['id']."' >".$archivosDescargados[0]['cantidad']." alumnos </a></span>";
+                                            echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&idFile=".$file['id']."'>x</a>";
+                                        }
+                                        echo "<span class='block-file descripcion'>".$file['descripcion']."</span>";
+                                        echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file['fecha_entrega']."</span>";     
+                                    ?>
                                 </label>
                             <?php 
                                 }//fin del FOR EACH :::: tipo usuario
@@ -150,16 +152,17 @@
                                         echo "<span class='block-file titulo'>".$file2['titulo']."</span>";
                                         if($nivel_usu == 2){
                                             echo "<span class='view_details fecha'>Fecha subida: ".$file2['fecha_subida']."</span>";
-                                            echo "<span class='view_details download'><a href='../services/service_descarga_file.php?idFile=".$file2['id']."' >download</a></span>";
+                                            echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."' >download</a></span>";
                                         } else{
                                             echo "<span class='block-file fecha'>Fecha subida: ".$file2['fecha_subida']."</span>";
-                                            echo "<span class='view_details download'><a href='service_descarga_file.php' >download</a></span>";
-                                            echo "<span class='view_details numberPerson_download'>15 alumnos</span>";
-                                            echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&id_archivo=".$file2['id']."'>x</a>";
+                                            echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."' >download</a></span>";
+                                            $archivosDescargados = $consultas_archivos->c_conteoDescarga($file2['id']);
+                                            echo "<span class='view_details download'><a href='lista-alumnos.php?idDetalleProf=".$id_detalle."&idFile=".$file2['id']."' >".$archivosDescargados[0]['cantidad']." alumnos </a></span>";
+                                            echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."'>x</a>";
                                         }
                                         echo "<span class='block-file descripcion'>".$file2['descripcion']."</span>";
                                         echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file2['fecha_entrega']."</span>";     
-                                    ?>
+                                     ?>
                                 </label>
                             <?php
                                 }//fin del FOR EACH :::: tipo usuario

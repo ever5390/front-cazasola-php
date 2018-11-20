@@ -54,13 +54,15 @@
 
         /* DESCARGA DE ARCHIVOS GESTIÒN */
 
-        public function insertarArchivoDescarga($id_archivo, $id_usuario){
-            $con = new Conexio();
+        public function insertarArchivoDescarga($id_archivo, $id_usuario, $id_detallecp, $fecha_descarga){
+            $con = new Conexion();
             $conexion = $con->get_conexion();
-            $sql="insert into descargas_archivos_alumnos values (null, :id_archivo, :id_usuario)";
+            $sql="insert into descargas_archivos_alumnos values (null, :id_archivo, :id_usuario, :id_detallecp, :fecha_descarga)";
             $statement = $conexion->prepare($sql);
             $statement->bindParam(":id_archivo", $id_archivo);
             $statement->bindParam(":id_usuario", $id_usuario);
+            $statement->bindParam(":id_detallecp", $id_detallecp);
+            $statement->bindParam(":fecha_descarga", $fecha_descarga);
             if(!$statement){
                 return false;
             }else{
@@ -69,20 +71,51 @@
             return true;
         }
 
-        public function conteoDescarga($id_archivo){
-            $con = new Conexio();
+        public function BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_usuario, $id_detallecp){
+            $rows = null;
+            $con = new Conexion();
             $conexion = $con->get_conexion();
-            $sql="select count(*) as cantidad from descargas_archivos_alumnos where id_archivo = :id_archivo)";
+            $sql="select * from descargas_archivos_alumnos where id_archivo = :id_archivo and id_usuario= :id_usuario and id_detallecp= :id_detallecp";
             $statement = $conexion->prepare($sql);
             $statement->bindParam(":id_archivo", $id_archivo);
-            if(!$statement){
-                return false;
-            }else{
-                $statement->execute();
+            $statement->bindParam(":id_usuario", $id_usuario);
+            $statement->bindParam(":id_detallecp", $id_detallecp);
+            $statement->execute();
+            while($result = $statement->fetch()){
+                $rows[] = $result;
             }
-            return true;
+            // $con->close_conexion();
+            return $rows;
         }
 
+        public function conteoDescarga($id){
+            $rows = null;
+            $con = new Conexion();
+            $conexion = $con->get_conexion();
+            $sql="select count(*) as cantidad from descargas_archivos_alumnos where id_archivo = :id";
+            $statement = $conexion->prepare($sql);
+            $statement->bindParam(":id", $id);
+            $statement->execute();
+            while($result = $statement->fetch()){
+                $rows[] = $result;
+            }
+            return $rows;
+        }
+        
+        public function getDescargasByIdArchivo($id_archivo){
+            $rows = null;
+            $con = new Conexion();
+            $conexion = $con->get_conexion();
+            $sql="select * from descargas_archivos_alumnos where id_archivo = :id_archivo";
+            $statement = $conexion->prepare($sql);
+            $statement->bindParam(":id_archivo", $id_archivo);
+            $statement->execute();
+            while($result = $statement->fetch()){
+                $rows[] = $result;
+            }
+            // $con->close_conexion();
+            return $rows;
+        }
     }
 
 ?>
