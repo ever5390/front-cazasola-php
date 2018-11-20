@@ -49,7 +49,8 @@
                     echo '<p>Horario del curso a gestionar</p>';
                 }else{
                     foreach($result as $detalle_reg){
-                        echo "<h1> SOP812 ".$detalle_reg['nombre_curso']."</h1>";
+                        $curso = $registro_curso->c_getDetalleByDetalleId($detalle_reg['id_detallecp']);
+                        echo "<h1> CUR_".$curso[0]['id_curso']." ".$detalle_reg['nombre_curso']."</h1>";
                         if($nivel_usu == 2){
                             $profesor = $usuarios->c_cargarUsuariosByUserId($detalle_reg['id_user']);
                             echo "<span> <strong>Prof: TYH56 </strong>".$profesor[0]['nombres']."</span><br><br>";

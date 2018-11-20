@@ -20,10 +20,6 @@ function valor() {
     }
 }
 
-function habilitarBtnUpload(){
-    
-}
-
 function openModal(){
     var valor = document.getElementById("nameFile").value;
     if(valor != ""){
@@ -31,7 +27,6 @@ function openModal(){
     } else {
         alert("Seleccione un archivo previamente...");
     }
-      
 }
 
 function closeModal(){

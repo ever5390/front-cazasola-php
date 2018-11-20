@@ -18,12 +18,12 @@
                 echo "<div class='item-curso'>";
                 echo    "<div class='name-curso'>";
                 $cursoName = $cursos->c_getCursosById($cursoReg['id_curso']);
-                echo        "<h4>".$cursoName[0]['nombre_curso']."</h4>";
+                echo        "<h4>CUR_".$cursoReg['id_curso']." ".$cursoName[0]['nombre_curso']."</h4>";
                 echo    "</div>";
                 echo    "<div class='descripcion-curso'>";
                 $horario = $cursos->c_horarioByIdCurso($cursoReg['id_detallecp']);
                 foreach($horario as $reg_horario){
-                    echo    "<p>".$reg_horario['dia_asignado'].": ";
+                    echo    "<p >".$reg_horario['dia_asignado'].": ";
                     echo          $reg_horario['horainicio']." - ";
                     echo          $reg_horario['horafin'];
                     echo    "</p>";

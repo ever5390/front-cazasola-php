@@ -5,7 +5,6 @@ body{
 }
 
 .container{
-    /* border: 1px solid red; */
     box-sizing: border-box;
     height: 100vh;
     width: 100%;
@@ -333,7 +332,7 @@ textarea{
 
 h4{
     padding: 0;
-    margin: 2px;
+    margin: 0;
 }
 
 .file-upload .box-content-file .enlace_ocultar{
@@ -383,7 +382,7 @@ h4{
 
 .item-curso .name-curso{
     width: 100%;
-    padding: 10px 15px;;
+    padding: 30px 20px;
     box-sizing: border-box;
     border-bottom: 1px solid #ccc;
     background: #1a5276;
@@ -397,6 +396,11 @@ h4{
 .item-curso .descripcion-curso{
     padding: 0 20px 10px 20px;
     overflow: hidden;
+    font-size: .9em;
+}
+
+.item-curso .descripcion-curso p{
+   line-height: .5em;
 }
 
 .btn-desactivado{

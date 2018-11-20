@@ -30,9 +30,17 @@
         <div class="menu-oculto"><i class="fas fa-bars"></i></div>
 
         <section class="bloque-main">
-           <h1>REGISTRO DE CURSOS ASIGNADO SEGÙN MATRÌCULA</h1>
-           <p><strong>Usuario: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>
-
+           <h1>REGISTRO DE CURSOS ASIGNADOS SEGÙN MATRÌCULA</h1>
+           <p>
+           <?php 
+                if($nivel_usu == 1){
+                    echo "<strong>Profesor: </strong>";
+                } else {
+                    echo "<strong>Alumno(a): </strong>";
+                }
+                echo $_SESSION["usuario_registrado"]['nombres']; 
+            ?>   
+            </p>
            <p>Seleccione el curso a habilitar en plataforma:</p>
            <?php
             if($nivel_usu == 1){  // PARA CASO  PROFESOR 

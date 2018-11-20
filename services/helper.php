@@ -32,7 +32,7 @@
                 echo        "<div class='name-curso'>";
                     $cursoName = $cursoById->c_getCursosById($cursoReg['id_curso']);
                     
-                    echo        "<h4>".$cursoName[0]['nombre_curso']."</h4>";
+                    echo        "<h4>CUR_".$cursoReg['id_curso']." ".$cursoName[0]['nombre_curso']."</h4>";
                     echo    "</div>";
                     echo    "<div class='descripcion-curso'>";
                     $horario = $cursoById->c_horarioByIdCurso($cursoReg['id_detallecp']);
@@ -43,8 +43,6 @@
                         echo          $reg_horario['horafin'];
                         echo    "</p>";
                     }
-                // // $habilitado = $cursoById->c_getCursosById($cursoReg['id_curso']);
-                // // foreach($habilitado as $reg_habilitado){
                 if($cursoReg['habilitado'] == 0){
                     echo        "<a class='btn-desactivado' href='".$ruta.$cursoReg['id_detallecp']."&activado=".$cursoReg['habilitado']."'>Habilitar en plataforma</a>";
                         } 
@@ -52,7 +50,7 @@
                         {
                     echo        "<a class='btn-activado' href='".$ruta.$cursoReg['id_detallecp']."&activado=".$cursoReg['habilitado']."'>Deshabilitar en plataforma</a>";
                     }
-                echo      "</div>";
+                echo       "</div>";
                 echo   "</div>";
         }
     }else{

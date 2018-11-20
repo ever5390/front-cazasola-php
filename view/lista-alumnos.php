@@ -41,7 +41,7 @@
         <div class="menu-oculto"><i class="fas fa-bars"></i></div>
 
         <section class="bloque-main">
-           <h1>LISTA DE ALUMNOS CON PARTICIPACIÒN ACTIVA</h1>
+           <h1>LISTA DE ALUMNOS CON DESCARGAS ACTIVAS</h1>
            <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p>                   
            <p>Seleccione la fuente de archivo para mostrar la lista correspondiente:</p>
            <select class="combo-box-cursos">
