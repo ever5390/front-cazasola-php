@@ -1,25 +1,27 @@
 <?php   
-        require_once '../model/DAO_courses.php';
-        require_once '../model/DAO_files.php';
-        require_once '../model/DAO_users.php';
-        require_once '../controller/controller_courses.php';
-        require_once '../controller/controller_users.php';
-        require_once '../controller/controller_files.php';
+    session_start();
+    if(!$_SESSION["usuario_registrado"]){
+        header('Location: ../index.html');    
+    }
+    require_once '../model/DAO_courses.php';
+    require_once '../model/DAO_files.php';
+    require_once '../model/DAO_users.php';
+    require_once '../controller/controller_courses.php';
+    require_once '../controller/controller_users.php';
+    require_once '../controller/controller_files.php';
 
-        session_start();
-        $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
-        $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
-        $result = null;
-
-        if(isset($_GET['idDetalleProf'])){
-            $id_detalle = $_GET['idDetalleProf'];
-            $consultas_archivos = new Archivos();
-            $registro_curso = new Cursos();
-            $usuarios =  new Usuarios();
-            $result = $registro_curso->getDetalleViewBDetalleId($id_detalle);
-        }else{
-            $id_detalle = 0;
-        }
+    $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
+    $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
+    $result = null;
+    if(isset($_GET['idDetalleProf'])){
+        $id_detalle = $_GET['idDetalleProf'];
+        $consultas_archivos = new Archivos();
+        $registro_curso = new Cursos();
+        $usuarios =  new Usuarios();
+        $result = $registro_curso->getDetalleViewBDetalleId($id_detalle);
+    }else{
+        $id_detalle = 0;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +57,7 @@
                         echo "<h1> CUR_".$curso[0]['id_curso']." ".$detalle_reg['nombre_curso']."</h1>";
                         if($nivel_usu == 2){
                             $profesor = $usuarios->c_cargarUsuariosByUserId($detalle_reg['id_user']);
-                            echo "<span> <strong>Prof: TYH56 </strong>".$profesor[0]['nombres']."</span><br><br>";
+                            echo "<span> <strong>Prof:  </strong>PROF_".$profesor[0]['id_usuario']." ".$profesor[0]['nombres']."</span><br><br>";
                         }
                         $horario = $registro_curso->c_horarioByIdCurso($detalle_reg['id_detallecp']);
                         echo    "<p class='horario'>";
@@ -103,27 +105,29 @@
                         <?php
                             $syllabus = $consultas_archivos->getFileSyllabus($id_detalle, 1);
                             if(!$syllabus){
-
-                                echo "<strong>Seleccione un curso de su Lista ..</strong>";
+                                if($nivel_usu == 1){
+                                    echo "<br>Ningún archivo subido por el momento, click en el botón de arriba para empezar!!";
+                                }else{
+                                    echo "<br>Ningún archivo subido por el momento, comuníquese con su profesor!!";
                                 }
-                            else{
+                            }else{
                                     
                                 foreach($syllabus as $file){
                             ?>
                                 <label class="box-content-file" for="nameFileRegistered">
                                     <?php
-                                        echo "<span class='block-file titulo'>".$file['titulo']."</span>";
+                                        echo "<span class='block-file titulo'><img class='icon-file' src='../uploads/icons/pdf3.png' ><label>".$file['titulo']."</label></span>";
                                         if($nivel_usu == 2){
                                             echo "<span class='view_details fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
-                                            echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."' >download</a></span>";
+                                            echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&nombreArchivo=".$file['name_archivo']."' >download</a></span>";
                                         } else{
                                             echo "<span class='block-file fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
                                             $archivosDescargados = $consultas_archivos->c_conteoDescarga($file['id']);
                                             if($archivosDescargados[0]['cantidad'] >= 1){
-                                                echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."' >download</a></span>";
+                                                echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&nombreArchivo=".$file['name_archivo']."' >download</a></span>";
                                                 echo "<span class='view_details download'><a href='lista-alumnos.php?idDetalleProf=".$id_detalle."&idFile=".$file['id']."&idcurso=".$id_curso."' >".$archivosDescargados[0]['cantidad']." alumnos </a></span>";
                                             }else{
-                                                echo "<span class='view_details download download-cero'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."' >download</a></span>";
+                                                echo "<span class='view_details download download-cero'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&nombreArchivo=".$file['name_archivo']."' >download</a></span>";
                                                 echo "<span class='view_details download download-cero'><a href='lista-alumnos.php?idDetalleProf=".$id_detalle."&idFile=".$file['id']."&idcurso=".$id_curso."' >".$archivosDescargados[0]['cantidad']." alumnos </a></span>";
                                             }
                                             echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&idFile=".$file['id']."'>x</a>";
@@ -148,27 +152,28 @@
                     <div class="box-syllabus">
                         <?php
                             if(!$actividades){
-
-                                echo "<strong>Seleccione un curso de su Lista ..</strong>";
-                            }
+                                if($nivel_usu == 1){
+                                    echo "<br>Ningún archivo subido por el momento, click en el botón de arriba para empezar!!";
+                                }else{
+                                    echo "<br>Ningún archivo subido por el momento, comuníquese con su profesor!!";
+                                }                            }
                             else
                             {
                                 foreach($actividades as $file2){
                         ?>
                                 <label class="box-content-file" for="nameFileRegistered">
                                     <?php
-                                        echo "<span class='block-file titulo'>".$file2['titulo']."</span>";
-                                        if($nivel_usu == 2){
+                                        echo "<span class='block-file titulo'><img class='icon-file' src='../uploads/icons/pdf3.png' ><label>".$file2['titulo']."</label></span>";                                        if($nivel_usu == 2){
                                             echo "<span class='view_details fecha'>Fecha subida: ".$file2['fecha_subida']."</span>";
-                                            echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."' >download</a></span>";
+                                            echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&nombreArchivo=".$file2['name_archivo']."' >download</a></span>";
                                         } else{
                                             echo "<span class='block-file fecha'>Fecha subida: ".$file2['fecha_subida']."</span>";
                                             $archivosDescargados = $consultas_archivos->c_conteoDescarga($file2['id']);
                                             if($archivosDescargados[0]['cantidad'] >= 1){
-                                                echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."' >download</a></span>";
+                                                echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&nombreArchivo=".$file2['name_archivo']."'>download</a></span>";
                                                 echo "<span class='view_details download'><a href='lista-alumnos.php?idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&idcurso=".$id_curso."' >".$archivosDescargados[0]['cantidad']." alumnos </a></span>";
                                             }else{
-                                                echo "<span class='view_details download download-cero'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."' >download</a></span>";
+                                                echo "<span class='view_details download download-cero'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&nombreArchivo=".$file2['name_archivo']."'>download</a></span>";
                                                 echo "<span class='view_details download download-cero'><a href='lista-alumnos.php?idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&idcurso=".$id_curso."' >".$archivosDescargados[0]['cantidad']." alumnos </a></span>";
                                             }
                                             echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."'>x</a>";

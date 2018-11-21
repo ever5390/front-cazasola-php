@@ -43,13 +43,18 @@
                         echo          $reg_horario['horafin'];
                         echo    "</p>";
                     }
-                if($cursoReg['habilitado'] == 0){
-                    echo        "<a class='btn-desactivado' href='".$ruta.$cursoReg['id_detallecp']."&activado=".$cursoReg['habilitado']."'>Habilitar en plataforma</a>";
-                        } 
-                    else 
-                        {
-                    echo        "<a class='btn-activado' href='".$ruta.$cursoReg['id_detallecp']."&activado=".$cursoReg['habilitado']."'>Deshabilitar en plataforma</a>";
+                if($nivel_usu == 1){
+                    if($cursoReg['habilitado'] == 0){
+                        echo        "<a class='btn-desactivado' href='".$ruta.$cursoReg['id_detallecp']."&activado=".$cursoReg['habilitado']."'>Habilitar en plataforma</a>";
+                    }else {
+                        echo        "<a class='btn-activado'href='".$ruta.$cursoReg['id_detallecp']."&activado=".$cursoReg['habilitado']."'>Deshabilitar en plataforma</a>";
                     }
+                } else {
+                    if($cursoReg['habilitado'] == 0){
+                        echo        "<a class='btn-desactivado' href='#'>Deshabilitado</a>";
+                    }else {
+                        echo        "<a class='btn-activado' href='#'>Habilitado</a>";
+                    }                }
                 echo       "</div>";
                 echo   "</div>";
         }

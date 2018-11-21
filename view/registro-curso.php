@@ -1,3 +1,16 @@
+<?php
+    session_start();
+    if(!$_SESSION["usuario_registrado"]){
+        header('Location: ../index.html');    
+    }
+    require_once '../model/DAO_connection.php';
+    require_once '../model/DAO_courses.php';
+    require_once '../controller/controller_courses.php';
+    $consulta = new Cursos();
+    $cursos = array();
+    $nivel_usu = $_SESSION["usuario_registrado"]['nivel']; //para el aside
+    $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,18 +24,6 @@
     <script src="../library/js/jquery.min.js"></script>
 </head>
 <body>
-    <?php
-        require_once '../model/DAO_connection.php';
-        require_once '../model/DAO_courses.php';
-        require_once '../controller/controller_courses.php';
-
-        session_start();
-        $consulta = new Cursos();
-        $cursos = array();
-
-        $nivel_usu = $_SESSION["usuario_registrado"]['nivel']; //para el aside
-        $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
-    ?>
     <div class="container">
         <?php
             include 'aside-usuario-info.php'
@@ -41,7 +42,7 @@
                 echo $_SESSION["usuario_registrado"]['nombres']; 
             ?>   
             </p>
-           <p>Seleccione el curso a habilitar en plataforma:</p>
+           <!-- <span>Seleccione el curso a habilitar en plataforma:</span> -->
            <?php
             if($nivel_usu == 1){  // PARA CASO  PROFESOR 
                 $cursos = $consulta->c_getDetalleViewByUser($id_user);

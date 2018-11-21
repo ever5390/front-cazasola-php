@@ -12,6 +12,7 @@
     $titulo = null;
     $nameFile = null;
     $fecha_entrega = null;
+    if(isset($_GET['nombreArchivo'])) $nombre_archivo = $_GET['nombreArchivo'];
     if(isset($_GET['idFile'])) $id_archivo = $_GET['idFile'];
     if(isset($_GET['orden']))  $orden = $_GET['orden'];
     if(isset($_POST['txtDescripcion'])) $descripcion = $_POST['txtDescripcion'];
@@ -55,6 +56,13 @@
             break;
         case 3:
             //Descarga y almacenamiento en tabla 'Descargas', para próximo conteo y muestra.
+            $path = "../uploads/files";
+            $enlace = $path."/".$nombre_archivo;
+            header ("Content-Disposition: attachment; filename=".$nombre_archivo."");
+            header ("Content-Type: application/octet-stream");
+            header ("Content-Length: ".filesize($enlace));
+            readfile($enlace);
+
             if($nivel_usu == 2){
                 $fecha_descarga = date("Y-m-d H:i:s");
                 $existe = $archivo->c_BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_user, $id_detalle);

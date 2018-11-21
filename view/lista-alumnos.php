@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if(!$_SESSION["usuario_registrado"]){
+        header('Location: ../index.html');    
+    }
     require_once '../model/DAO_connection.php';
     require_once '../model/DAO_users.php';
     require_once '../model/DAO_files.php';
