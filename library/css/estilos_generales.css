@@ -267,10 +267,6 @@ textarea{
     padding: 2px 8px;
 }
 
-/* .box-content-file .numberPerson_download{
-    margin-left: 3px;
-} */
-
 .box-content-file .download{
     margin-left: 5px;
     color: white;
@@ -368,9 +364,12 @@ h4{
 
 
 /* PAGINA LISTA CURSOS */
-.cursos{
+.box-lista{
     width: 100%;
     box-sizing: border-box;
+    border: 1px solid gray;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .item-curso{
@@ -435,9 +434,41 @@ h4{
 
 /* PAGINA LISTA ALUMNOS*/
 
-.cursos table{
+.box-lista table{
     width: 100%;
     text-align: center;
     border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 0;
 }
 
+.box-lista span{
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+}
+
+.box-lista table thead th{
+   padding: 5px 0;
+}
+
+.box-lista span{
+    font-size: .9rem;
+}
+
+
+
+/* LISTA ALUMNOS */
+.bloque-main p, .bloque-main .box-lista{
+    font-size: .9rem;
+}
+
+.bloque-main h3{
+    padding: 0;
+    margin: 0
+}

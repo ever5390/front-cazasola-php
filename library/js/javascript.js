@@ -20,6 +20,15 @@ function valor() {
     }
 }
 
+function valor2() {
+    var valorSelect= $("#miSelect2").val();
+    if(valorSelect != 0){
+        //La ruta es como si estuviera en la pàgina de cursos_registro por eso SOLO los ../
+        window.locationf="../services/service_alumnos.php?val="+valorSelect;
+        $("#divData2").load("../services/service_alumnos.php?val="+valorSelect) ;
+    }
+}
+
 function openModal(){
     var valor = document.getElementById("nameFile").value;
     if(valor != ""){

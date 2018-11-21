@@ -2,6 +2,12 @@
 
 class Archivos{
     
+    function c_getFileByIdFile($idFile){
+        $consultas = new ConsultasArchivos();
+        $registro_archivos = $consultas->getFileByIdFile($idFile);
+        return $registro_archivos;
+    }
+
     function getFileSyllabus($id_detalle, $tipo){
         $consultas = new ConsultasArchivos();
         $registro_archivos = $consultas->cargarArchivosByParamas($id_detalle, $tipo);

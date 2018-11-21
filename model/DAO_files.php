@@ -1,6 +1,21 @@
 <?php
     require_once ('DAO_connection.php');
     class ConsultasArchivos{
+        
+        public function getFileByIdFile($idFile){
+            $rows = null;
+            $con = new Conexion();
+            $conexion = $con->get_conexion();
+            $sql="select * from archivo where id = :idFile";
+            $statement = $conexion->prepare($sql);
+            $statement->bindParam(":idFile", $idFile);
+            $statement->execute();
+            while($result = $statement->fetch()){
+                $rows[] = $result;
+            }
+            // $con->close_conexion();
+            return $rows;
+        }
 
         public function cargarArchivosByParamas($id_detalle, $tipo_archivo){
             $rows = null;
