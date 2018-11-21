@@ -17,7 +17,10 @@
     $curso = null;
 
     //Obtener Lista de Alumnos que descargaron dichos archivos. Buscando por IdArchivo en tabla Descargas.
-
+    
+    if(isset($_GET['idDetalleProf'])) {
+        $id_detalle = $_GET['idDetalleProf'];
+    }
     if(isset($_GET['idFile'])) {
         $id_archivo = $_GET['idFile'];
         $alumnos = $archivo->c_getDescargasByIdArchivo($id_archivo);
@@ -54,14 +57,31 @@
             <h2>LISTA DE ALUMNOS CON DESCARGAS ACTIVAS</h2>
             <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p> 
 
-            <div class="box-lista">
-               <?php
-                    if($alumnos){
-                        echo "<h4>CUR_".$curso[0]['id_curso']." ". $curso[0]['nombre_curso']."</h4><br>";
+            <?php   if(!$alumnos){
+            echo "<div class='box-lista-cursos'>";
+                    $cursosByProfesor = $cursos->c_getDetalleViewByUser($id_usu);
+                       echo " <select class='combo-box-cursos' onchange='valor2(this)' id='miSelect2'>";
+                       echo "    <option value = '0'>---- Seleccione curso ----</option>";
+                       if($cursosByProfesor){
+                            foreach($cursosByProfesor as $cursos){
+                                echo "<option value='".$cursos['id_detallecp']."'>".$cursos['nombre_curso']."</option>";
+                            }
+                        }
+                       echo " </select>";
+                       
+                    
+            
+            echo "</div>";
+            ?>
+            <div id='divData2'></div>
+            <?php   }
+                    else{
+                        echo "<div class='box-lista-alumnos'>";
+                        echo "<h4><a href='plataforma.php?idDetalleProf=".$id_detalle."'>CUR_".$curso[0]['id_curso']." ". $curso[0]['nombre_curso']."</a></h4><br>";
                         $filename = $archivo->c_getFileByIdFile($id_archivo);
                         echo "<span>".$filename[0]['titulo']."</span>";
-                ?>
-                        <table>
+            ?>
+                    <table>
                         <thead>
                             <th>Nro</th>
                             <th>Código</th>
@@ -91,21 +111,11 @@
                         </tbody>
                     </table>
                 <?php
-                    }else{
-                       echo "<p>Seleccione el archivo para mostrar la lista correspondiente:</p>";
-                       $cursosByProfesor = $cursos->c_getDetalleViewByUser($id_usu);
-                       echo " <select class='combo-box-cursos' onchange='valor2(this)' id='miSelect2'>";
-                       echo "    <option value = '0'>--Seleccione--</option>";
-                       if($cursosByProfesor){
-                            foreach($cursosByProfesor as $cursos){
-                                echo "<option value='".$cursos['id_detallecp']."'>".$cursos['nombre_curso']."</option>";
-                            }
-                        }
-                       echo " </select>";
-                       echo " <div id='divData2'></div>";
+                        echo  "</div>";
                     }
+                
                 ?>
-           </div>
+           
         </section>
     </div>
 </body>

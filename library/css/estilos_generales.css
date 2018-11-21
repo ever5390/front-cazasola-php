@@ -271,6 +271,12 @@ textarea{
     margin-left: 5px;
     color: white;
     text-decoration: none;
+    background-color: #14D18D  ;
+}
+
+.box-content-file .download-cero{
+    
+    background-color: transparent ;
 }
 
 .box-content-file .download a{
@@ -364,7 +370,21 @@ h4{
 
 
 /* PAGINA LISTA CURSOS */
-.box-lista{
+.box-lista-cursos{
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    padding: 10px 20px 0px 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.box-lista-cursos .combo-box-cursos{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.box-lista-alumnos{
     width: 100%;
     box-sizing: border-box;
     border: 1px solid gray;
@@ -430,41 +450,52 @@ h4{
     font-size: 1rem;
     margin-left: 5px;
     margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 /* PAGINA LISTA ALUMNOS*/
+.box-lista-alumnos a{
+    text-decoration: none;
+    color: #111;
+}
 
-.box-lista table{
+.box-lista-alumnos a:hover{
+    text-decoration: underline;
+}
+
+.box-lista-alumnos table{
     width: 100%;
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 10px;
-    margin: 0;
+    margin-bottom: 15px;
 }
 
-.box-lista span{
+.box-lista-alumnos span{
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-radius: 5px;
     padding: 5px 10px;
     margin-bottom: 5px;
     display: block;
-    font-weight: bold;
+    font-weight: 100;
+    background-color: #2471a3;
+    color: #fff;
 }
 
-.box-lista table thead th{
+.box-lista-alumnos table thead th{
    padding: 5px 0;
 }
 
-.box-lista span{
+.box-lista-alumnos span{
     font-size: .9rem;
 }
 
 
 
 /* LISTA ALUMNOS */
-.bloque-main p, .bloque-main .box-lista{
+.bloque-main p, .bloque-main .box-lista-alumnos{
     font-size: .9rem;
 }
 
