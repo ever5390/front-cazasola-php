@@ -1,7 +1,9 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: .4px;
+    color: #283747
 }
 
 .container{
@@ -159,13 +161,17 @@ label{
     color: #fff;
     padding: 20px;
     transition: 0.5s;
+    border-radius: 12px 0 0 12px; 
 }
 
-/* .enlace_desactivado{
-    pointer-events: none;
-    cursor: default;
-    text-decoration: none;
-} */
+.btn-subir-file{
+    font-size: .8rem;
+    background: #1B4F72;
+    color: #fff;
+    padding: 20px;
+    transition: 0.5s;
+    border-radius: 0 12px 12px 0; 
+}
 
 .input-label:hover{
     background: #283747;
@@ -282,7 +288,7 @@ textarea{
 
 .box-content-file .titulo{
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 200;
     margin-bottom: 8px;
 }
 
@@ -545,4 +551,23 @@ h4{
 .bloque-main h3{
     padding: 0;
     margin: 0
+}
+
+
+.item-curso .name-curso .notification{
+    background-color: #fff;
+    border: 1px solid  #1a5276;
+    padding: 3px 8px 1px 5px;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.item-curso .name-curso .notification img{
+    background-color: #fff;
+}
+
+.item-curso .name-curso .notification a{
+    color: #1a5276;
+    margin-top:0;
+    text-decoration: none;
 }

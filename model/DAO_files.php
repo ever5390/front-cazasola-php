@@ -17,6 +17,22 @@
             return $rows;
         }
         
+
+        public function numeroArchivosPorIdDetalle($id_detalle){
+            $rows = null;
+            $con = new Conexion();
+            $conexion = $con->get_conexion();
+            $sql="select count(*) as cantidad from archivo where id_detallecp = :id_detalle";
+            $statement = $conexion->prepare($sql);
+            $statement->bindParam(":id_detalle", $id_detalle);
+            $statement->execute();
+            while($result = $statement->fetch()){
+                $rows[] = $result;
+            }
+            // $con->close_conexion();
+            return $rows;
+        }
+
         public function getFilesByIdDetalle($id_detalle){
             $rows = null;
             $con = new Conexion();

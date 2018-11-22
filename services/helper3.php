@@ -18,7 +18,16 @@
                 echo "<div class='item-curso'>";
                 echo    "<div class='name-curso'>";
                 $cursoName = $cursos->c_getCursosById($cursoReg['id_curso']);
-                echo        "<h4>CUR_".$cursoReg['id_curso']." ".$cursoName[0]['nombre_curso']."</h4>";
+                echo        "<h4>";
+                ?>
+                <div style='float:right' class='notification'>
+                    <!-- <div class='notify-box'> -->
+                        <img src='../uploads/icons/notifications-button2.png' alt='notify'>
+                        <a class='notify-number-download' href="#">5</a>
+                    <!-- </div> -->
+                </div>
+                <?php
+                echo "CUR_".$cursoReg['id_curso']." ".$cursoName[0]['nombre_curso']."</h4>";
                 echo    "</div>";
                 echo    "<div class='descripcion-curso'>";
                 $horario = $cursos->c_horarioByIdCurso($cursoReg['id_detallecp']);

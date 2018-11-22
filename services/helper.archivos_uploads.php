@@ -7,7 +7,7 @@
     $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
     $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
     $id_archivo = null;
-    $extensiones_validas= array("doc", "docs", "xls", "xlsx","png", "jpg", "jpeg", "pptx", "ppt");
+    $extensiones_validas= array("doc", "docs", "xls", "xlsx","png", "jpg", "jpeg", "pptx", "ppt", "pdf");
     $permitido = null;
     $archivo = new Archivos();
     $titulo = null;

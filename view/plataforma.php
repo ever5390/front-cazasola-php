@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Raleway|Work+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet"> 
     <link rel="stylesheet" href="../library/css/estilos_generales.css">
     <script src="../library/js/jquery.min.js"></script>
     <script src="../library/js/javascript.js"></script>
@@ -80,9 +80,9 @@
                 if($nivel_usu == 1) {
             ?>
                     <label for="file" class="input-label" id="file_button" >
-                        <i class="fas fa-upload"></i> Seleccione el archivo a subir
+                        <i class="fas fa-upload"></i> Seleccione archivo
                     </label>
-                    <a class="input-label enlace_desactivado" href="javascript:openModal()" >Subir</a>
+                    <a class="btn-subir-file" href="javascript:openModal()" >Subir</a>
 
                     <div id="modal">
                         

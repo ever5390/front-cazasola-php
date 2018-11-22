@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `archivo` (
   `fecha_entrega` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_detallecp_archivo` (`id_detallecp`)
-) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla drive_unac.archivo: 28 rows
 /*!40000 ALTER TABLE `archivo` DISABLE KEYS */;
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `curso` (
   `id_curso` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_curso` varchar(50) NOT NULL,
   PRIMARY KEY (`id_curso`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla drive_unac.curso: 7 rows
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
@@ -79,6 +79,9 @@ INSERT INTO `curso` (`id_curso`, `nombre_curso`) VALUES
 	(7, 'PROGRAMACION AVANZADA');
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 
+
+
+
 -- Volcando estructura para tabla drive_unac.descargas_archivos_alumnos
 CREATE TABLE IF NOT EXISTS `descargas_archivos_alumnos` (
   `id_descarga` int(11) NOT NULL AUTO_INCREMENT,
@@ -90,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `descargas_archivos_alumnos` (
   KEY `id_usuario` (`id_usuario`),
   KEY `id_archivo` (`id_archivo`),
   KEY `id_detallecp` (`id_detallecp`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla drive_unac.descargas_archivos_alumnos: 27 rows
 /*!40000 ALTER TABLE `descargas_archivos_alumnos` DISABLE KEYS */;
@@ -133,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `detalle_curso_prof` (
   PRIMARY KEY (`id_detallecp`),
   KEY `fk_curso_prof` (`id_curso`),
   KEY `fk_user_prof` (`id_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla drive_unac.detalle_curso_prof: 9 rows
 /*!40000 ALTER TABLE `detalle_curso_prof` DISABLE KEYS */;
@@ -158,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `horario` (
   `horafin` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id_horario`),
   KEY `fk_detallecp` (`id_detallecp`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla drive_unac.horario: 18 rows
 /*!40000 ALTER TABLE `horario` DISABLE KEYS */;
@@ -228,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `nivel` (
   `id_nivel` int(11) NOT NULL AUTO_INCREMENT,
   `nivel` varchar(20) NOT NULL,
   PRIMARY KEY (`id_nivel`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla drive_unac.nivel: 2 rows
 /*!40000 ALTER TABLE `nivel` DISABLE KEYS */;
@@ -249,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `telefono` int(11) DEFAULT NULL,
   `imagen` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla drive_unac.usuario: 9 rows
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
@@ -272,7 +275,7 @@ CREATE TABLE `view_curso_detalle` (
 	`id_curso` INT(11) NOT NULL,
 	`id_detallecp` INT(11) NOT NULL,
 	`id_user` INT(11) NOT NULL
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 -- Volcando estructura para vista drive_unac.view_detalle_matricula
 -- Creando tabla temporal para superar errores de dependencia de VIEW
@@ -283,7 +286,7 @@ CREATE TABLE `view_detalle_matricula` (
 	`id_detallecp` INT(11) NOT NULL,
 	`id_user` INT(11) NOT NULL,
 	`habilitado` INT(1) NOT NULL
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 -- Volcando estructura para vista drive_unac.view_curso_detalle
 -- Eliminando tabla temporal y crear estructura final de VIEW

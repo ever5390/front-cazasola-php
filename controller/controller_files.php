@@ -27,6 +27,12 @@ class Archivos{
         return $registro_archivos;
     }
 
+    function c_numeroArchivosPorIdDetalle($id_detalle){
+        $consultas = new ConsultasArchivos();
+        $registro_archivos = $consultas->numeroArchivosPorIdDetalle($id_detalle);
+        return $registro_archivos;
+    }
+
     function c_insertarArchivo($titulo, $nameFile, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega){
         $consultas = new ConsultasArchivos();
         $exito = $consultas->InsertarArchivo($titulo, $nameFile,  $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega);
