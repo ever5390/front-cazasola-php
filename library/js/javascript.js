@@ -42,6 +42,11 @@ function closeModal(){
         $("#modal").slideUp("fast");
 }
 
+function mensajePorTiempo(){
+    setTimeout(function() {
+        $(".mensaje").fadeOut(1500);
+    },3000);
+}
 function cargarArchivo(elemento){
 
 	// var preview = document.querySelector("img");

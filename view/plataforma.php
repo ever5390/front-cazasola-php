@@ -13,6 +13,11 @@
     $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
     $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
     $result = null;
+    $mensaje = null;
+    if(isset($_GET['mensaje'])){
+        $mensaje = $_GET['mensaje'];
+    }
+
     if(isset($_GET['idDetalleProf'])){
         $id_detalle = $_GET['idDetalleProf'];
         $consultas_archivos = new Archivos();
@@ -94,9 +99,9 @@
                         </form>
                     </div>
             <?php  
-                }  
+                }
             ?>
-
+            <div class="mensaje"><?php echo $mensaje ?></div>
             <!--  INICIO SECCION LISTA DE ARCHIVOS -->
 
                 <div class="file-upload">
@@ -113,11 +118,26 @@
                             }else{
                                     
                                 foreach($syllabus as $file){
+                                        /* Verificar la extensión del archivo recibido */
+                                        $path1 = "../uploads/files/".$file['name_archivo']."";
+                                        $partes_ruta1 = pathinfo($path1);
+                                        $extension1 = $partes_ruta1['extension'];
                             ?>
                                 <label class="box-content-file" for="nameFileRegistered">
                                     <?php
-                                        echo "<span class='block-file titulo'><img class='icon-file' src='../uploads/icons/pdf3.png' ><label>".$file['titulo']."</label></span>";
-                                        if($nivel_usu == 2){
+                                        echo "<span class='block-file titulo'>";
+                                        if($extension1 =="docx" || $extension1 == "doc"){
+                                            echo "<img class='icon-file' src='../uploads/icons/word.png' >";
+                                        }elseif($extension1 =="xls" || $extension1 =="xlsx"){
+                                            echo "<img class='icon-file' src='../uploads/icons/excel.png' >";
+                                        }elseif($extension1 =="ppt" || $extension1 =="ppts" || $extension1 =="pptx"){
+                                            echo "<img class='icon-file' src='../uploads/icons/ppt.png' >";
+                                        }elseif($extension1 =="pdf"){
+                                            echo "<img class='icon-file' src='../uploads/icons/pdf3.png' >";
+                                        }else{
+                                            echo "<img class='icon-file' src='../uploads/icons/png.png' >";
+                                        }
+                                        echo "<label>".$file['titulo']."</label></span>";                                          if($nivel_usu == 2){
                                             echo "<span class='view_details fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
                                             echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&nombreArchivo=".$file['name_archivo']."' >download</a></span>";
                                         } else{
@@ -160,10 +180,27 @@
                             else
                             {
                                 foreach($actividades as $file2){
+                                    /* Verificar la extensión del archivo recibido */
+                                    $path = "../uploads/files/".$file2['name_archivo']."";
+                                    $partes_ruta = pathinfo($path);
+                                    $extension = $partes_ruta['extension'];
                         ?>
                                 <label class="box-content-file" for="nameFileRegistered">
                                     <?php
-                                        echo "<span class='block-file titulo'><img class='icon-file' src='../uploads/icons/pdf3.png' ><label>".$file2['titulo']."</label></span>";                                        if($nivel_usu == 2){
+                                        echo "<span class='block-file titulo'>";
+                                        if($extension =="docx" || $extension == "doc"){
+                                            echo "<img class='icon-file' src='../uploads/icons/word.png' >";
+                                        }elseif($extension =="xls" || $extension =="xlsx"){
+                                            echo "<img class='icon-file' src='../uploads/icons/excel.png' >";
+                                        }elseif($extension =="ppt" || $extension =="ppts" || $extension =="pptx"){
+                                            echo "<img class='icon-file' src='../uploads/icons/ppt.png' >";
+                                        }elseif($extension =="pdf"){
+                                            echo "<img class='icon-file' src='../uploads/icons/pdf3.png' >";
+                                        }else{
+                                            echo "<img class='icon-file' src='../uploads/icons/png.png' >";
+                                        }
+                                        echo "<label>".$file2['titulo']."</label></span>";                                        
+                                        if($nivel_usu == 2){
                                             echo "<span class='view_details fecha'>Fecha subida: ".$file2['fecha_subida']."</span>";
                                             echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&nombreArchivo=".$file2['name_archivo']."' >download</a></span>";
                                         } else{

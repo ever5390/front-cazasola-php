@@ -7,7 +7,8 @@
     $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
     $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
     $id_archivo = null;
-
+    $extensiones_validas= array("doc", "docs", "xls", "xlsx","png", "jpg", "jpeg", "pptx", "ppt");
+    $permitido = null;
     $archivo = new Archivos();
     $titulo = null;
     $nameFile = null;
@@ -26,33 +27,47 @@
     }
     $mensaje = null; //mensaje de respuesta [RESPONSE]
 
-    
-    // echo var_dump($titulo);
-    // echo var_dump($tipo_archivo);
-    // echo var_dump($nameFile);
-    // echo var_dump($fecha_entrega);
-    // echo var_dump($fecha_subida);
-    // echo var_dump($descripcion);
-    // echo var_dump($id_detalle);
-    // echo var_dump($orden);
     switch($orden){
         case 1:
             //Subida e Inserción en tabla 'Archivo'.
             // $dir_subida = 'c:/wamp64/www/front-cazasola-php/uploads/files';
             $dir_subida = '../uploads/files/';
             $fecha_subida = date("Y-m-d H:i:s");
-            $fichero_subido = $dir_subida.basename($_FILES['fichero_usuario']['name']);    
-            if (move_uploaded_file($_FILES['fichero_usuario']['tmp_name'], $fichero_subido)){
-                $archivo->c_insertarArchivo($titulo, $nameFile, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega);
-                if($archivo){
-                    $mensaje = "Archivo insertado con exito";
+            $fichero_subido = $dir_subida.basename($_FILES['fichero_usuario']['name']);
+
+            /* Validación de extensión a almacenar */
+            $partes_ruta = pathinfo($fichero_subido);
+            $extension = $partes_ruta['extension'];
+            foreach($extensiones_validas as $extens){
+                if($extension == $extens){
+                    $permitido = 1;
                 }
             }
+
+            if($permitido != null){
+                if (move_uploaded_file($_FILES['fichero_usuario']['tmp_name'], $fichero_subido)){
+                    $archivo->c_insertarArchivo($titulo, $nameFile, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega);
+                    if($archivo){
+                        $mensaje = "Información almacenada con con exito";
+                    }else{
+                        $mensaje = "Se encontró un error al intentar almacenar los datos";
+                    }
+                }else{
+                    $mensaje = "Se encontró un error al intentar subir el archivo al servidor";
+                }
+            }else{
+                $mensaje = "Se encontró que el archivo no tiene la extensión permitida, solo .pdf, .ppt, .ppts, .doc, .docs, xls, xlsx por favor";
+            }
+            
             break;
         case 2:
             //Eliminación de archivos.
             $archivo->c_deleteArchivo($id_archivo);
-            if($archivo) $mensaje = "Archivo eliminado con exito";
+            if($archivo) {
+                $mensaje = "Infomación eliminada con exito";
+            }else {
+                $mensaje = "Se encontró un error al intentar eliminar los datos";
+            }
             break;
         case 3:
             //Descarga y almacenamiento en tabla 'Descargas', para próximo conteo y muestra.
@@ -62,7 +77,6 @@
             header ("Content-Type: application/octet-stream");
             header ("Content-Length: ".filesize($enlace));
             readfile($enlace);
-
             if($nivel_usu == 2){
                 $fecha_descarga = date("Y-m-d H:i:s");
                 $existe = $archivo->c_BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_user, $id_detalle);
@@ -80,4 +94,14 @@
 
     header ("Location: ../view/plataforma.php?idDetalleProf=".$id_detalle."&mensaje=".$mensaje);
 
+
+
+    // echo var_dump($titulo);
+    // echo var_dump($tipo_archivo);
+    // echo var_dump($nameFile);
+    // echo var_dump($fecha_entrega);
+    // echo var_dump($fecha_subida);
+    // echo var_dump($descripcion);
+    // echo var_dump($id_detalle);
+    // echo var_dump($orden);
 ?>
