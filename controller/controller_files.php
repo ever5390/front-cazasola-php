@@ -59,16 +59,37 @@ class Archivos{
         return $exito;
     }
 
-    function c_conteoDescarga($id_archivo){
-        $consultas = new ConsultasArchivos();
-        $cantidadCoincidencias = $consultas->conteoDescarga($id_archivo);
-        return $cantidadCoincidencias;
-    }
-
     function c_getDescargasByIdArchivo($id_archivo){
         $consultas = new ConsultasArchivos();
         $exito = $consultas->getDescargasByIdArchivo($id_archivo);
         return $exito;
+    }
+
+    function c_deleteArchivoDescargaById($id_archivo){
+        $consultas = new ConsultasArchivos();
+        $exito = $consultas->deleteArchivoDescargaById($id_archivo);
+        if(!$exito){
+            return 0;
+        }
+        return $exito;
+    }
+
+    public function c_conteoArchivosDescarga($idDetalle, $id_userAlumno){
+        $consultas = new ConsultasArchivos();
+        $cantidadCoincidencias = $consultas->conteoArchivosDescarga($idDetalle, $id_userAlumno);
+        return $cantidadCoincidencias;
+    }
+
+    public function c_conteoArchivos($idDetalle){
+        $consultas = new ConsultasArchivos();
+        $cantidadCoincidencias = $consultas->conteoArchivos($idDetalle);
+        return $cantidadCoincidencias;
+    }
+    /** Obtiene el nunero de alumnos que descargaron el archivo poara el profesor */
+    function c_conteoDescarga($id_archivo){
+        $consultas = new ConsultasArchivos();
+        $cantidadCoincidencias = $consultas->conteoDescarga($id_archivo);
+        return $cantidadCoincidencias;
     }
 
 }

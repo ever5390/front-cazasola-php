@@ -257,14 +257,14 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Volcando datos para la tabla drive_unac.usuario: 9 rows
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `contrasena`, `nivel`, `nombres`, `dni`, `correo`, `telefono`, `imagen`) VALUES
-	(1, 'casazola', '12345', 1, 'Oswaldo Daniel Cazasola Salas', 12345678, 'cazasolad@gmail.com', 258963147, 'moto.jpg'),
-	(2, 'ever', '12345', 1, 'Ever Rosales Peña', 12345678, 'everjrosalesp@gmail.com', 258963147, 'zapatilla.jpg'),
-	(3, 'cinthia', '12345', 2, 'Cinthia Maria Eduardo Ortiz', 12345678, 'cinthia_154_aries@gmail.com', 258963147, 'moldimix.jpg'),
-	(4, 'fiorela', '12345', 1, 'Fiorella Armuto Quispe', 14785236, 'fiorella.armutoq@gmail.com', 951357486, 'carita.jpg'),
-	(5, 'luis', '12345', 2, 'Luis Alberto Chavarria Chavez', 4568712, 'luis.a.chavarria@gmail.com', 258932147, 'fotoluis.jpg'),
-	(6, 'carlos', '12345', 2, 'Carlos Alcantara Solis', 25874136, 'carlos.alcantara@gmail.com', 741258963, 'imagencarlos.jpg'),
+	(1, 'pedro', '12345', 1, 'Oswaldo Daniel Cazasola Salas', 12345678, 'cazasolad@gmail.com', 258963147, 'pedro.jpg'),
+	(2, 'oliver', '12345', 1, 'Oliver Atom Tsubasa', 12345678, 'oliver.tsubasa@gmail.com', 258963147, 'oliver.jpg'),
+	(3, 'ericka', '12345', 2, 'Ericka Jimenez Camones', 12345678, 'ericka.camones@gmail.com', 258963147, 'ericka.jpg'),
+	(4, 'fiorela', '12345', 1, 'Fiorella Armuto Quispe', 14785236, 'fiorella.armutoq@gmail.com', 951357486, 'fiorela.jpg'),
+	(5, 'luis', '12345', 2, 'Luis Alberto Chavarria Chavez', 4568712, 'luis.a.chavarria@gmail.com', 258932147, 'luis.jpg'),
+	(6, 'carlos', '12345', 2, 'Carlos Alcantara Solis', 25874136, 'carlos.alcantara@gmail.com', 741258963, 'carlos.jpg'),
 	(7, 'juan', '12345', 2, 'Juan Albinagorta Perez', 98748563, 'juan.albinagorta@gmail.com', 591738426, 'juan.jpg'),
-	(8, 'Ana', '12345', 2, 'Ana Ramos Breña', 456987123, 'ana.ramos@gmail.com', 897541236, 'ana.jpg'),
+	(8, 'ana', '12345', 2, 'Ana Ramos Breña', 456987123, 'ana.ramos@gmail.com', 897541236, 'ana.jpg'),
 	(9, 'virna', '12345', 2, 'Virna Solis Huayanay', 12698745, 'virna.solis@gmail.com', 154879632, 'virna.jpg');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 

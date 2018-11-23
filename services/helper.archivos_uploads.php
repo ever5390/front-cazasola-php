@@ -7,7 +7,7 @@
     $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
     $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
     $id_archivo = null;
-    $extensiones_validas= array("doc", "docs", "xls", "xlsx","png", "jpg", "jpeg", "pptx", "ppt", "pdf");
+    $extensiones_validas= array("doc", "docx", "xls", "xlsx","png", "jpg", "jpeg", "pptx", "ppt", "pdf");
     $permitido = null;
     $archivo = new Archivos();
     $titulo = null;
@@ -64,7 +64,14 @@
             //Eliminación de archivos.
             $archivo->c_deleteArchivo($id_archivo);
             if($archivo) {
-                $mensaje = "Infomación eliminada con exito";
+                
+                $archivoDescarga = $archivo->c_deleteArchivoDescargaById($id_archivo);
+                if($archivoDescarga == 0){
+                    $mensaje= "eliminado el archivo de tabla archivos pero El archivo no encontrado en descar0as";
+                }else{
+                // if($archivoDescarga != 0){
+                    $mensaje = "Infomación eliminada con exito";
+                }
             }else {
                 $mensaje = "Se encontró un error al intentar eliminar los datos";
             }

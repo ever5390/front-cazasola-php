@@ -5,11 +5,19 @@ window.onload = function() {
     }
 }
 
+document.getElementById("box-archivo").addEventListener("click", myFunction);
+
+function myFunction() {
+alert("adasd");
+}
+
 $(document).ready(function(){
     $('.menu-oculto').on('click', function(){
         $('.bloque-menu').toggleClass('mostrar');
     });
 });
+
+
 
 function valor() {
     var valorSelect= $("#miSelect").val();

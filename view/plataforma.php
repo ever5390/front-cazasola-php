@@ -35,7 +35,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet"> 
     <link rel="stylesheet" href="../library/css/estilos_generales.css">
     <script src="../library/js/jquery.min.js"></script>
@@ -123,7 +123,7 @@
                                         $partes_ruta1 = pathinfo($path1);
                                         $extension1 = $partes_ruta1['extension'];
                             ?>
-                                <label class="box-content-file" for="nameFileRegistered">
+                                <div onclick="click_descarga()" class="box-content-file" for="nameFileRegistered">
                                     <?php
                                         echo "<span class='block-file titulo'>";
                                         if($extension1 =="docx" || $extension1 == "doc"){
@@ -137,7 +137,8 @@
                                         }else{
                                             echo "<img class='icon-file' src='../uploads/icons/png.png' >";
                                         }
-                                        echo "<label>".$file['titulo']."</label></span>";                                          if($nivel_usu == 2){
+                                        echo "<label>".$file['titulo']."</label></span>";
+                                        if($nivel_usu == 2){
                                             echo "<span class='view_details fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
                                             echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&nombreArchivo=".$file['name_archivo']."' >download</a></span>";
                                         } else{
@@ -155,7 +156,7 @@
                                         echo "<span class='block-file descripcion'>".$file['descripcion']."</span>";
                                         echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file['fecha_entrega']."</span>";     
                                     ?>
-                                </label>
+                                </div>
                             <?php 
                                 }//fin del FOR EACH :::: tipo usuario
                             }
@@ -199,7 +200,7 @@
                                         }else{
                                             echo "<img class='icon-file' src='../uploads/icons/png.png' >";
                                         }
-                                        echo "<label>".$file2['titulo']."</label></span>";                                        
+                                        echo "<label>".$file2['titulo']."</label></span>";                 
                                         if($nivel_usu == 2){
                                             echo "<span class='view_details fecha'>Fecha subida: ".$file2['fecha_subida']."</span>";
                                             echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&nombreArchivo=".$file2['name_archivo']."' >download</a></span>";
@@ -222,7 +223,6 @@
                             <?php
                                 }//fin del FOR EACH :::: tipo usuario
                             }
-                        
                         ?>
                     </div>
                 </div>
