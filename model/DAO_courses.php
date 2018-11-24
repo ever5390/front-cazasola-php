@@ -1,4 +1,6 @@
 <?php
+    require_once ('DAO_connection.php');
+
     class ConsultasCursos{
         //para mostrar la lista de cursos habikitados mas horario y llenar el combo
         public function cargarCursosByusuario($idUser){

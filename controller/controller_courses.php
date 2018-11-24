@@ -1,6 +1,6 @@
 <?php
-    require_once '../model/DAO_connection.php';
-    require_once '../model/DAO_courses.php'; 
+    // require_once '../model/DAO_connection.php';
+    require_once '../model/DAO_courses.php';
 
 Class Cursos{
     

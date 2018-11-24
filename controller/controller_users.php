@@ -3,6 +3,8 @@
 require_once ('../model/DAO_connection.php');
 require_once ('../model/DAO_users.php');
 
+require_once '../model/DAO_users.php';
+
 Class Usuarios{
     
     function getUsuarioLogin($user, $pass){

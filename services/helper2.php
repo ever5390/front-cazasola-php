@@ -1,7 +1,4 @@
 <?php
-
-    require_once '../model/DAO_connection.php';
-    require_once '../model/DAO_courses.php';
     require_once '../controller/controller_courses.php';
 
     if (isset($_GET['idcurso'])){

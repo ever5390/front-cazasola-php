@@ -1,4 +1,5 @@
 <?php
+    require_once '../model/DAO_files.php';
 
 class Archivos{
     

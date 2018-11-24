@@ -3,8 +3,6 @@
     if(!$_SESSION["usuario_registrado"]){
         header('Location: ../index.html');    
     }
-    require_once '../model/DAO_connection.php';
-    require_once '../model/DAO_courses.php';
     require_once '../controller/controller_courses.php';
     $consulta = new Cursos();
     $cursos = array();

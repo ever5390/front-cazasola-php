@@ -1,10 +1,6 @@
 <?php
 
-    require_once '../model/DAO_connection.php';
-    require_once '../model/DAO_courses.php';
     require_once '../controller/controller_courses.php';
-
-    require_once '../model/DAO_files.php';
     require_once '../controller/controller_files.php';
 
     $ruta = "../view/plataforma.php?idDetalleProf=";
