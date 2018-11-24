@@ -2,8 +2,7 @@
 
     require_once '../controller/controller_courses.php';
     require_once '../controller/controller_files.php';
-
-    $ruta = "../view/plataforma.php?idDetalleProf=";
+    $ruta = "../view/plataforma.php?ruta=gestionArchivos&idDetalleProf=";
     $cursos = new Cursos();
     $files =  new Archivos();
     if($nivel_usu == 1){ // USUARIO PROFESOR

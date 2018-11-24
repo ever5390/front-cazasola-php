@@ -1,34 +1,4 @@
-<?php
-    session_start();
-    if(!$_SESSION["usuario_registrado"]){
-        header('Location: ../index.html');    
-    }
-    require_once '../controller/controller_courses.php';
-    $consulta = new Cursos();
-    $cursos = array();
-    $nivel_usu = $_SESSION["usuario_registrado"]['nivel']; //para el aside
-    $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Raleway|Work+Sans" rel="stylesheet">     <title>plataforma-administrativa</title>
-    <link rel="stylesheet" href="../library/css/estilos_generales.css">
-    <script src="../library/js/javascript.js"></script>
-    <script src="../library/js/jquery.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <?php
-            include 'aside-usuario-info.php'
-        ?>
-        <div class="menu-oculto"><i class="fas fa-bars"></i></div>
 
-        <section class="bloque-main">
            <h1>REGISTRO DE CURSOS ASIGNADOS SEGÙN MATRÌCULA</h1>
            <p>
            <?php 
@@ -43,7 +13,7 @@
            <!-- <span>Seleccione el curso a habilitar en plataforma:</span> -->
            <?php
             if($nivel_usu == 1){  // PARA CASO  PROFESOR 
-                $cursos = $consulta->c_getDetalleViewByUser($id_user);
+                $cursos = $c_cursos->c_getDetalleViewByUser($id_user);
            ?>
                 <select class="combo-box-cursos" onchange="valor(this)" id="miSelect">
                     <option value='0'>--seleccione--</option>
@@ -57,13 +27,13 @@
                 </select>
             <?php
             } else { // PARA CASO ALUMNO
-                $cursos = $consulta->c_getMatriculaAlumno($id_user);
+                $cursos = $c_cursos->c_getMatriculaAlumno($id_user);
            ?>
                 <select class="combo-box-cursos" onchange="valor(this)" id="miSelect">
                     <option value='0'>--seleccione--</option>
                     <?php
                     foreach($cursos as $curso){
-                        $matricula = $consulta->getDetalleViewBDetalleId($curso['id_detallecp']);
+                        $matricula = $c_cursos->getDetalleViewBDetalleId($curso['id_detallecp']);
                    
                         if($matricula){
                             foreach($matricula as $reg_matricula){
@@ -81,9 +51,3 @@
             <div id="divData" class="cursos"></div>
 
         </section>
-
-    </div>
-
-
-</body>
-</html>

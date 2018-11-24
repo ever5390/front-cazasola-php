@@ -97,7 +97,7 @@
             break;
     }
 
-    header ("Location: ../view/plataforma.php?idDetalleProf=".$id_detalle."&mensaje=".$mensaje);
+    header ("Location: ../view/plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."&mensaje=".$mensaje);
 
 
 

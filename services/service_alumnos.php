@@ -26,7 +26,7 @@
     if($lista_archivos){
         
         echo "<div class='box-lista-alumnos'>";
-        echo "<h4><a href='plataforma.php?idDetalleProf=".$idDetalle."'>CUR_".$lista_archivos[0]['id_curso']." ". $lista_archivos[0]['nombre_curso']."</a></h4><br>";
+        echo "<h4><a href='plataforma.php?ruta=gestionArchivos&idDetalleProf=".$idDetalle."'>CUR_".$lista_archivos[0]['id_curso']." ". $lista_archivos[0]['nombre_curso']."</a></h4><br>";
       if($archivos){
         foreach($archivos as $archivo_reg){
             $cantidad = 10;

@@ -15,5 +15,5 @@ if($registro_usuario){
         }
     }
 }
-header('Location: ../view/cursos.php');
+header('Location: ../view/plataforma.php?ruta=cursos');
 ?>

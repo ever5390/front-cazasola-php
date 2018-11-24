@@ -17,5 +17,5 @@
     
     $cursoById = new Cursos();
     $result = $cursoById->c_updateCurso($idDetalle, $activado);
-    header('Location: ../view/registro-curso.php');    
+    header('Location: ../view/plataforma.php?ruta=registroCursos&registro-curso.php');    
 ?>
