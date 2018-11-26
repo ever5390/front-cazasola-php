@@ -1,56 +1,55 @@
 <div>
+
     <?php
-        if(!$result){
-            echo '<h1>PLATAFORMA DE GESTION DE ACTIVIDADES</h1>';
-            echo '<p>Horario del curso a gestionar</p>';
-        }else{
-            foreach($result as $detalle_reg){
-                $curso = $c_cursos->c_getDetalleByDetalleId($detalle_reg['id_detallecp']);
-                $id_curso =  $curso[0]['id_curso']; //rescata id  curso par a enviar a lista_alumnos
-                echo "<h1> CUR_".$curso[0]['id_curso']." ".$detalle_reg['nombre_curso']."</h1>";
-                if($nivel_usu == 2){
-                    $profesor = $c_usuarios->c_cargarUsuariosByUserId($detalle_reg['id_user']);
-                    echo "<span> <strong>Prof:  </strong>PROF_".$profesor[0]['id_usuario']." ".$profesor[0]['nombres']."</span><br><br>";
-                }
-                $horario = $c_cursos->c_horarioByIdCurso($detalle_reg['id_detallecp']);
-                echo    "<p class='horario'>";
-                foreach($horario as $reg_horario){
-                    echo          $reg_horario['dia_asignado'].": ";
-                    echo          $reg_horario['horainicio']." - ";
-                    echo          $reg_horario['horafin'] ."<br>";
-                }
-                echo    "</p>";
-            }
+
+    foreach($result as $detalle_reg){
+        $curso = $c_cursos->c_getDetalleByDetalleId($detalle_reg['id_detallecp']);
+        $id_curso =  $curso[0]['id_curso']; //rescata id  curso par a enviar a lista_alumnos
+        echo "
+        <h1> CUR_".$curso[0]['id_curso']." ".$detalle_reg['nombre_curso']."</h1>";
+        if($nivel_usu == 2){
+            $profesor = $c_usuarios->c_cargarUsuariosByUserId($detalle_reg['id_user']);
+            echo "<span> <strong>Prof:  </strong>PROF_".$profesor[0]['id_usuario']." ".$profesor[0]['nombres']."</span><br><br>";
         }
+        $horario = $c_cursos->c_horarioByIdCurso($detalle_reg['id_detallecp']);
+        echo    "<p class='horario'>";
+        foreach($horario as $reg_horario){
+            echo          $reg_horario['dia_asignado'].": ";
+            echo          $reg_horario['horainicio']." - ";
+            echo          $reg_horario['horafin'] ."<br>";
+        }
+        echo    "</p>";
+    }
     ?>
    <div class="select-file">
     <?php
         if($nivel_usu == 1) {
     ?>
-            <label for="file" class="input-label" id="file_button" >
-                <i class="fas fa-upload"></i> Seleccione archivo
-            </label>
-            <a class="btn-subir-file" href="javascript:openModal()" >Subir</a>
+            <div class="posicion-btn-plus" id="posicion-btn-plus">
+                <a class="boton-ver-formulario" href="javascript:openModal()" ><i class="fas fa-plus"></i></a>
+            </div>
             <div id="modal">
-                
                 <form id="form-archivo-details" name="formulario" enctype="multipart/form-data" action="../services/helper.archivos_uploads.php?orden=1&idDetalleProf=<?php echo $id_detalle ?>" method="post" >
                     <div><a class="close-modal" href="javascript:closeModal()">x</a></div><br>
                     <p><input type="radio" name="radio" value="1" required> Syllabus
-                    <input type="radio" name="radio" value="2" required> Actividades <p>    
+                    <input type="radio" name="radio" value="2" required> Actividades <p>
+                    <label for="file" class="boton-examinar-archivo" >
+                        <i class="fas fa-upload"></i> Seleccione archivo
+                    </label>
                     <p><input    class="input-form" type="file" name="fichero_usuario" id="file" onchange = "cargarArchivo(this)"></p>
-                    <p><input    class="input-form" type="text" name="txtTitulo" placeholder="titulo de actividad"></p>
-                    <p><input    class="input-form" type="text" id="nameFile" name="nameFile" placeholder="archivo subido" ></p>
+                    <p><input    class="input-form" type="text" name="txtTitulo" maxlength="80" placeholder="titulo de actividad"></p>
+                    <p><input    class="input-form" type="text" id="nameFile" maxlength="80" name="nameFile" placeholder="archivo subido" ></p>
                     <p><input    class="input-form" type="date" name="txtFecha" required></p>
-                    <p><textarea class="input-form" cols="2" rows="3" name="txtDescripcion" placeholder=" descripcion de la actividad" value=""></textarea></p>
+                    <p><textarea class="input-form" cols="2" rows="3" maxlenght="900" name="txtDescripcion" placeholder=" descripcion de la actividad" value=""></textarea></p>
                     <p><input    class="input-form btn-submit" type="submit" name="btn_submit" value="Upload File"></p>
                 </form>
             </div>
-    <?php  
+    <?php
         }
     ?>
-    <div class="mensaje"><?php echo $mensaje ?></div>
+    <!-- <div class="mensaje"><?php echo $mensaje ?></div> -->
     <!--  INICIO SECCION LISTA DE ARCHIVOS -->
-        <div class="file-upload">
+        <div class="contenedor-principal-archivo">
             <h4>SYLLABUS</h4>
             <div class="box-syllabus">
                 <?php
@@ -62,55 +61,85 @@
                             echo "<br>Ningún archivo subido por el momento, comuníquese con su profesor!!";
                         }
                     }else{
-                            
                         foreach($syllabus as $file){
                                 /* Verificar la extensión del archivo recibido */
                                 $path1 = "../uploads/files/".$file['name_archivo']."";
                                 $partes_ruta1 = pathinfo($path1);
-                                $extension1 = $partes_ruta1['extension'];
+                                $extension = $partes_ruta1['extension'];
                 ?>
-                        <div onclick="click_descarga()" class="box-content-file" for="nameFileRegistered">
+                            <div class="cuadro-archivo" id='cuadro-archivo' >
                             <?php
-                                echo "<span class='block-file titulo'>";
-                                if($extension1 =="docx" || $extension1 == "doc"){
-                                    echo "<img class='icon-file' src='../uploads/icons/word.png' >";
-                                }elseif($extension1 =="xls" || $extension1 =="xlsx"){
-                                    echo "<img class='icon-file' src='../uploads/icons/excel.png' >";
-                                }elseif($extension1 =="ppt" || $extension1 =="ppts" || $extension1 =="pptx"){
-                                    echo "<img class='icon-file' src='../uploads/icons/ppt.png' >";
-                                }elseif($extension1 =="pdf"){
-                                    echo "<img class='icon-file' src='../uploads/icons/pdf3.png' >";
-                                }else{
-                                    echo "<img class='icon-file' src='../uploads/icons/png.png' >";
-                                }
-                                echo "<label>".$file['titulo']."</label></span>";
-                                if($nivel_usu == 2){
-                                    echo "<span class='view_details fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
-                                    echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&nombreArchivo=".$file['name_archivo']."' >download</a></span>";
-                                } else{
-                                    echo "<span class='block-file fecha'>Fecha subida: ".$file['fecha_subida']."</span>";
-                                    $archivosDescargados = $c_archivos->c_conteoDescarga($file['id']);
-                                    if($archivosDescargados[0]['cantidad'] >= 1){
-                                        echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&nombreArchivo=".$file['name_archivo']."' >download</a></span>";
-                                        echo "<span class='view_details download'><a href='plataforma.php?ruta=listaAlumnos&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&idcurso=".$id_curso."' >".$archivosDescargados[0]['cantidad']." alumnos </a></span>";
+                                    echo "<div class='header'>";
+                                    echo "  <div class='izquierda'>";
+                                    echo "    <span class='titulo'>";
+                                    echo "      <label>";
+                                    if($extension =="docx" || $extension == "doc"){
+                                    echo "          <i class='fas fa-file-word icon-tipo-archivo'></i>";
+                                    }elseif($extension =="xls" || $extension =="xlsx"){
+                                    echo "          <i class='fas fa-file-excel icon-tipo-archivo'></i>";
+                                    }elseif($extension =="ppt" || $extension =="ppts" || $extension =="pptx"){
+                                    echo "          <i class='fas fa-file-powerpoint icon-tipo-archivo'></i>";
+                                    }elseif($extension =="pdf"){
+                                    echo "          <i class='fas fa-file-pdf icon-tipo-archivo'></i>";
                                     }else{
-                                        echo "<span class='view_details download download-cero'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&nombreArchivo=".$file['name_archivo']."' >download</a></span>";
-                                        echo "<span class='view_details download download-cero'><a href='plataforma.php?ruta=listaAlumnos&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&idcurso=".$id_curso."' >".$archivosDescargados[0]['cantidad']." alumnos </a></span>";
+                                    echo "          <i class='fas fa-file-image icon-tipo-archivo'></i>";
                                     }
-                                    echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&idFile=".$file['id']."'>x</a>";
-                                }
-                                echo "<span class='block-file descripcion'>".$file['descripcion']."</span>";
-                                echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file['fecha_entrega']."</span>";     
-                            ?>
-                        </div>
-                    <?php 
+                                    echo ""         .$file['titulo']."";
+                                    echo "      </label>";
+                                    echo "    </span>";
+                                    echo "    <div class='fecha'>
+                                                Fecha subida: ".$file['fecha_subida'].
+                                         "    </div>";
+                                    echo "  </div>";
+                                    echo "  <div class='derecha'>";
+                                    $archivoDescargado = $c_archivos->c_getDescargasByIdArchivoUserAlumno($file['id'], $id_user);
+                                    if(!$archivoDescargado && $nivel_usu == 2){
+                                    echo "     <span class='recuadro-bordeado-iconos masdeuno'>";
+                                    echo "        <a class='masdeuno-enlace' href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&nombreArchivo=".$file['name_archivo']."'>";
+
+                                    }else{
+                                    echo "     <span class='recuadro-bordeado-iconos'>";
+                                    echo "        <a class='masdeuno-enlace' href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&nombreArchivo=".$file['name_archivo']."'>";
+
+                                    }
+                                    echo "           <i class='fas fa-download'></i>";
+                                    echo "        </a>";
+                                    echo "     </span>";
+
+                                            if($nivel_usu == 1){
+                                    $archivosDescargados = $c_archivos->c_conteoDescarga($file['id']);                                    
+                                    if($archivosDescargados[0]['cantidad'] >= 1){
+                                    echo "    <span class='recuadro-bordeado-iconos masdeuno'>";
+                                    echo "      <a class='masdeuno-enlace' href='plataforma.php?ruta=listaAlumnos&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&idcurso=".$id_curso."' >";
+                                    }else {
+                                    echo "    <span class='recuadro-bordeado-iconos'>";
+                                    echo "      <a href='plataforma.php?ruta=listaAlumnos&idDetalleProf=".$id_detalle."&idFile=".$file['id']."&idcurso=".$id_curso."' >";
+                                    }
+                                    echo "          <i class='fas fa-users'></i> ".$archivosDescargados[0]['cantidad']. "
+                                                </a>
+                                              </span>";
+                                    echo "    <span class='recuadro-bordeado-iconos'>
+                                                <a href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&idFile=".$file['id']."' >".
+                                                    "<i class='fas fa-trash-alt'></i> 
+                                                </a>
+                                              </span>";
+                                            }
+                                    echo "  </div>";
+                                    echo "</div>";
+                                    echo "<div class='detalles'>";
+                                    echo "  <div class='descripcion'>".$file['descripcion']."</div>";
+                                    echo "  <div class='fecha'><strong>Fecha Entrega:</strong> ".$file['fecha_entrega']."</div>";
+                                    echo "</div>"; 
+                             ?>
+                             </div>
+                     <?php
                         }//fin del FOR EACH :::: tipo usuario
                     }
                 //fin del If :::: tipo usuario
                 ?>
             </div>
         </div>
-        <div class="file-upload">
+        <div class="contenedor-principal-archivo">
             <h4>ACTIVIDADES</h4>
             <?php
                 $actividades = $c_archivos->getFileSyllabus($id_detalle, 2);
@@ -128,43 +157,76 @@
                         foreach($actividades as $file2){
                             /* Verificar la extensión del archivo recibido */
                             $path = "../uploads/files/".$file2['name_archivo']."";
-                            $partes_ruta = pathinfo($path);
-                            $extension = $partes_ruta['extension'];
+                            $partes_ruta2 = pathinfo($path);
+                            $extension = $partes_ruta2['extension'];
                 ?>
-                        <label class="box-content-file" for="nameFileRegistered">
+                        <div onclick='myFunction()' class="cuadro-archivo">
                             <?php
-                                echo "<span class='block-file titulo'>";
-                                if($extension =="docx" || $extension == "doc"){
-                                    echo "<img class='icon-file' src='../uploads/icons/word.png' >";
-                                }elseif($extension =="xls" || $extension =="xlsx"){
-                                    echo "<img class='icon-file' src='../uploads/icons/excel.png' >";
-                                }elseif($extension =="ppt" || $extension =="ppts" || $extension =="pptx"){
-                                    echo "<img class='icon-file' src='../uploads/icons/ppt.png' >";
-                                }elseif($extension =="pdf"){
-                                    echo "<img class='icon-file' src='../uploads/icons/pdf3.png' >";
-                                }else{
-                                    echo "<img class='icon-file' src='../uploads/icons/png.png' >";
-                                }
-                                echo "<label>".$file2['titulo']."</label></span>";                 
-                                if($nivel_usu == 2){
-                                    echo "<span class='view_details fecha'>Fecha subida: ".$file2['fecha_subida']."</span>";
-                                    echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&nombreArchivo=".$file2['name_archivo']."' >download</a></span>";
-                                } else{
-                                    echo "<span class='block-file fecha'>Fecha subida: ".$file2['fecha_subida']."</span>";
-                                    $archivosDescargados = $c_archivos->c_conteoDescarga($file2['id']);
-                                    if($archivosDescargados[0]['cantidad'] >= 1){
-                                        echo "<span class='view_details download'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&nombreArchivo=".$file2['name_archivo']."'>download</a></span>";
-                                        echo "<span class='view_details download'><a href='plataforma.php?ruta=listaAlumnos&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&idcurso=".$id_curso."' >".$archivosDescargados[0]['cantidad']." alumnos </a></span>";
+                                    echo "<div class='header' onclick='myFunction()'>";
+                                    echo "  <div class='izquierda'>";
+                                    echo "    <span class='titulo'>";
+                                    echo "      <label>";
+                                    if($extension =="docx" || $extension == "doc"){
+                                    echo "          <i class='fas fa-file-word icon-tipo-archivo'></i>";
+                                    }elseif($extension =="xls" || $extension =="xlsx"){
+                                    echo "          <i class='fas fa-file-excel icon-tipo-archivo'></i>";
+                                    }elseif($extension =="ppt" || $extension =="ppts" || $extension =="pptx"){
+                                    echo "          <i class='fas fa-file-powerpoint icon-tipo-archivo'></i>";
+                                    }elseif($extension =="pdf"){
+                                    echo "          <i class='fas fa-file-pdf icon-tipo-archivo'></i>";
                                     }else{
-                                        echo "<span class='view_details download download-cero'><a href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&nombreArchivo=".$file2['name_archivo']."'>download</a></span>";
-                                        echo "<span class='view_details download download-cero'><a href='plataforma.php?ruta=listaAlumnos&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&idcurso=".$id_curso."' >".$archivosDescargados[0]['cantidad']." alumnos </a></span>";
+                                    echo "          <i class='fas fa-file-image icon-tipo-archivo'></i>";
                                     }
-                                    echo "<a class='enlace_ocultar' href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."'>x</a>";
-                                }
-                                echo "<span class='block-file descripcion'>".$file2['descripcion']."</span>";
-                                echo "<span class='block-file fecha'><strong class='fecha_entrega'>Fecha Entrega:</strong> ".$file2['fecha_entrega']."</span>";     
+                                    echo ""         .$file2['titulo']."";
+                                    echo "      </label>";
+                                    echo "    </span>";
+                                    echo "    <div class='fecha'>
+                                                Fecha subida: ".$file2['fecha_subida'].
+                                         "    </div>";
+                                    echo "  </div>";
+                                    echo "  <div class='derecha'>";
+                                   
+                                    $archivoDescargado = $c_archivos->c_getDescargasByIdArchivoUserAlumno($file2['id'], $id_user);
+                                    if(!$archivoDescargado && $nivel_usu == 2){
+                                    echo "   <span class='recuadro-bordeado-iconos masdeuno'>";
+                                    echo "      <a class='masdeuno-enlace' href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&nombreArchivo=".$file2['name_archivo']."'>";
+
+                                    }else{
+                                    echo "   <span class='recuadro-bordeado-iconos'>";
+                                    echo "      <a class='masdeuno-enlace' href='../services/helper.archivos_uploads.php?orden=3&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&nombreArchivo=".$file2['name_archivo']."'>";
+
+                                    }
+                                    echo "           <i class='fas fa-download'></i>";
+                                    echo "      </a>";
+                                    echo "   </span>";
+
+
+                                            if($nivel_usu == 1){
+                                    $archivosDescargados = $c_archivos->c_conteoDescarga($file2['id']);                                    
+                                    if($archivosDescargados[0]['cantidad'] >= 1){
+                                    echo "    <span class='recuadro-bordeado-iconos masdeuno'>";
+                                    echo "      <a class='masdeuno-enlace' href='plataforma.php?ruta=listaAlumnos&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&idcurso=".$id_curso."' >";
+                                    }else {
+                                    echo "    <span class='recuadro-bordeado-iconos'>";
+                                    echo "      <a href='plataforma.php?ruta=listaAlumnos&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."&idcurso=".$id_curso."' >";
+                                    }
+                                    echo "          <i class='fas fa-users'></i> ".$archivosDescargados[0]['cantidad']. "
+                                                </a>
+                                              </span>";
+                                    echo "    <span class='recuadro-bordeado-iconos'>
+                                                <a href='../services/helper.archivos_uploads.php?orden=2&idDetalleProf=".$id_detalle."&idFile=".$file2['id']."' >".
+                                                    "<i class='fas fa-trash-alt'></i> 
+                                                </a>
+                                              </span>";
+                                            }
+                                    echo "  </div>";
+                                    echo "</div>";            
+                                    echo "<div class='detalles'>";
+                                    echo "  <div class='descripcion'>".$file2['descripcion']."</div>";
+                                    echo "  <div class='fecha'><strong>Fecha Entrega:</strong> ".$file2['fecha_entrega']."</div>";
+                                    echo "</div>";                              
                             ?>
-                        </label>
+                        </div>
                     <?php
                         }//fin del FOR EACH :::: tipo usuario
                     }

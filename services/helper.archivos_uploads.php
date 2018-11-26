@@ -76,19 +76,24 @@
             break;
         case 3:
             //Descarga y almacenamiento en tabla 'Descargas', para próximo conteo y muestra.
+            
+            // if($nivel_usu == 2){
+            //     $fecha_descarga = date("Y-m-d H:i:s");
+            //     $existe = $archivo->c_BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_user, $id_detalle);
+            //     if(!$existe){
+            //         $archivo->c_insertarArchivoDescarga($id_archivo, $id_user, $id_detalle, $fecha_descarga);
+            //         $mensaje = "Descarga exitosa";
+                   
+            //     }
+            // }
+            $mensaje = "Descarga exitosa";
             $path = "../uploads/files";
             $enlace = $path."/".$nombre_archivo;
             header ("Content-Disposition: attachment; filename=".$nombre_archivo."");
             header ("Content-Type: application/octet-stream");
             header ("Content-Length: ".filesize($enlace));
             readfile($enlace);
-            if($nivel_usu == 2){
-                $fecha_descarga = date("Y-m-d H:i:s");
-                $existe = $archivo->c_BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_user, $id_detalle);
-                if(!$existe){
-                    $archivo->c_insertarArchivoDescarga($id_archivo, $id_user, $id_detalle, $fecha_descarga);
-                }
-            }
+
             break;
         case 4:
             break;
@@ -96,7 +101,7 @@
             echo "default";  
             break;
     }
-
+    echo $mensaje;
     header ("Location: ../view/plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."&mensaje=".$mensaje);
 
 

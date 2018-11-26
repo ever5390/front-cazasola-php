@@ -5,12 +5,6 @@ window.onload = function() {
     }
 }
 
-document.getElementById("box-archivo").addEventListener("click", myFunction);
-
-function myFunction() {
-alert("adasd");
-}
-
 $(document).ready(function(){
     $('.menu-oculto').on('click', function(){
         $('.bloque-menu').toggleClass('mostrar');
@@ -38,12 +32,13 @@ function valor2() {
 }
 
 function openModal(){
-    var valor = document.getElementById("nameFile").value;
-    if(valor != ""){
-        $("#modal").slideDown("slow");
-    } else {
-        alert("Seleccione un archivo previamente...");
-    }
+    $("#modal").slideDown("slow");
+    // var valor = document.getElementById("nameFile").value;
+    // if(valor != ""){
+    //     $("#modal").slideDown("slow");
+    // } else {
+    //     alert("Seleccione un archivo previamente...");
+    // }
 }
 
 function closeModal(){
@@ -76,5 +71,23 @@ function cargarArchivo(elemento){
 	// 	preview.src = "";
 	// }
 
+}
+
+function myFunction() {
+    // var acc = document.getElementsByClassName("header");
+    // var i;
+   
+    // for (i = 0; i < acc.length; i++) {
+    //     acc[i].addEventListener("click", function() {
+    //         this.classList.toggle("active");
+    //         var panel = this.nextElementSibling;
+    //         if (panel.style.display === "block") {
+    //             panel.style.display = "none";
+    //         } else {
+    //             panel.style.display = "block";
+    //         }
+    //     });
+    // }
+    
 }
 

@@ -66,6 +66,12 @@ class Archivos{
         return $exito;
     }
 
+    function c_getDescargasByIdArchivoUserAlumno($id_archivo, $id_user){
+        $consultas = new ConsultasArchivos();
+        $exito = $consultas->getDescargasByIdArchivoUserAlumno($id_archivo, $id_user);
+        return $exito;
+    }
+
     function c_deleteArchivoDescargaById($id_archivo){
         $consultas = new ConsultasArchivos();
         $exito = $consultas->deleteArchivoDescargaById($id_archivo);

@@ -150,238 +150,245 @@ body{
 /*-- Fin bloque titulo y horario --*/
 
 
-/* estilo file upload*/
-label{
-    display: inline-block;
-}
+/* ADMINISTRACIÓN ARCHIVOS ::: FORMULARIO SUBIR ARCHIVO */
 
-.input-label{
-    font-size: .8rem;
-    background: #1B4F72;
-    color: #fff;
-    padding: 20px;
-    transition: 0.5s;
-    border-radius: 12px 0 0 12px; 
-}
+    /*  CUADRADO
+    */
+    .boton-ver-formulario{
+        background: #fff;
+        border: 1px solid #1B4F72;
+        color: #1B4F72;
+        transition: 0.5s;
+        padding: 8px 10px;
+        border-radius: 5px;
+        float: left;
+        margin-bottom: 5px;
+    }
+    /* 
+        CIRCULO
+    .boton-ver-formulario{
+        background: #fff;
+        border: 1px solid #1B4F72;
+        color: #1B4F72;
+        transition: 0.5s;
+        padding: 8px 10px;
+        border-radius: 50%; 
+    } */
 
-.btn-subir-file{
-    font-size: .8rem;
-    background: #1B4F72;
-    color: #fff;
-    padding: 20px;
-    transition: 0.5s;
-    border-radius: 0 12px 12px 0; 
-}
+    .boton-ver-formulario:hover{
+        background: #1B4F72;
+        color: #fff;
+        transition: 0.3s;
+    }
 
-.input-label:hover{
-    background: #283747;
+    #file{
+        display: none;
+    }
+
+    /*para boton examinar ocupe todo el ancho*/
+    label{
+        display: inline-block;
+    }
+
+    .boton-examinar-archivo{
+        font-size: .8rem;
+        background: #1B4F72;
+        border: 1px solid #1B4F72;
+        color: #fff;
+        padding: 10px;
+        width: 300px;
+        box-sizing: border-box;
+        border-radius: 5px; 
+    }
+
+    .boton-examinar-archivo:hover{
+        background: #fff;
+        color: #1B4F72;
+        cursor: pointer;
+    }
+
+    #modal{
+        background-color: rgba(87, 81, 81, 0.8);
+        position: fixed;
+        display: none;
+        z-index: 100;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
+
+    .close-modal{
+        text-decoration: none;
+        position: absolute;
+        font-weight: bold;
+        color: #051c2b;
+        right: 20px;
+        top: 10px;
+    }
+
+    div .close-modal:hover{
+        color: #C0392B;
+    }
+
+    #form-archivo-details{
+        border: 1px solid rgba(204, 204, 204,.5);
+        background-color: #fff;
+        border-radius: 20px;
+        text-align: center;
+        color: #111;
+        width: 320px;
+        width: 400px;
+        transform: translate(-50%, -50%);  
+        position: absolute;
+        left: 50%;
+        top:50%;
+    }
+
+    #form-archivo-details .input-form{
+        width: 300px;
+        height: 25px;
+        font-size: .9rem;
+        border: 1px solid rgba(204, 201, 201, .7);
+        color: rgba(19, 21, 22, 0.6);
+        border-radius: 5px;
+        padding-left: 10px;
+        box-sizing: border-box;
+    }
+
+    textarea{
+        height: 50px !important;
+    }
+
+    #form-archivo-details .btn-submit{
+        height: 35px;
+    }
+
+    #form-archivo-details .btn-submit:hover{
+        background: #283747;
+        color: #fff;
+        cursor: pointer;
+    }
+
+/* ADMINISTRACION DE ARCHIVOS ::: BLOQUE ARCHIVO */
+    .contenedor-principal-archivo{
+        margin-top: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        padding: 10px 20px;
+        border-radius: 10px;
+        clear: both;
+    }
+    /* Para los subtitulos de sylabus y Actividades */
+    h4{
+        padding: 0;
+        margin: 0;
+    }
+
+    .izquierda{
+        float: left;
+    }
+
+    .derecha{
+        float: left;
+        margin-bottom: .5rem;
+    }
+
+    .cuadro-archivo{
+        background-color: #fff ;
+        border: 1px solid #1B4F72;
+        border-radius: 10px;
+        padding: 10px 10px 0 10px;
+        color: #1B4F72;
+        margin-top: 5px;
+        box-sizing: border-box;
+        font-size: .8rem;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .header{
+        display: block;
+    }
+    .cuadro-archivo .titulo{
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .icon-tipo-archivo{
+        margin-right: .5rem;
+    }
+
+    .cuadro-archivo .fecha {
+        font-size: .8rem;
+        margin-top: .2rem;
+        margin-bottom: .5rem;
+    }
+
+    .cuadro-archivo .recuadro-bordeado-iconos{
+        border: 1px solid #1B4F72;
+        border-radius: 5px;
+        padding: 2px 10px;
+        margin-right: 5px;
+    }
+
+    .cuadro-archivo a{
+        color: #1B4F72;
+        text-decoration: none;
+    }
+
+    .masdeuno{
+        background-color: #1B4F72;
+        color: #fff;
+    }
+
+    .masdeuno .masdeuno-enlace{
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .cuadro-archivo a:hover{
+        text-decoration: underline;
+    }
+
+    .cuadro-archivo .detalles{
+        clear: both;
+        display: none;
+        transition: all .2s;
+    }
+
+
+/* FIN BLOQUE ADMINISTRACION ARCHIVOS  */
+.contenedor-principal-archivo .accordion {
+    background-color: #eee;
+    color: #444;
     cursor: pointer;
-}
-
-.fas{
-    margin-right: 10px;
-}
-
-#file{
-    display: none;
-}
-
-
-.input_inline_file{
-    display: inline-block !important;
-}
-/* fin file upload*/
-
-#modal{
-    background-color: rgba(87, 81, 81, 0.8);
+    padding: 18px;
     width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.contenedor-principal-archivo .active, .accordion:hover {
+    background-color: #ccc; 
+}
+
+.contenedor-principal-archivo .box-syllabus .panel {
+    padding: 0 18px;
     display: none;
+    background-color: white;
+    overflow: hidden;
 }
-
-.close-modal{
-    color: #051c2b;
-    text-decoration: none;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-}
-
-div .close-modal:hover{
-    color: #C0392B;
-}
-
-#form-archivo-details{
-    background-color: #fff;
-    border-radius: 20px;
-    border: 1px solid rgba(204, 204, 204,.5);
-    text-align: center;
-    width: 350px;
-    color: #111;
-    width: 400px;
-    position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);  
-}
-
-#form-archivo-details .input-form{
-    width: 300px;
-    height: 25px;
-    font-size: .9rem;
-    border: 1px solid rgba(204, 201, 201, .7);
-    color: rgba(19, 21, 22, 0.6);
-    border-radius: 10px;
-    padding-left: 10px;
-    box-sizing: border-box;
-}
-
-textarea{
-    height: 45px !important;
-}
-
-#form-archivo-details .btn-submit{
-    height: 35px;
-}
-
-#form-archivo-details .btn-submit:hover{
-    background: #283747;
-    color: #fff;
-    cursor: pointer;
-}
-
-/* Block Administración de archivos */
-.box-content-file{
-    background-color: #1B4F72 ;
-    border: 1px solid #1B4F72;
-    border-radius: 10px;
-    padding: 10px 20px;
-    color: #fff;
-    /* color: #1B4F72; */
-    margin-top: 5px;
-    box-sizing: border-box;
-    font-size: .8rem;
-    width: 100%;
-    position: relative;
-}
-
-.box-content-file .block-file{
-    display: block;
-    padding-left: 5px;
-    position: relative;
-}
-
-.box-content-file .block-file label{
-    padding-left: 35px;
-}
-
-.box-content-file .block-file .icon-file{
-    margin-right: 10px;
-    top:0;
-    position: absolute;
-}
-
-.box-content-file .titulo{
-    font-size: 1rem;
-    font-weight: 200;
-    margin-bottom: 8px;
-}
-
-.box-content-file .fecha {
-    font-size: .8rem;
-    margin-bottom: 10px;
-}
-
-.box-content-file .view_details{
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 2px 8px;
-}
-
-.box-content-file .download{
-    margin-left: 5px;
-    color: white;
-    text-decoration: none;
-    background-color: #CB4335  ;
-    /* background-color: #14D18D  ; */
-}
-
-.box-content-file .download-cero{
-    
-    background-color: transparent ;
-}
-
-.box-content-file .download a{
-    color: white;
-    text-decoration: none;
-}
-
-.box-content-file .download a:hover{
-    text-decoration: underline;
-}
-
-.box-content-file .descripcion{
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
-
-.box-content-file .enlace_ocultar{
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    color: red;
-    padding: 0 5px;
-    text-decoration: none;
-    background: #fff;
-    border-radius: 50%;
-    font-weight: bold;
-}
-
-/* para los botones de accion eliminar, ver y cantidad de alumnos que descargaron*/
-.box-content-file .enlace_ocultar:hover{
-    background: red;
-    color: #fff;
-}
-
-.box-content-file:hover{
-    background-color: #2874A6 ;
-    cursor: pointer;
-    color: #fff;
-}
-
-.file-upload .box-content-file:hover> .enlace_ocultar{
-    opacity: 1;
-}
-
-
-/* Fin de block Administración de archivos */
-
-.file-upload{
-    margin-top: 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding: 10px 20px;
-    border-radius: 10px;
-}
-
-h4{
-    padding: 0;
-    margin: 0;
-}
-
-.file-upload .box-content-file .enlace_ocultar{
-    opacity :0.0;
-    transition: all 0.3s;
-}
-
 /* toggle class*/
-
-
+@media (min-width: 1000px){
+    .derecha{
+        float: right;
+    }
+}
 
 @media (max-width: 680px){
     .bloque-menu{
@@ -398,13 +405,6 @@ h4{
         width: 100%;
     }
 }
-
-/* @media (min-width: 681px){
-    .bloque-menu{
-        position: static;
-    }
-} */
-
 
 /* PAGINA LISTA CURSOS */
 .box-lista-cursos{

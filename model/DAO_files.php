@@ -148,6 +148,22 @@
             // $con->close_conexion();
             return $rows;
         }
+        
+        public function getDescargasByIdArchivoUserAlumno($id_archivo, $id_user){
+            $rows = null;
+            $con = new Conexion();
+            $conexion = $con->get_conexion();
+            $sql="select * from descargas_archivos_alumnos where id_archivo = :id_archivo and id_usuario = :id_user";
+            $statement = $conexion->prepare($sql);
+            $statement->bindParam(":id_archivo", $id_archivo);
+            $statement->bindParam(":id_user", $id_user);
+            $statement->execute();
+            while($result = $statement->fetch()){
+                $rows[] = $result;
+            }
+            // $con->close_conexion();
+            return $rows;
+        }
 
         public function deleteArchivoDescargaById($id_archivo){
             $con = new Conexion();
