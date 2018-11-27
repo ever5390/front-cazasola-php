@@ -6,50 +6,58 @@
     $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
     $id_archivo = null;
     $extensiones_validas= array("doc", "docx", "xls", "xlsx","png", "jpg", "jpeg", "pptx", "ppt", "pdf");
+    $extension = null;
     $permitido = null;
     $archivo = new Archivos();
     $titulo = null;
     $nameFile = null;
     $fecha_entrega = null;
-    if(isset($_GET['nombreArchivo'])) $nombre_archivo = $_GET['nombreArchivo'];
-    if(isset($_GET['idFile'])) $id_archivo = $_GET['idFile'];
-    if(isset($_GET['orden']))  $orden = $_GET['orden'];
-    if(isset($_POST['txtDescripcion'])) $descripcion = $_POST['txtDescripcion'];
-    if(isset($_POST['txtFecha'])) $fecha_entrega = $_POST['txtFecha'];
-    if(isset($_POST['txtTitulo'])) $titulo = $_POST['txtTitulo'];
-    if(isset($_POST['radio'])) $tipo_archivo = $_POST['radio'];
-    if(isset($_POST['nameFile'])) $nameFile = $_POST['nameFile'];
-    if(isset($_GET['idDetalleProf'])) $id_detalle = $_GET['idDetalleProf'];
+    $filtro = null;
+    $filtroArchivo = null;
+    $fichero_subido = null;
+    $fecha_subida = null;
+    $mensaje = null; //mensaje de respuesta [RESPONSE]
+
+    if(isset($_GET['nombreArchivo']))   $nombre_archivo = $_GET['nombreArchivo'];
+    if(isset($_GET['idFile']))          $id_archivo     = $_GET['idFile'];
+    if(isset($_GET['orden']))           $orden          = $_GET['orden'];
+    if(isset($_POST['txtDescripcion'])) $descripcion    = $_POST['txtDescripcion'];
+    if(isset($_POST['txtFecha']))       $fecha_entrega  = $_POST['txtFecha'];
+    if(isset($_POST['txtTitulo']))      $titulo         = $_POST['txtTitulo'];
+    if(isset($_POST['txt-buscar']))     $filtro         = $_POST['txt-buscar'];
+    if(isset($_POST['radio']))          $tipo_archivo   = $_POST['radio'];
+    if(isset($_POST['nameFile']))       $nameFile       = $_POST['nameFile'];
+    if(isset($_GET['idDetalleProf']))   $id_detalle     = $_GET['idDetalleProf'];
+
     if($titulo == ''){
         $titulo = $nameFile;
     }
-    $mensaje = null; //mensaje de respuesta [RESPONSE]
+
+     //Validacio´n y formato de la fecha completa a alamcenar como subida de archivo.
+     $fecha_actual = getdate();
+     $fecha_actual['hours'] = $fecha_actual['hours'] - 5;
+     if($fecha_actual['hours']<10){
+         $fecha_actual['hours'] = "0".$fecha_actual['hours'];
+     }
+     if($fecha_actual['minutes']<10){
+         $fecha_actual['minutes'] = "0".$fecha_actual['minutes'];
+     }
+     if($fecha_actual['seconds']<10){
+         $fecha_actual['seconds'] = "0".$fecha_actual['seconds'];
+     }
+     $fecha_subida = $fecha_actual['year']."-".$fecha_actual['mon']."-".$fecha_actual['mday']." ".$fecha_actual['hours'].":".$fecha_actual['minutes'].":".$fecha_actual['seconds'];
 
     switch($orden){
-        case 1:
-            //Subida e Inserción en tabla 'Archivo'.
-            // $dir_subida = '../uploads/files/';
-            // $fecha_subida = date("Y-m-d H:i:s");
-            // $fichero_subido = $dir_subida.basename($_FILES['fichero_usuario']['name']);
-
-            // /* Validación de extensión a almacenar */
-            // $partes_ruta = pathinfo($fichero_subido);
-
-            // $extension = $partes_ruta['extension'];
-            // foreach($extensiones_validas as $extens){
-            //     if($extension == $extens){
-            //         $permitido = 1;
-            //     }
-            // }
-
+        case 1:           
+            //directorio donde se alamcenarán los archivos
             $dir_subida = '../uploads/files/';
-            $fecha_subida = date("Y-m-d H:i:s");
             $fichero_subido = $dir_subida.basename($_FILES['fichero_usuario']['name']);
 
-            /* Validación de extensión a almacenar */
+            //Validación de extensión a almacenar 
+            $fichero_subido = strtolower($fichero_subido);
             $partes_ruta = pathinfo($fichero_subido);
-
             $extension = $partes_ruta['extension'];
+
             foreach($extensiones_validas as $extens){
                 if($extension == $extens){
                     $permitido = 1;
@@ -63,13 +71,13 @@
                     if($archivo){
                         $mensaje = "Información almacenada con con exito";
                     }else{
-                        $mensaje = "Se encontró un error al intentar almacenar los datos";
+                        $mensaje = "Error al intentar almacenar los datos";
                     }
                 }else{
-                    $mensaje = "Se encontró un error al intentar subir el archivo al servidor";
+                    $mensaje = "Error al intentar subir el archivo al servidor";
                 }
             }else{
-                $mensaje = "Se encontró que el archivo no tiene la extensión permitida, solo .pdf, .ppt, .ppts, .doc, .docs, xls, xlsx por favor";
+                $mensaje = "Tipo de archivo no permitido, solo .pdf, .ppt, .ppts, .doc, .docs, xls, xlsx por favor";
             }
             
             break;
@@ -77,12 +85,10 @@
             //Eliminación de archivos.
             $archivo->c_deleteArchivo($id_archivo);
             if($archivo) {
-                
                 $archivoDescarga = $archivo->c_deleteArchivoDescargaById($id_archivo);
                 if($archivoDescarga == 0){
                     $mensaje= "eliminado el archivo de tabla archivos pero El archivo no encontrado en descar0as";
                 }else{
-                // if($archivoDescarga != 0){
                     $mensaje = "Infomación eliminada con exito";
                 }
             }else {
@@ -90,15 +96,13 @@
             }
             break;
         case 3:
-            //Descarga y almacenamiento en tabla 'Descargas', para próximo conteo y muestra.
-            
+            //Descarga y almacenamiento en tabla 'Descargas', para próximo conteo y muestra.   
             if($nivel_usu == 2){
                 $fecha_descarga = date("Y-m-d H:i:s");
                 $existe = $archivo->c_BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_user, $id_detalle);
                 if(!$existe){
                     $archivo->c_insertarArchivoDescarga($id_archivo, $id_user, $id_detalle, $fecha_descarga);
                     $mensaje = "Descarga exitosa";
-                   
                 }
             }
             $mensaje = "Descarga exitosa";
@@ -111,17 +115,22 @@
 
             break;
         case 4:
+            // echo "texto a buscar ".$filtro;
+            // if($filtro != null){
+            //     $filtroArchivo = $archivo->c_filtrarArchivosByNombreDescripcion($id_detalle, $filtro);
+            // }else{
+            //     $filtroArchivo = $archivo->c_getFilesByIdDetalle($id_detalle);
+            // }
+            // // var_dump($filtroArchivo);
             break;
-        default;
+        default:
             echo "default";  
             break;
     }
-    echo $mensaje;
-    header ("Location: ../view/plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."&mensaje=".$mensaje);
 
+    header ("Location: ../view/plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."&filtro=".$filtro."&mensaje=".$mensaje);
 
-
-    // echo var_dump($titulo);
+        // echo var_dump($titulo);
     // echo var_dump($tipo_archivo);
     // echo var_dump($nameFile);
     // echo var_dump($fecha_entrega);

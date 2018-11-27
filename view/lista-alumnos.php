@@ -1,6 +1,12 @@
 <h2>LISTA DE ALUMNOS CON DESCARGAS ACTIVAS</h2>
 <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p> 
-<?php   if(!$alumnos){
+<?php   
+    $totalArchivos = $c_archivos->c_numeroArchivosPorIdDetalle($id_detalle);
+    if($id_archivo!=null){
+        $totaldescargasByArchivo = $c_archivos->c_conteoDescargaByIdArchivo($id_archivo);
+    }
+
+    if(!$alumnos){
     echo "<div class='box-lista-cursos'>";
             $cursosByProfesor = $c_cursos->c_getDetalleViewByUser($id_user);
             echo " <select class='combo-box-cursos' onchange='valor2(this)' id='miSelect2'>";
@@ -9,17 +15,26 @@
                     foreach($cursosByProfesor as $cursos){
                         echo "<option value='".$cursos['id_detallecp']."'>".$cursos['nombre_curso']."</option>";
                     }
-                }
+    }
             echo " </select>";
     echo "</div>";
 ?>
 <div id='divData2'></div>
 <?php   }
         else{
+
+            //totales de archivos por curso y el sgte es descargas por archivo
+
             echo "<div class='box-lista-alumnos'>";
-            echo "<h4><a href='plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."'>CUR_".$curso[0]['id_curso']." ". $curso[0]['nombre_curso']."</a></h4><br>";
+            echo "<h4>
+                        <a href='plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."'>CUR_".$curso[0]['id_curso']." ". $curso[0]['nombre_curso']."</a>
+                        <label> 1 archivo</label>
+                  </h4><br>";
             $filename = $c_archivos->c_getFileByIdFile($id_archivo);
-            echo "<span>".$filename[0]['titulo']."</span>";
+            echo "<span>".$filename[0]['titulo']."
+                  <label>".$totaldescargasByArchivo[0]['cantidad']." descargas</label>
+                  </span>";
+                //   c_numeroArchivosPorIdDetalle
 ?>
         <table>
             <thead>

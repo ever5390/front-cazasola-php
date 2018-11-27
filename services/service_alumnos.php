@@ -16,9 +16,10 @@
     //Obtener Lista de Alumnos que descargaron dichos archivos. Buscando por IdArchivo en tabla Descargas.
 
     if(isset($_GET['val'])) {
-        $idDetalle = $_GET['val'];
-        $lista_archivos = $cursos->getDetalleViewBDetalleId($idDetalle);
-        $archivos = $archivo->c_getFilesByIdDetalle($idDetalle);
+        $id_detalle = $_GET['val'];
+        $totalArchivos = $archivo->c_numeroArchivosPorIdDetalle($id_detalle);
+        $lista_archivos = $cursos->getDetalleViewBDetalleId($id_detalle);
+        $archivos = $archivo->c_getFilesByIdDetalle($id_detalle);
     }
 
 ?>
@@ -26,11 +27,18 @@
     if($lista_archivos){
         
         echo "<div class='box-lista-alumnos'>";
-        echo "<h4><a href='plataforma.php?ruta=gestionArchivos&idDetalleProf=".$idDetalle."'>CUR_".$lista_archivos[0]['id_curso']." ". $lista_archivos[0]['nombre_curso']."</a></h4><br>";
+        echo "<h4>
+                    <a href='plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."'>CUR_".$lista_archivos[0]['id_curso']." ". $lista_archivos[0]['nombre_curso']."</a>
+                    <label>".$totalArchivos[0]['cantidad']." archivos</label>
+              </h4><br>";
       if($archivos){
         foreach($archivos as $archivo_reg){
             $cantidad = 10;
-            echo "<span>".$archivo_reg['titulo']." </span>";
+            $totaldescargasByArchivo = $archivo->c_conteoDescargaByIdArchivo($archivo_reg['id']);
+
+            echo "<span>".$archivo_reg['titulo']." 
+            <label>".$totaldescargasByArchivo[0]['cantidad']." descargas</label>
+            </span>";
 ?>
             <table>
                 <thead>

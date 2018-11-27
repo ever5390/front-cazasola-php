@@ -11,8 +11,6 @@ $(document).ready(function(){
     });
 });
 
-
-
 function valor() {
     var valorSelect= $("#miSelect").val();
     if(valorSelect != 0){
@@ -31,14 +29,9 @@ function valor2() {
     }
 }
 
-function openModal(){
+function openModals(){
     $("#modal").slideDown("slow");
-    // var valor = document.getElementById("nameFile").value;
-    // if(valor != ""){
-    //     $("#modal").slideDown("slow");
-    // } else {
-    //     alert("Seleccione un archivo previamente...");
-    // }
+    var valor = document.getElementById("nameFile").value;
 }
 
 function closeModal(){
@@ -50,44 +43,42 @@ function mensajePorTiempo(){
         $(".mensaje").fadeOut(1500);
     },3000);
 }
+
 function cargarArchivo(elemento){
-
-	// var preview = document.querySelector("img");
-    var file = document.querySelector("input[type=file]").files[0];
-    var valor = document.formulario.nameFile;
-    valor.value = file.name;
-
-	// var valor = document.formularioModificacion.txtFoto;
-	// valor.value = file.name;
-
-	// var leer = new FileReader();
-
-	// if(file){
-	// 	leer.readAsDataURL(file);
-	// 	leer.onloadend = function(){
-	// 		preview.src = leer.result;
-	// 	}
-	// }else{
-	// 	preview.src = "";
-	// }
-
-}
-
-function myFunction() {
-    // var acc = document.getElementsByClassName("header");
-    // var i;
-   
-    // for (i = 0; i < acc.length; i++) {
-    //     acc[i].addEventListener("click", function() {
-    //         this.classList.toggle("active");
-    //         var panel = this.nextElementSibling;
-    //         if (panel.style.display === "block") {
-    //             panel.style.display = "none";
-    //         } else {
-    //             panel.style.display = "block";
-    //         }
-    //     });
-    // }
     
+    //validar tipo archivo
+    var fileInput = document.getElementById('file');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(.jpg|.jpeg|.png|.pdf|.doc|.docx|.xls|.xlsx|.ppt|.pptx)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('Por favor solo extensiones .jpg/.jpeg/.png/.pdf/.doc/.docx/.xls/.xlsx/.ppt/.pptx .');
+        fileInput.value = '';
+        return false;
+    }else{
+        var oFile = document.getElementById("file").files[0]; 
+        if (oFile.size > 10485760) // 2 mb for bytes.
+        {
+            alert("El archivo supera el límite de 10MB!");
+            return;
+        }else{
+            var preview = document.querySelector("img");
+            var file = document.querySelector("input[type=file]").files[0];
+            var valor = document.formulario.nameFile;
+            valor.value = file.name;
+        }
+
+        //Image preview
+        // if (fileInput.files && fileInput.files[0]) {
+        //     var reader = new FileReader();
+        //     reader.onload = function(e) {
+        //         document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'"/>';
+        //     };
+        //     reader.readAsDataURL(fileInput.files[0]);
+        // }
+        //<div id="imagePreview"></div>
+    }
+
 }
+
+
 

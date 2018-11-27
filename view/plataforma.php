@@ -19,12 +19,14 @@
 
     /* Inicializamos variables */
     $result = null;
+    $id_archivo = null;
     $mensaje = null;
     $alumnos = null;
     $curso = null;
     $id_detalle = 0;
+    $filtro = null;
 
-    /** Identificamos si s pasan o no paràmetros por URL y almacenamos si fuera el caso */
+    /** Identificamos si se pasan o no paràmetros por URL y almacenamos si fuera el caso */
     // if(isset($_GET['idDetalleProf'])) {
     //     $id_detalle = $_GET['idDetalleProf'];
     // }
@@ -50,6 +52,10 @@
     if(isset($_GET['idDetalleProf'])){
         $id_detalle = $_GET['idDetalleProf'];
         $result = $c_cursos->getDetalleViewBDetalleId($id_detalle);
+    }
+
+    if(isset($_GET['filtro'])){
+        $filtro = $_GET['filtro'];
     }
 ?>
 
@@ -86,7 +92,8 @@
                     include 'registro-curso.php';
                 break;
                 case "gestionArchivos":
-                    include 'administracionArchivos.php';
+               
+                include 'administracionArchivos.php';
                 break;
                 default:
                     include 'cursos.php';

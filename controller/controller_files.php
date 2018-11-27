@@ -93,16 +93,16 @@ class Archivos{
         return $cantidadCoincidencias;
     }
     /** Obtiene el nunero de alumnos que descargaron el archivo poara el profesor */
-    function c_conteoDescarga($id_archivo){
+    function c_conteoDescargaByIdArchivo($id_archivo){
         $consultas = new ConsultasArchivos();
-        $cantidadCoincidencias = $consultas->conteoDescarga($id_archivo);
+        $cantidadCoincidencias = $consultas->conteoDescargaByIdArchivo($id_archivo);
         return $cantidadCoincidencias;
     }
 
     // filtrarArchivosByNombreDescripcion
-    function c_filtrarArchivosByNombreDescripcion($filtro){
+    function c_filtrarArchivosByNombreDescripcion($id_archivo, $filtro){
         $consultas = new ConsultasArchivos();
-        $exito = $consultas->filtrarArchivosByNombreDescripcion($filtro);
+        $exito = $consultas->filtrarArchivosByNombreDescripcion($id_archivo, $filtro);
         return $exito;
     }
 

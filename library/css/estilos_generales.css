@@ -125,6 +125,10 @@ body{
     background-color:  #ecf0f1 ;
 }
 
+.menu-funciones ul li a:visited {
+    background-color: #ecf0f1;
+    /* color: red; */
+}
 
 /* Bloque Container Principal*/
 
@@ -166,11 +170,6 @@ body{
         margin-bottom: .3rem;
     }
 
-    .boton-buscar-archivo{
-        border: 1px solid #1B4F72;
-        margin-left: .3rem;
-        border-radius: 5px 0 0 5px;
-    }
     /* 
         CIRCULO
     .boton-ver-formulario{
@@ -182,6 +181,22 @@ body{
         border-radius: 50%; 
     } */
 
+    /* Buscar Archivo*/
+
+    .posicion-btn-plus{
+        width: 100%;
+        border-top: 1px solid #ccc;
+        padding-top: .3rem;
+    }
+
+    .boton-buscar-archivo{
+        border: 1px solid #1B4F72;
+        margin-left: .3rem;
+        border-radius: 5px 0 0 5px;
+        /* padding: .6rem; */
+        height: 2.3rem;
+    }
+    
     .boton-ver-formulario:hover, .boton-buscar-archivo:hover{
         background: #1B4F72;
         color: #fff;
@@ -193,19 +208,20 @@ body{
         border: 1px solid #1B4F72;
         width: calc(100% - 80px);
         border-radius: 0 5px 5px 0;
-        padding: .3rem;
+        padding: 0;
         float: left;
         box-sizing: border-box;
     }
 
     .input-buscar{
-        border-radius: 5px;
+        border-radius: 0 5px 5px 0;
         border:none;
-        height: 1.6rem;
-        width: 100%;
+        height: 2.4rem;
+        width: 70%;
         color: #1B4F72;
         padding-left: 10px;
         box-sizing: border-box;
+        float: left;
     }
 
     .input-buscar:focus{
@@ -270,7 +286,6 @@ body{
         text-align: center;
         color: #111;
         width: 320px;
-        width: 400px;
         transform: translate(-50%, -50%);  
         position: absolute;
         left: 50%;
@@ -346,6 +361,7 @@ body{
         font-size: 1rem;
         font-weight: bold;
         margin-bottom: 8px;
+        margin-right: 1rem;
     }
 
     .icon-tipo-archivo{
@@ -453,14 +469,6 @@ body{
     box-sizing: border-box;
 }
 
-.box-lista-alumnos{
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid gray;
-    padding: 20px;
-    border-radius: 10px;
-}
-
 .item-curso{
     width: 300px;
     min-height: 230px;
@@ -528,6 +536,19 @@ body{
 }
 
 /* PAGINA LISTA ALUMNOS*/
+.box-lista-alumnos{
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.box-lista-alumnos label{
+    float: right;
+    margin-right: 2rem;
+}
+
 .box-lista-alumnos a{
     text-decoration: none;
     color: #111;
@@ -556,6 +577,7 @@ body{
     font-weight: 100;
     background-color: #2471a3;
     color: #fff;
+    overflow: hidden;
 }
 
 .box-lista-alumnos table thead th{
@@ -566,9 +588,6 @@ body{
     font-size: .9rem;
 }
 
-
-
-/* LISTA ALUMNOS */
 .bloque-main span, .bloque-main .box-lista-alumnos{
     font-size: .9rem;
 }

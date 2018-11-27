@@ -1,7 +1,7 @@
 <?php
     require_once ('DAO_connection.php');
     class ConsultasArchivos{
-        
+
         public function getFileByIdFile($idFile){
             $rows = null;
             $con = new Conexion();
@@ -16,7 +16,7 @@
             // $con->close_conexion();
             return $rows;
         }
-        
+
 
         public function numeroArchivosPorIdDetalle($id_detalle){
             $rows = null;
@@ -29,6 +29,7 @@
             while($result = $statement->fetch()){
                 $rows[] = $result;
             }
+            
             // $con->close_conexion();
             return $rows;
         }
@@ -37,7 +38,7 @@
             $rows = null;
             $con = new Conexion();
             $conexion = $con->get_conexion();
-            $sql="select * from archivo where id_detallecp = :id_detalle";
+            $sql="select * from archivo where id_detallecp = :id_detalle order by fecha_subida desc";
             $statement = $conexion->prepare($sql);
             $statement->bindParam(":id_detalle", $id_detalle);
             $statement->execute();
@@ -52,7 +53,7 @@
             $rows = null;
             $con = new Conexion();
             $conexion = $con->get_conexion();
-            $sql="select * from archivo where id_detallecp = :id_detalle and tipo_archivo= :tipo_archivo";
+            $sql="select * from archivo where id_detallecp = :id_detalle and tipo_archivo= :tipo_archivo order by fecha_subida desc";
             $statement = $conexion->prepare($sql);
             $statement->bindParam(":id_detalle", $id_detalle);
             $statement->bindParam(":tipo_archivo", $tipo_archivo);
@@ -148,7 +149,7 @@
             // $con->close_conexion();
             return $rows;
         }
-        
+
         public function getDescargasByIdArchivoUserAlumno($id_archivo, $id_user){
             $rows = null;
             $con = new Conexion();
@@ -215,14 +216,13 @@
         }
     /** Obtiene el nunero de alumnos que descargaron el archivo poara el profesor */
 
-
-        public function conteoDescarga($id){
+        public function conteoDescargaByIdArchivo($idArchivo){
             $rows = null;
             $con = new Conexion();
             $conexion = $con->get_conexion();
-            $sql="select count(*) as cantidad from descargas_archivos_alumnos where id_archivo = :id";
+            $sql="select count(*) as cantidad from descargas_archivos_alumnos where id_archivo = :idArchivo";
             $statement = $conexion->prepare($sql);
-            $statement->bindParam(":id", $id);
+            $statement->bindParam(":idArchivo", $idArchivo);
             $statement->execute();
             while($result = $statement->fetch()){
                 $rows[] = $result;
@@ -230,11 +230,13 @@
             return $rows;
         }
 
-        public function filtrarArchivosByNombreDescripcion($filtro){
-            $con = new Connection();
+        public function filtrarArchivosByNombreDescripcion($idDetalle, $filtro){
+            $con = new Conexion();
+            $rows = null;
             $conexion = $con->get_conexion();
-            $sql = "select * from archivo where (name_archivo like '%".$filtro."%' or descripcion like '%".$filtro."%')";
+            $sql = "select * from archivo where id_detallecp = :idDetalle and (titulo like '%".$filtro."%' or descripcion like '%".$filtro."%')";
             $statement = $conexion->prepare($sql);
+            $statement->bindParam(":idDetalle", $idDetalle);
             $statement->execute();
             while($result = $statement->fetch()){
                 $rows[] = $result;
@@ -242,8 +244,6 @@
             // $con->close_conexion();
             return $rows;
         }
-
-
     }
 
     // select * from archivo where (name_archivo like "%or%" or descripcion like "%or%");
