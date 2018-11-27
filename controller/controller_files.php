@@ -99,6 +99,13 @@ class Archivos{
         return $cantidadCoincidencias;
     }
 
+    // filtrarArchivosByNombreDescripcion
+    function c_filtrarArchivosByNombreDescripcion($filtro){
+        $consultas = new ConsultasArchivos();
+        $exito = $consultas->filtrarArchivosByNombreDescripcion($filtro);
+        return $exito;
+    }
+
 }
 
 ?>

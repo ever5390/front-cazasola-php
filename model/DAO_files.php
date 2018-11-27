@@ -229,6 +229,23 @@
             }
             return $rows;
         }
+
+        public function filtrarArchivosByNombreDescripcion($filtro){
+            $con = new Connection();
+            $conexion = $con->get_conexion();
+            $sql = "select * from archivo where (name_archivo like '%".$filtro."%' or descripcion like '%".$filtro."%')";
+            $statement = $conexion->prepare($sql);
+            $statement->execute();
+            while($result = $statement->fetch()){
+                $rows[] = $result;
+            }
+            // $con->close_conexion();
+            return $rows;
+        }
+
+
     }
+
+    // select * from archivo where (name_archivo like "%or%" or descripcion like "%or%");
 
 ?>

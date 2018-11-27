@@ -28,17 +28,32 @@
     switch($orden){
         case 1:
             //Subida e Inserción en tabla 'Archivo'.
-            // $dir_subida = 'c:/wamp64/www/front-cazasola-php/uploads/files';
+            // $dir_subida = '../uploads/files/';
+            // $fecha_subida = date("Y-m-d H:i:s");
+            // $fichero_subido = $dir_subida.basename($_FILES['fichero_usuario']['name']);
+
+            // /* Validación de extensión a almacenar */
+            // $partes_ruta = pathinfo($fichero_subido);
+
+            // $extension = $partes_ruta['extension'];
+            // foreach($extensiones_validas as $extens){
+            //     if($extension == $extens){
+            //         $permitido = 1;
+            //     }
+            // }
+
             $dir_subida = '../uploads/files/';
             $fecha_subida = date("Y-m-d H:i:s");
             $fichero_subido = $dir_subida.basename($_FILES['fichero_usuario']['name']);
 
             /* Validación de extensión a almacenar */
             $partes_ruta = pathinfo($fichero_subido);
+
             $extension = $partes_ruta['extension'];
             foreach($extensiones_validas as $extens){
                 if($extension == $extens){
                     $permitido = 1;
+                    break;
                 }
             }
 
@@ -77,15 +92,15 @@
         case 3:
             //Descarga y almacenamiento en tabla 'Descargas', para próximo conteo y muestra.
             
-            // if($nivel_usu == 2){
-            //     $fecha_descarga = date("Y-m-d H:i:s");
-            //     $existe = $archivo->c_BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_user, $id_detalle);
-            //     if(!$existe){
-            //         $archivo->c_insertarArchivoDescarga($id_archivo, $id_user, $id_detalle, $fecha_descarga);
-            //         $mensaje = "Descarga exitosa";
+            if($nivel_usu == 2){
+                $fecha_descarga = date("Y-m-d H:i:s");
+                $existe = $archivo->c_BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_user, $id_detalle);
+                if(!$existe){
+                    $archivo->c_insertarArchivoDescarga($id_archivo, $id_user, $id_detalle, $fecha_descarga);
+                    $mensaje = "Descarga exitosa";
                    
-            //     }
-            // }
+                }
+            }
             $mensaje = "Descarga exitosa";
             $path = "../uploads/files";
             $enlace = $path."/".$nombre_archivo;

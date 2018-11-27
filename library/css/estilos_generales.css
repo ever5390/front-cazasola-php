@@ -152,9 +152,10 @@ body{
 
 /* ADMINISTRACIÓN ARCHIVOS ::: FORMULARIO SUBIR ARCHIVO */
 
+    
     /*  CUADRADO
     */
-    .boton-ver-formulario{
+    .boton-ver-formulario, .boton-buscar-archivo{
         background: #fff;
         border: 1px solid #1B4F72;
         color: #1B4F72;
@@ -162,7 +163,13 @@ body{
         padding: 8px 10px;
         border-radius: 5px;
         float: left;
-        margin-bottom: 5px;
+        margin-bottom: .3rem;
+    }
+
+    .boton-buscar-archivo{
+        border: 1px solid #1B4F72;
+        margin-left: .3rem;
+        border-radius: 5px 0 0 5px;
     }
     /* 
         CIRCULO
@@ -175,10 +182,35 @@ body{
         border-radius: 50%; 
     } */
 
-    .boton-ver-formulario:hover{
+    .boton-ver-formulario:hover, .boton-buscar-archivo:hover{
         background: #1B4F72;
         color: #fff;
         transition: 0.3s;
+        
+    }
+
+    .formulario-buscar{
+        border: 1px solid #1B4F72;
+        width: calc(100% - 80px);
+        border-radius: 0 5px 5px 0;
+        padding: .3rem;
+        float: left;
+        box-sizing: border-box;
+    }
+
+    .input-buscar{
+        border-radius: 5px;
+        border:none;
+        height: 1.6rem;
+        width: 100%;
+        color: #1B4F72;
+        padding-left: 10px;
+        box-sizing: border-box;
+    }
+
+    .input-buscar:focus{
+        outline-offset: 0px !important;
+        outline: none !important;
     }
 
     #file{

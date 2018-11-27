@@ -22,12 +22,24 @@
     }
     ?>
    <div class="select-file">
+            <div class="posicion-btn-plus" id="posicion-btn-plus">
     <?php
         if($nivel_usu == 1) {
     ?>
-            <div class="posicion-btn-plus" id="posicion-btn-plus">
                 <a class="boton-ver-formulario" href="javascript:openModal()" ><i class="fas fa-plus"></i></a>
+    <?php
+        }
+    ?>
+                <a class="boton-buscar-archivo" href="javascript:openModal()" ><i class="fas fa-search"></i></a>
+                <div class="formulario-buscar">
+                    <form action="">
+                        <input class = "input-buscar" type="text" name="txt-buscar" placeholder="Archivo a buscar">
+                    </form>
+                </div>
             </div>
+    <?php
+        if($nivel_usu == 1) {
+    ?>
             <div id="modal">
                 <form id="form-archivo-details" name="formulario" enctype="multipart/form-data" action="../services/helper.archivos_uploads.php?orden=1&idDetalleProf=<?php echo $id_detalle ?>" method="post" >
                     <div><a class="close-modal" href="javascript:closeModal()">x</a></div><br>
@@ -47,7 +59,7 @@
     <?php
         }
     ?>
-    <!-- <div class="mensaje"><?php echo $mensaje ?></div> -->
+    <div class="mensaje"><?php echo $mensaje ?></div>
     <!--  INICIO SECCION LISTA DE ARCHIVOS -->
         <div class="contenedor-principal-archivo">
             <h4>SYLLABUS</h4>
