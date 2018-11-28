@@ -1,6 +1,11 @@
 <?php
-require_once '../controller/controller_users.php';
+
 session_start();
+if(!$_SESSION["usuario_registrado"]){
+    header('Location: ../index.html');    
+}
+
+require_once '../controller/controller_users.php';
 
 $usuario = $_POST['txtUser'];
 $password = $_POST['txtPass'];

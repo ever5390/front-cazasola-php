@@ -13,12 +13,14 @@ body{
     position: relative;
 }
 
+/* Aside Menù - Enlaces*/
+
 .bloque-menu{
     width: 250px;
     height: 100vh;
     float: left;
     outline: 1px solid #ecf0f1;
-    background-color: #fff;
+    background-color: #ecf0f1;
     transition: all 400ms;
     position: fixed;
     z-index: 400;
@@ -31,12 +33,7 @@ body{
 }
 
 .mostrar{
-    /* display: block !important; */
     transform: translateX(0) !important;
-    /* position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10; */
 }
 
 .menu-oculto{
@@ -58,10 +55,6 @@ body{
     font-weight: bold;
 }
 
-/* .box-user .img-user{
-    width: 100%;
-} */
-
 .img-user{
     display: block;
     width: 100%;
@@ -81,7 +74,7 @@ body{
     padding-left: 20px;
 }
 
-/* bloque funciones */
+/* bloque Enlaces */
 
 .menu-funciones{
     text-align: left;
@@ -91,16 +84,13 @@ body{
     list-style: none;
     margin: 0px;
     padding: 0px;
-    /* background-color: #77b9b7; */
 }
 
 .menu-funciones ul li{
     height: 50px;
     position: relative;
-
-    /* background-color: #ccc; */
-    /* outline: 1px solid gray; */
 }
+
 .menu-funciones ul li a img{
     position: absolute;
     bottom: 10px;
@@ -122,13 +112,14 @@ body{
 }
 
 .menu-funciones ul li a:hover{
-    background-color:  #ecf0f1 ;
+    background-color:  #fff ;
 }
 
-.menu-funciones ul li a:visited {
+/* .menu-funciones ul li a:visited {
     background-color: #ecf0f1;
-    /* color: red; */
-}
+    color: red;
+} */
+
 
 /* Bloque Container Principal*/
 
@@ -141,6 +132,7 @@ body{
     padding-right: 5%;
     box-sizing: border-box;
     left: 250px;
+    background-color: #fff;
 }
 
 .bloque-main .horario {
@@ -156,7 +148,7 @@ body{
 
 /* ADMINISTRACIÓN ARCHIVOS ::: FORMULARIO SUBIR ARCHIVO */
 
-    
+
     /*  CUADRADO
     */
     .boton-ver-formulario, .boton-buscar-archivo{
@@ -170,7 +162,7 @@ body{
         margin-bottom: .3rem;
     }
 
-    /* 
+    /*
         CIRCULO
     .boton-ver-formulario{
         background: #fff;
@@ -178,7 +170,7 @@ body{
         color: #1B4F72;
         transition: 0.5s;
         padding: 8px 10px;
-        border-radius: 50%; 
+        border-radius: 50%;
     } */
 
     /* Buscar Archivo*/
@@ -196,12 +188,12 @@ body{
         /* padding: .6rem; */
         height: 2.3rem;
     }
-    
+
     .boton-ver-formulario:hover, .boton-buscar-archivo:hover{
         background: #1B4F72;
         color: #fff;
         transition: 0.3s;
-        
+
     }
 
     .formulario-buscar{
@@ -246,7 +238,7 @@ body{
         padding: 10px;
         width: 300px;
         box-sizing: border-box;
-        border-radius: 5px; 
+        border-radius: 5px;
     }
 
     .boton-examinar-archivo:hover{
@@ -286,7 +278,7 @@ body{
         text-align: center;
         color: #111;
         width: 320px;
-        transform: translate(-50%, -50%);  
+        transform: translate(-50%, -50%);
         position: absolute;
         left: 50%;
         top:50%;
@@ -317,7 +309,19 @@ body{
         cursor: pointer;
     }
 
+    .mensaje{
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+        background-color: rgba(204, 204, 204, .5);
+        /* border: 1px solid #ccc; */
+        color: #283747;
+        box-sizing: border-box;
+        padding: .5rem 1.5rem;
+        border-radius: 5px;
+    }
 /* ADMINISTRACION DE ARCHIVOS ::: BLOQUE ARCHIVO */
+
     .contenedor-principal-archivo{
         margin-top: 15px;
         box-sizing: border-box;
@@ -406,8 +410,6 @@ body{
         transition: all .2s;
     }
 
-
-/* FIN BLOQUE ADMINISTRACION ARCHIVOS  */
 .contenedor-principal-archivo .accordion {
     background-color: #eee;
     color: #444;
@@ -422,7 +424,7 @@ body{
 }
 
 .contenedor-principal-archivo .active, .accordion:hover {
-    background-color: #ccc; 
+    background-color: #ccc;
 }
 
 .contenedor-principal-archivo .box-syllabus .panel {
@@ -431,28 +433,8 @@ body{
     background-color: white;
     overflow: hidden;
 }
-/* toggle class*/
-@media (min-width: 1000px){
-    .derecha{
-        float: right;
-    }
-}
 
-@media (max-width: 680px){
-    .bloque-menu{
-       /* display: none ; */
-       position: absolute;
-       transform: translateX(-250px);
-    }
-
-    .menu-oculto{
-        display: block;
-    }
-
-    .bloque-main{
-        width: 100%;
-    }
-}
+/* FIN BLOQUE ADMINISTRACION ARCHIVOS  */
 
 /* PAGINA LISTA CURSOS */
 .box-lista-cursos{
@@ -512,7 +494,6 @@ body{
 }
 
 .btn-activado{
-    /* float: right; */
     position: absolute;
     bottom: 10px;
     right: 15px;
@@ -523,8 +504,7 @@ body{
     text-decoration: none;
 }
 
-
-/* PAGINA REGISTRO CURSOS*/ 
+/* PAGINA REGISTRO CURSOS*/
 
 .combo-box-cursos{
     width: 300px;
@@ -592,18 +572,10 @@ body{
     font-size: .9rem;
 }
 
-/* .bloque-main span{
-    border: 1px solid #ccc;
-    padding: 4px 8px;
-    margin-right: 0;
-    border-radius: 5px 0 0 5px;
-} */
-
 .bloque-main h3{
     padding: 0;
     margin: 0
 }
-
 
 .item-curso .name-curso .notification{
     background-color: #fff;
@@ -621,4 +593,26 @@ body{
     color: #1a5276;
     margin-top:0;
     text-decoration: none;
+}
+
+@media (min-width: 1000px){
+    /* Iconos de acciones eliminar, descargar y contar descargas por archivo/*/
+    .derecha{
+        float: right;
+    }
+}
+
+@media (max-width: 680px){
+    .bloque-menu{
+       position: absolute;
+       transform: translateX(-250px);
+    }
+
+    .menu-oculto{
+        display: block;
+    }
+
+    .bloque-main{
+        width: 100%;
+    }
 }

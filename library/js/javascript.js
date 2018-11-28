@@ -1,3 +1,7 @@
+// setTimeout(function(){ alert("Hello"); }, 3000);
+setTimeout(function() { $('#mensaje').fadeOut('slow'); }, 2000); //Desaparecer mensaje en 2 segundos
+
+/** mostrar todos los curso en cuales fueron asignados en matrìcula */
 window.onload = function() {
     document.getElementById("btn_cursos").onclick = function(){
         window.locationf="../services/helper.php?val=todos";
@@ -5,6 +9,7 @@ window.onload = function() {
     }
 }
 
+/* Mostrar Descripcion de archivos al clickear*/
 $(document).ready(function(){
     $('.menu-oculto').on('click', function(){
         $('.bloque-menu').toggleClass('mostrar');
@@ -77,7 +82,6 @@ function cargarArchivo(elemento){
         // }
         //<div id="imagePreview"></div>
     }
-
 }
 
 

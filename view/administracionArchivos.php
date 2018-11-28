@@ -45,7 +45,7 @@
                     <label for="file" class="boton-examinar-archivo" >
                         <i class="fas fa-upload"></i> Seleccione archivo
                     </label>
-                    <p><input    class="input-form" type="file" name="fichero_usuario" id="file" onchange = "cargarArchivo(this)"></p>
+                    <p><input    class="input-form" type="file" name="fichero" id="file" onchange = "cargarArchivo(this)"></p>
                     <p><input    class="input-form" type="text" name="txtTitulo" maxlength="79" placeholder="titulo de actividad"></p>
                     <p><input    class="input-form" type="text" id="nameFile" maxlength="79" name="nameFile" placeholder="archivo subido" ></p>
                     <p><input    class="input-form" type="date" name="txtFecha" required></p>
@@ -55,12 +55,13 @@
             </div>
     <?php
         }
+
+        if($mensaje != null){
     ?>
-    <div class="mensaje"><?php echo $mensaje ?></div>
-    <!--  INICIO SECCION LISTA DE ARCHIVOS -->
-    
-    <?php  
-    
+            <div class="mensaje"id="mensaje"><?php echo $mensaje ?></div>
+        <!--  INICIO SECCION LISTA DE ARCHIVOS -->
+        <?php  
+        }
         if($filtro==null){
             include "lista-archivos.php"; 
         } else {

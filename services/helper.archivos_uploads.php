@@ -1,7 +1,12 @@
 <?php
+   session_start();
+   if(!$_SESSION["usuario_registrado"]){
+       header('Location: ../index.html');    
+   }
+   
     require_once '../controller/controller_files.php';
 
-    session_start();
+    
     $id_user = $_SESSION["usuario_registrado"]['id_usuario'];
     $nivel_usu = $_SESSION["usuario_registrado"]['nivel'];
     $id_archivo = null;
@@ -14,7 +19,7 @@
     $fecha_entrega = null;
     $filtro = null;
     $filtroArchivo = null;
-    $fichero_subido = null;
+    $fichero = null;
     $fecha_subida = null;
     $mensaje = null; //mensaje de respuesta [RESPONSE]
 
@@ -35,7 +40,7 @@
 
      //Validacio´n y formato de la fecha completa a alamcenar como subida de archivo.
      $fecha_actual = getdate();
-     $fecha_actual['hours'] = $fecha_actual['hours'] - 5;
+     $fecha_actual['hours'] = $fecha_actual['hours'] - 6;
      if($fecha_actual['hours']<10){
          $fecha_actual['hours'] = "0".$fecha_actual['hours'];
      }
@@ -51,11 +56,11 @@
         case 1:           
             //directorio donde se alamcenarán los archivos
             $dir_subida = '../uploads/files/';
-            $fichero_subido = $dir_subida.basename($_FILES['fichero_usuario']['name']);
+            $fichero = $dir_subida.basename($_FILES['fichero']['name']);
 
             //Validación de extensión a almacenar 
-            $fichero_subido = strtolower($fichero_subido);
-            $partes_ruta = pathinfo($fichero_subido);
+            $fichero = strtolower($fichero);
+            $partes_ruta = pathinfo($fichero);
             $extension = $partes_ruta['extension'];
 
             foreach($extensiones_validas as $extens){
@@ -64,9 +69,9 @@
                     break;
                 }
             }
-
+            // echo $extension;
             if($permitido != null){
-                if (move_uploaded_file($_FILES['fichero_usuario']['tmp_name'], $fichero_subido)){
+                if (move_uploaded_file($_FILES['fichero']['tmp_name'], $fichero)){
                     $archivo->c_insertarArchivo($titulo, $nameFile, $descripcion, $tipo_archivo, $id_detalle, $fecha_subida, $fecha_entrega);
                     if($archivo){
                         $mensaje = "Información almacenada con con exito";
@@ -115,13 +120,6 @@
 
             break;
         case 4:
-            // echo "texto a buscar ".$filtro;
-            // if($filtro != null){
-            //     $filtroArchivo = $archivo->c_filtrarArchivosByNombreDescripcion($id_detalle, $filtro);
-            // }else{
-            //     $filtroArchivo = $archivo->c_getFilesByIdDetalle($id_detalle);
-            // }
-            // // var_dump($filtroArchivo);
             break;
         default:
             echo "default";  

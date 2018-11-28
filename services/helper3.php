@@ -1,5 +1,7 @@
 <?php
-
+   if(!$_SESSION["usuario_registrado"]){
+       header('Location: ../index.html');    
+   }
     require_once '../controller/controller_courses.php';
     require_once '../controller/controller_files.php';
     $ruta = "../view/plataforma.php?ruta=gestionArchivos&idDetalleProf=";

@@ -26,11 +26,6 @@
     $id_detalle = 0;
     $filtro = null;
 
-    /** Identificamos si se pasan o no paràmetros por URL y almacenamos si fuera el caso */
-    // if(isset($_GET['idDetalleProf'])) {
-    //     $id_detalle = $_GET['idDetalleProf'];
-    // }
-
     if(isset($_GET['idFile'])) {
         $id_archivo = $_GET['idFile'];
         $alumnos = $c_archivos->c_getDescargasByIdArchivo($id_archivo);

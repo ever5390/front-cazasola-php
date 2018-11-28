@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if(!$_SESSION["usuario_registrado"]){
+        header('Location: ../index.html');    
+    }
     require_once '../controller/controller_files.php';
     require_once '../controller/controller_users.php';
     require_once '../controller/controller_courses.php';

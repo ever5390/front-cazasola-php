@@ -1,4 +1,9 @@
 <?php
+   session_start();
+   if(!$_SESSION["usuario_registrado"]){
+       header('Location: ../index.html');    
+   }
+   
     require_once '../controller/controller_courses.php';
 
     if (isset($_GET['idcurso'])){
