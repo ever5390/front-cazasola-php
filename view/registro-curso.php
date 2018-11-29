@@ -1,4 +1,7 @@
-
+<?php if(!$_SESSION["usuario_registrado"]){
+        header('Location: ../index.html');    
+    }
+?>
            <h1>REGISTRO DE CURSOS ASIGNADOS SEGÙN MATRÌCULA</h1>
            <p>
            <?php 

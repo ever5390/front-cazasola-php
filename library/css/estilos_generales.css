@@ -8,7 +8,7 @@ body{
 
 .container{
     box-sizing: border-box;
-    height: 100vh;
+    /* height: 100vh; */
     width: 100%;
     position: relative;
 }
@@ -524,7 +524,7 @@ body{
     border-radius: 10px;
 }
 
-.box-lista-alumnos label{
+.box-lista-alumnos .label{
     float: right;
     margin-right: 2rem;
 }
@@ -534,7 +534,13 @@ body{
     color: #111;
 }
 
+.box-lista-alumnos span label{
+    float: right;
+    margin-right: 1.4rem;
+}
+
 .box-lista-alumnos a:hover{
+    cursor: pointer;
     text-decoration: underline;
 }
 

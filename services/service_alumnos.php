@@ -23,24 +23,34 @@
         $totalArchivos = $archivo->c_numeroArchivosPorIdDetalle($id_detalle);
         $lista_archivos = $cursos->getDetalleViewBDetalleId($id_detalle);
         $archivos = $archivo->c_getFilesByIdDetalle($id_detalle);
+
+        if($totalArchivos[0]['cantidad'] != 1){
+            $texto_archivo_total = "archivos";
+        }else{
+            $texto_archivo_total = "archivo";
+        }
     }
 
-?>
-<?php
+
     if($lista_archivos){
-        
         echo "<div class='box-lista-alumnos'>";
         echo "<h4>
-                    <a href='plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."'>CUR_".$lista_archivos[0]['id_curso']." ". $lista_archivos[0]['nombre_curso']."</a>
-                    <label>".$totalArchivos[0]['cantidad']." archivos</label>
+                <a href='plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."'>CUR_".$lista_archivos[0]['id_curso']." ". $lista_archivos[0]['nombre_curso']."</a>
+                <a class='label' href='reporte_pdf.php?id_detalle=$id_detalle' target='_blank' ><i class='fas fa-cloud-download-alt fa-1x'></i>  ".$totalArchivos[0]['cantidad']." ".$texto_archivo_total."</a>
               </h4><br>";
       if($archivos){
         foreach($archivos as $archivo_reg){
-            $cantidad = 10;
             $totaldescargasByArchivo = $archivo->c_conteoDescargaByIdArchivo($archivo_reg['id']);
 
+            if($totaldescargasByArchivo[0]['cantidad'] != 1){
+                $texto_descarga_total = "descargas";
+            }else{
+                $texto_descarga_total = "descarga";
+            }
+
             echo "<span>".$archivo_reg['titulo']." 
-            <label>".$totaldescargasByArchivo[0]['cantidad']." descargas</label>
+
+            <label>".$totaldescargasByArchivo[0]['cantidad']." ".$texto_descarga_total."</label>
             </span>";
 ?>
             <table>
@@ -71,7 +81,7 @@
                         }
                     }else{
                         echo "<tr>";
-                        echo "   <td colspan = '5'> Ningún alumno actualmente ha descargado este archivo </td>";
+                        echo "   <td colspan = '5'> Ningún alumno ha descargado este archivo </td>";
                         echo "</tr>";
                     }
         ?>

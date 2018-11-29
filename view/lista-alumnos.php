@@ -1,10 +1,23 @@
+<?php if(!$_SESSION["usuario_registrado"]){
+        header('Location: ../index.html');    
+    }
+?>
 <h2>LISTA DE ALUMNOS CON DESCARGAS ACTIVAS</h2>
 <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p> 
 <?php   
     $totalArchivos = $c_archivos->c_numeroArchivosPorIdDetalle($id_detalle);
     if($id_archivo!=null){
         $totaldescargasByArchivo = $c_archivos->c_conteoDescargaByIdArchivo($id_archivo);
+
+        if($totaldescargasByArchivo[0]['cantidad'] != 1){
+            $texto_descarga_total = "archivos";
+        }else{
+            $texto_descarga_total = "archivo";
+        }
+        
     }
+
+    $existe_alumnos = null;
 
     if(!$alumnos){
     echo "<div class='box-lista-cursos'>";
@@ -19,23 +32,26 @@
             echo " </select>";
     echo "</div>";
 ?>
+
 <div id='divData2'></div>
-<?php   }
-        else{
 
-            //totales de archivos por curso y el sgte es descargas por archivo
+<?php }
+    else
+    {
+        $existe_alumnos = 1;
+    //totales de archivos por curso y el sgte es descargas por archiv
 
-            echo "<div class='box-lista-alumnos'>";
-            echo "<h4>
-                        <a href='plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."'>CUR_".$curso[0]['id_curso']." ". $curso[0]['nombre_curso']."</a>
-                        <label> 1 archivo</label>
-                  </h4><br>";
-            $filename = $c_archivos->c_getFileByIdFile($id_archivo);
-            echo "<span>".$filename[0]['titulo']."
-                  <label>".$totaldescargasByArchivo[0]['cantidad']." descargas</label>
-                  </span>";
-                //   c_numeroArchivosPorIdDetalle
+echo "<div class='box-lista-alumnos'>";
+    echo "<h4>
+                <a href='plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."'>CUR_".$curso[0]['id_curso']." ". $curso[0]['nombre_curso']."</a>
+                <a class='label' href='reporte_pdf.php?file_id=$id_archivo&id_detalle=$id_detalle&existe_alumnos=$existe_alumnos' target='_blank' ><i class='fas fa-cloud-download-alt fa-1x'></i>  1 archivo</a>
+          </h4><br>";
+    $filename = $c_archivos->c_getFileByIdFile($id_archivo);
+    echo "<span>".$filename[0]['titulo']."
+            <label>".$totaldescargasByArchivo[0]['cantidad']." ".$texto_descarga_total."</label>
+          </span>";
 ?>
+
         <table>
             <thead>
                 <th>Nro</th>
@@ -44,6 +60,7 @@
                 <th>Correo</th>
                 <th>Fecha Descarga</th>
             </thead>
+
             <tbody>
             <?php
             if($alumnos != null){
@@ -65,8 +82,8 @@
             ?>
             </tbody>
         </table>
+
     <?php
-            echo  "</div>";
-        }
-    
-    ?>
+echo  "</div>";
+}
+?>

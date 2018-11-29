@@ -48,7 +48,7 @@
                     <p><input    class="input-form" type="file" name="fichero" id="file" onchange = "cargarArchivo(this)"></p>
                     <p><input    class="input-form" type="text" name="txtTitulo" maxlength="79" placeholder="titulo de actividad"></p>
                     <p><input    class="input-form" type="text" id="nameFile" maxlength="79" name="nameFile" placeholder="archivo subido" ></p>
-                    <p><input    class="input-form" type="date" name="txtFecha" required></p>
+                    <p><input    class="input-form" type="date" min="<?php echo date('Y-m-d'); ?>" name="txtFecha" required></p>
                     <p><textarea class="input-form" cols="2" rows="3" maxlength="800" name="txtDescripcion" placeholder=" descripcion de la actividad" value=""></textarea></p>
                     <p><input    class="input-form btn-submit" type="submit" name="btn_submit" value="Upload File"></p>
                 </form>
@@ -60,7 +60,7 @@
     ?>
             <div class="mensaje"id="mensaje"><?php echo $mensaje ?></div>
         <!--  INICIO SECCION LISTA DE ARCHIVOS -->
-        <?php  
+        <?php
         }
         if($filtro==null){
             include "lista-archivos.php"; 
