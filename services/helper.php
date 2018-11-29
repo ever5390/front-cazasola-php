@@ -3,11 +3,10 @@
    if(!$_SESSION["usuario_registrado"]){
        header('Location: ../index.html');    
    }
-   
+
     require_once '../controller/controller_courses.php';
 
     $cursoById = new Cursos();
-    session_start();
     $id_usu = $_SESSION["usuario_registrado"]['id_usuario'];
     $nivel_usu = $_SESSION["usuario_registrado"]['nivel']; //para el aside
 
@@ -66,8 +65,5 @@
     }else{
         echo $mensaje;
     }
-    
 
-    
-    
 ?>

@@ -3,6 +3,8 @@
     if(!$_SESSION["usuario_registrado"]){
         header('Location: ../index.html');    
     }
+    $nombre_usuario = $_SESSION["usuario_registrado"]['nombres'];
+
     require_once '../controller/controller_files.php';
     require_once '../controller/controller_users.php';
     require_once '../controller/controller_courses.php';
@@ -36,7 +38,7 @@
         echo "<div class='box-lista-alumnos'>";
         echo "<h4>
                 <a href='plataforma.php?ruta=gestionArchivos&idDetalleProf=".$id_detalle."'>CUR_".$lista_archivos[0]['id_curso']." ". $lista_archivos[0]['nombre_curso']."</a>
-                <a class='label' href='reporte_pdf.php?id_detalle=$id_detalle' target='_blank' ><i class='fas fa-cloud-download-alt fa-1x'></i>  ".$totalArchivos[0]['cantidad']." ".$texto_archivo_total."</a>
+                <a class='label' href='reporte_pdf.php?nombre=$nombre_usuario&id_detalle=$id_detalle' target='_blank' ><i class='fas fa-cloud-download-alt fa-1x'></i>  ".$totalArchivos[0]['cantidad']." ".$texto_archivo_total."</a>
               </h4><br>";
       if($archivos){
         foreach($archivos as $archivo_reg){
