@@ -4,7 +4,7 @@
 
     $nombre_usuario = $_SESSION["usuario_registrado"]['nombres'];
 ?>
-<h2>LISTA DE ALUMNOS CON DESCARGAS ACTIVAS</h2>
+<h2>REPORTES ESTADO DE DESCARGA DE ARCHIVOS</h2>
 <p><strong>Prof: </strong><?php echo $_SESSION["usuario_registrado"]['nombres']; ?></p> 
 <?php   
     $totalArchivos = $c_archivos->c_numeroArchivosPorIdDetalle($id_detalle);
@@ -12,9 +12,9 @@
         $totaldescargasByArchivo = $c_archivos->c_conteoDescargaByIdArchivo($id_archivo);
 
         if($totaldescargasByArchivo[0]['cantidad'] != 1){
-            $texto_descarga_total = "archivos";
+            $texto_descarga_total = "descargas";
         }else{
-            $texto_descarga_total = "archivo";
+            $texto_descarga_total = "descarga";
         }
         
     }

@@ -40,7 +40,7 @@
 
      //Validacio´n y formato de la fecha completa a alamcenar como subida de archivo.
      $fecha_actual = getdate();
-     $fecha_actual['hours'] = $fecha_actual['hours'] - 6;
+     $fecha_actual['hours'] = $fecha_actual['hours'] - 5;
      if($fecha_actual['hours']<10){
          $fecha_actual['hours'] = "0".$fecha_actual['hours'];
      }
@@ -103,7 +103,7 @@
         case 3:
             //Descarga y almacenamiento en tabla 'Descargas', para próximo conteo y muestra.   
             if($nivel_usu == 2){
-                $fecha_descarga = date("Y-m-d H:i:s");
+                $fecha_descarga = $fecha_subida;
                 $existe = $archivo->c_BuscarArchivoPorIdFileIdAlumno($id_archivo, $id_user, $id_detalle);
                 if(!$existe){
                     $archivo->c_insertarArchivoDescarga($id_archivo, $id_user, $id_detalle, $fecha_descarga);

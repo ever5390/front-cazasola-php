@@ -76,7 +76,7 @@
             padding: 2px 15px;
         }
 
-        .titulo{
+        .cabecera{
             text-align:center;
             color: #524E4E;
             border-top : 3px solid #C7C3C2;
@@ -96,7 +96,7 @@
             margin-top: 6px;
         }
         
-        p{
+        .datos_docente{
             margin: 0 0 4px 0;
             margin-left: 20px;
         }
@@ -104,23 +104,20 @@
     </style>
 </head>
 <body>
-<div class="titulo">
+<div class="cabecera">
     <h3>Universidad Nacional del Callao</h3>
     <h4 id="subtitulo">Facultad de Ingenieria Industrial y de Sistemas</h4>
     <p id="subtitulo2"><strong>Escuela Profesional de Ingenierìa de Sistenas</strong></p>
 </div>
-<p><strong>Docente:</strong>  <?php echo $nombre ?></p>
-<p><strong>Curso:</strong>  <?php echo "CUR_".$lista_archivos[0]['id_curso']." ". $lista_archivos[0]['nombre_curso']."" ?></p>
-<p><strong>Total Archivos:</strong>  <?php echo $totalArchivos[0]['cantidad']." ".$texto_archivo_total.""  ?></p>
+<p class='datos_docente'><strong>Docente:</strong>  <?php echo $nombre ?></p>
+<p class='datos_docente'><strong>Curso:</strong>  <?php echo "CUR_".$lista_archivos[0]['id_curso']." ". $lista_archivos[0]['nombre_curso']."" ?></p>
+<p class='datos_docente'><strong>Total Archivos:</strong>  <?php echo $totalArchivos[0]['cantidad']." ".$texto_archivo_total.""  ?></p>
 
 <?php
     if($lista_archivos){
         ?>
             <div class='box-lista-alumnos'>
         <?php 
-        // echo "  <h4>
-        //             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ".$totalArchivos[0]['cantidad']." ".$texto_archivo_total." </label>
-        //         </h4>";
 
         if($archivos){
             foreach($archivos as $archivo_reg){
@@ -140,11 +137,11 @@
 
         echo    "<table>
                         <tr>
-                            <td class='headstart'>Nro</td>
-                            <td>Código</td>
-                            <td>Nombres y Apellidos</td>
-                            <td>Correo</td>
-                            <td class='headfinal'>Fecha Descarga</td>
+                            <td class='head-small'>Nro</td>
+                            <td class='head-small'>Código</td>
+                            <td class='head'>Nombres y Apellidos</td>
+                            <td class='head'>Correo</td>
+                            <td class='head'>Fecha Descarga</td>
                         </tr>";
                 $indice=1;
                 $lista_alumnos = $archivo->c_getDescargasByIdArchivo($archivo_reg['id']);
@@ -162,7 +159,7 @@
                     }
                 }else{
                     echo "<tr>";
-                    echo "   <td rowspan ='5' class='headcero'> Ningún registro </td>";
+                    echo "   <td rowspan ='5'> Ningún registro </td>";
                     echo "</tr>";
                 }
         echo    "</table>";

@@ -23,11 +23,11 @@
                 <li><a href="plataforma.php?ruta=cursos"><img src="../uploads/icons/courses.png"><label>Cursos</label></a></li>
                 <?php
                     if($nivel_usu == 1) {
-                        echo "<li><a href='plataforma.php?ruta=listaAlumnos'><img src='../uploads/icons/users.png'><label>Lista Alumnos</label></a></li>";
+                        echo "<li><a href='plataforma.php?ruta=listaAlumnos'><img src='../uploads/icons/users.png'><label>Reportes</label></a></li>";
                     }
                 ?>
                 <li><a href="plataforma.php?ruta=registroCursos"><img src="../uploads/icons/register.png">    
-                    <label>Registro Curso</label></a>
+                    <label>Gestión de cursos</label></a>
                 </li>
                 <li><a href="cerrar-session.php"><img src="../uploads/icons/close-session.png"><label>Cerrar Sesiòn</label></a></li>
             </ul>

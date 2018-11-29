@@ -1,5 +1,5 @@
 <div>
-    <h1>LISTA DE CURSOS ASIGNADOS</h1>
+    <h1>LISTA DE CURSOS ASIGNADOS EN MATRÍCULA</h1>
     <p>
      <?php 
          if($nivel_usu == 1){

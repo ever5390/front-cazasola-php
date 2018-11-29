@@ -2,7 +2,7 @@
         header('Location: ../index.html');    
     }
 ?>
-           <h1>REGISTRO DE CURSOS ASIGNADOS SEGÙN MATRÌCULA</h1>
+           <h1>REGISTRO DE CURSOS ASIGNADOS EN MATRÌCULA</h1>
            <p>
            <?php 
                 if($nivel_usu == 1){
